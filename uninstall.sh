@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-app_dir="$HOME/.spf13-vim-3"
+app_dir="$HOME/.config/spf13-vim-master"
 
 warn() {
     echo "$1" >&2
@@ -13,6 +13,8 @@ die() {
 
 rm $HOME/.vimrc
 rm $HOME/.vimrc.bundles
-rm $HOME/.vim
+rm $HOME/.vimrc.local
+rm $HOME/.vimrc.before
 
+rm -rf $HOME/.vim
 rm -rf $app_dir

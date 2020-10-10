@@ -16,9 +16,9 @@ REM    limitations under the License.
 @if not exist "%HOME%" @set HOME=%HOMEDRIVE%%HOMEPATH%
 @if not exist "%HOME%" @set HOME=%USERPROFILE%
 
-@set APP_PATH=%HOME%\.spf13-vim-3
+@set APP_PATH=%HOME%\.config\spf13-vim-master
 IF NOT EXIST "%APP_PATH%" (
-    call git clone -b 3.0 https://github.com/spf13/spf13-vim.git "%APP_PATH%"
+    call git clone -b master https://github.com/wk30/spf13-vim.git "%APP_PATH%"
 ) ELSE (
     @set ORIGINAL_DIR=%CD%
     echo updating spf13-vim
@@ -37,16 +37,16 @@ call mklink "%HOME%\.vimrc.before" "%APP_PATH%\.vimrc.before"
 call mklink "%HOME%\.vimrc.before.fork" "%APP_PATH%\.vimrc.before.fork"
 call mklink /J "%HOME%\.vim" "%APP_PATH%\.vim"
 
-IF NOT EXIST "%APP_PATH%\.vim\bundle" (
-    call mkdir "%APP_PATH%\.vim\bundle"
-)
+@REM IF NOT EXIST "%APP_PATH%\.vim\autoload" (
+@REM     call mkdir "%APP_PATH%\.vim\autoload"
+@REM )
 
-IF NOT EXIST "%HOME%/.vim/bundle/vundle" (
-    call git clone https://github.com/gmarik/vundle.git "%HOME%/.vim/bundle/vundle"
+IF NOT EXIST "%HOME%/.vim/autoload" (
+    call git clone https://github.com/junegunn/vim-plug.git "%HOME%/.vim/autoload"
 ) ELSE (
-  call cd "%HOME%/.vim/bundle/vundle"
+  call cd "%HOME%/.vim/autoload"
   call git pull
   call cd %HOME%
 )
 
-call vim -u "%APP_PATH%/.vimrc.bundles" +BundleInstall! +BundleClean +qall
+call vim -u "%APP_PATH%/.vimrc.bundles" +set nomore +PlugUpdate! +PlugClean +qall

@@ -1,3 +1,4 @@
+if !exists('g:vscode')
 " Modeline and Notes {
 " vim: set sw=4 ts=4 sts=4 et tw=78 foldmarker={,} foldlevel=0 foldmethod=marker spell:
 "
@@ -131,6 +132,13 @@
     set iskeyword-=.                    " '.' is an end of word designator
     set iskeyword-=#                    " '#' is an end of word designator
     set iskeyword-=-                    " '-' is an end of word designator
+    set errorbells                      " Trigger bell on error
+    set nobackup
+
+    if has('vim_starting')
+        set encoding=utf-8
+        scriptencoding utf-8
+    endif
 
     " Instead of reverting the cursor to the last position in the buffer, we
     " set it to the first line when editing a git commit message
@@ -178,11 +186,14 @@
 " Vim UI {
 
     if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-        let g:solarized_termcolors=256
+        colorscheme solarized
+        let g:solarized_termcolors="24bits"
         let g:solarized_termtrans=1
-        let g:solarized_contrast="normal"
+        let g:solarized_degrade=0
+        let g:solarized_bold=0
+        let g:solarized_contrast="high"
         let g:solarized_visibility="normal"
-        color solarized             " Load a colorscheme
+        syntax enable
     endif
 
     set tabpagemax=15               " Only show 15 tabs
@@ -457,10 +468,38 @@
 " }
 
 " Plugins {
+    " EditorConfig
+        if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
+            let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*'] "Excluded patterns.
+            "let g:EditorConfig_disable_rules = ['trim_trailing_whitespace'] "Disable rules
+        endif
+
+    " Cheat.sh {
+        if count(g:spf13_bundle_groups, 'cheat.sh')
+            let g:syntastic_javascript_checkers = [ 'jshint' ]
+            let g:syntastic_ocaml_checkers = ['merlin']
+            let g:syntastic_python_checkers = ['pylint']
+            let g:syntastic_shell_checkers = ['shellcheck']
+        endif
+    " }
+    " Rust {
+        if count(g:spf13_bundle_groups, 'rust')
+            let g:rustfmt_autosave = 1
+            let g:rust_clip_command = 'pbcopy'
+        endif
+    " }
 
     " GoLang {
         if count(g:spf13_bundle_groups, 'go')
+            let g:go_highlight_extra_types = 1
+            let g:go_highlight_operators = 0
             let g:go_highlight_functions = 1
+            let g:go_highlight_function_parameters = 1
+            let g:go_highlight_function_calls = 1
+            let g:go_highlight_types = 1
+            let g:go_highlight_fields = 1
+            let g:go_highlight_variable_declarations = 1
+            let g:go_highlight_variable_assignments = 1
             let g:go_highlight_methods = 1
             let g:go_highlight_structs = 1
             let g:go_highlight_operators = 1
@@ -1120,7 +1159,7 @@
             let directory = common_dir . dirname . '/'
             if exists("*mkdir")
                 if !isdirectory(directory)
-                    call mkdir(directory)
+                    call mkdir(directory, 'p')
                 endif
             endif
             if !isdirectory(directory)
@@ -1249,3 +1288,4 @@
         endif
     endif
 " }
+endif
