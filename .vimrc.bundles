@@ -96,9 +96,9 @@ call plug#begin('~/.vim/bundle')
     " list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups=[
-            \ 'general', 'writing', 'youcompleteme', 'programming', 'cheat.sh', 
-            \ 'php', 'ruby', 'python', 'javascript', 'html', 'misc', 'go', 'scala', 
-            \ 'rust'
+            \ 'general', 'writing', 'youcompleteme', 'programming', 'cheat.sh',
+            \ 'php', 'ruby', 'python', 'javascript', 'html', 'misc', 'go', 'scala',
+            \ 'rust',
             \ ]
     endif
 
@@ -185,7 +185,7 @@ call plug#begin('~/.vim/bundle')
                 source ~/.vim/bundle/vim-snippets/snippets/support_functions.vim
             endif
         elseif count(g:spf13_bundle_groups, 'youcompleteme')
-            Plug 'valloric/youcompleteme'
+            Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
             Plug 'sirVer/ultisnips'
             Plug 'honza/vim-snippets'
         elseif count(g:spf13_bundle_groups, 'neocomplcache')
@@ -292,10 +292,10 @@ call plug#begin('~/.vim/bundle')
         endif
     " }
 
-    " Go Lang {
+    " Golang {
         if count(g:spf13_bundle_groups, 'go')
             "Plug 'Blackrush/vim-gocode'
-            Plug 'fatih/vim-go'
+            Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
         endif
     " }
 
