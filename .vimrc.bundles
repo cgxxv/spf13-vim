@@ -146,6 +146,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'kana/vim-textobj-indent'
             Plug 'gcmt/wildfire.vim'
             Plug 'liuchengxu/vim-which-key'
+            Plug 'antonk52/vim-tabber'
         endif
     " }
 
