@@ -277,7 +277,7 @@ if !exists('g:vscode')
     " Workaround broken colour highlighting in Haskell
     autocmd FileType haskell,rust setlocal nospell
 
-    autocmd BufWritePre * :%s/\s\+$//e
+    " autocmd BufWritePre * :%s/\s\+$//e
 " }
 
 " Key (re)Mappings {
@@ -680,6 +680,7 @@ if !exists('g:vscode')
 
     " ctrlp {
         if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
+            let g:ctrlp_cache_dir = g:spf13_consolidated_directory . "ctrlp"
             let g:ctrlp_working_path_mode = 'ra'
             nnoremap <silent> <D-t> :CtrlP<CR>
             nnoremap <silent> <D-r> :CtrlPMRU<CR>
@@ -710,12 +711,26 @@ if !exists('g:vscode')
                 \ 'fallback': s:ctrlp_fallback
             \ }
 
+            let g:ctrlp_extensions = []
             if isdirectory(expand("~/.vim/bundle/ctrlp-funky/"))
                 " CtrlP extensions
-                let g:ctrlp_extensions = ['funky']
+                " let g:ctrlp_extensions = ['funky']
+                call add(g:ctrlp_extensions, 'funky')
 
                 "funky
                 nnoremap <Leader>fu :CtrlPFunky<Cr>
+            endif
+            if isdirectory(expand("~/.vim/bundle/ctrlp-smarttabs/"))
+                " ctrlp open files in a new tab
+                " https://github.com/kien/ctrlp.vim/issues/646
+                let g:ctrlp_prompt_mappings = {
+                \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
+                \ 'AcceptSelection("t")': ['<cr>'],
+                \ }
+                call add(g:ctrlp_extensions, 'smarttabs')
+
+                "smarttabs
+                nnoremap <Leader>ct :CtrlPSmartTabs<Cr>
             endif
         endif
     "}
