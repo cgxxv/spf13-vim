@@ -682,8 +682,6 @@ if !exists('g:vscode')
         if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
             let g:ctrlp_cache_dir = g:spf13_consolidated_directory . "ctrlp"
             let g:ctrlp_working_path_mode = 'ra'
-            nnoremap <silent> <D-t> :CtrlP<CR>
-            nnoremap <silent> <D-r> :CtrlPMRU<CR>
             let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
                 \ 'file': '\.exe$\|\.so$\|\.dll$\|\.pyc$' }
@@ -714,23 +712,10 @@ if !exists('g:vscode')
             let g:ctrlp_extensions = []
             if isdirectory(expand("~/.vim/bundle/ctrlp-funky/"))
                 " CtrlP extensions
-                " let g:ctrlp_extensions = ['funky']
                 call add(g:ctrlp_extensions, 'funky')
 
                 "funky
                 nnoremap <Leader>fu :CtrlPFunky<Cr>
-            endif
-            if isdirectory(expand("~/.vim/bundle/ctrlp-smarttabs/"))
-                " ctrlp open files in a new tab
-                " https://github.com/kien/ctrlp.vim/issues/646
-                let g:ctrlp_prompt_mappings = {
-                \ 'AcceptSelection("e")': ['<2-LeftMouse>'],
-                \ 'AcceptSelection("t")': ['<cr>'],
-                \ }
-                call add(g:ctrlp_extensions, 'smarttabs')
-
-                "smarttabs
-                nnoremap <Leader>ct :CtrlPSmartTabs<Cr>
             endif
         endif
     "}

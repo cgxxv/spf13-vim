@@ -147,7 +147,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'gcmt/wildfire.vim'
             Plug 'liuchengxu/vim-which-key'
             Plug 'antonk52/vim-tabber'
-            Plug 'davidegx/ctrlp-smarttabs'
         endif
     " }
 
