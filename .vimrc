@@ -672,6 +672,35 @@ if !exists('g:vscode')
         endif
     " }
 
+    " fzf {
+        if isdirectory(expand("~/.vim/bundle/fzf")) &&
+                    \ isdirectory(expand("~/.vim/bundle/fzf.vim"))
+            nnoremap <Leader>zf :Files<CR>
+            nnoremap <Leader>zg :GFiles<CR>
+            nnoremap <Leader>zG :GFiles?<CR>
+            nnoremap <Leader>zb :Buffers<CR>
+            nnoremap <Leader>zC :Colors<CR>
+            nnoremap <Leader>zs :Rg<CR>
+            nnoremap <Leader>zl :Lines<CR>
+            nnoremap <Leader>zL :BLines<CR>
+            nnoremap <Leader>zt :Tags<CR>
+            nnoremap <Leader>zT :BTags<CR>
+            nnoremap <Leader>zM :Marks<CR>
+            nnoremap <Leader>zw :Windows<CR>
+            nnoremap <Leader>zF :Locate <Space>
+            nnoremap <Leader>zh :History<CR>
+            nnoremap <Leader>zH :History:<CR>
+            nnoremap <Leader>z/ :History/<CR>
+            nnoremap <Leader>zS :Snippets<CR>
+            nnoremap <Leader>zc :Commits<CR>
+            nnoremap <Leader>zbm :BCommits<CR>
+            nnoremap <Leader>z: :Commands<CR>
+            nnoremap <Leader>zm :Maps<CR>
+            nnoremap <Leader>zht :Helptags<CR>
+            nnoremap <Leader>zft :Filetypes<CR>
+        endif
+    " }
+
     " ctrlp {
         if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
             let g:ctrlp_cache_dir = g:spf13_consolidated_directory . "ctrlp"
