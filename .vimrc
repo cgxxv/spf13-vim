@@ -492,6 +492,19 @@ if !exists('g:vscode')
 
 " }
 
+" Coc.nvim {
+    if !exists('g:coc_global_extension')
+        let g:coc_global_extensions = [
+            \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
+            \ 'coc-spell-checker', 'coc-vimlsp', 'coc-go', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint'
+            \ ]
+    endif
+
+    if count(g:spf13_bundle_groups, 'cos')
+        source ~/.vim/coc.vim
+    endif
+" }
+
 " Plugins {
     " EditorConfig
         if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
@@ -542,7 +555,7 @@ if !exists('g:vscode')
             au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
             au FileType go nmap <leader>co <Plug>(go-coverage)
         endif
-        " }
+    " }
 
 
     " TextObj Sentence {
@@ -977,6 +990,16 @@ if !exists('g:vscode')
                 exec "set " . settingname . "=" . directory
             endif
         endfor
+
+        " if count(g:spf13_bundle_groups, 'cos')
+        "     let g:coc_global_extensions = [
+        "         \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
+        "         \ 'coc-spell-checker', 'coc-vimlsp', 'coc-go', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint'
+        "         \ ]
+        "     for cocext in g:coc_global_extensions
+        "         call coc#util#install_extension(cocext)
+        "     endfor
+        " endif
     endfunction
     call InitializeDirectories()
     " }

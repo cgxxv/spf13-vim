@@ -96,6 +96,12 @@
     "   let g:spf13_edit_config_mapping='<leader>ev'
     "   let g:spf13_apply_config_mapping='<leader>sv'
 
+    " The coc extensions you want to enable
+    "   let g:coc_global_extensions = [
+    "       \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
+    "       \ 'coc-spell-checker', 'coc-vimlsp', 'coc-go', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint'
+    "       \ ]
+
 " }
 
 " Use fork before if available {

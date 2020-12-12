@@ -169,12 +169,14 @@ setup_vim_plug() {
     vim \
         -u "$1" \
         "+set nomore" \
-        "+PlugUpdate!" \
-        "+PlugClean" \
+        "+PlugClean!" \
+        "+PlugUpdate! 30" \
+        "+PlugSnapshot! snapshot.vim" \
         "+qall"
 
     export SHELL="$system_shell"
 
+    ret="$?"
     success "Now updating/installing plugins using Vim-Plug"
     debug
 }
