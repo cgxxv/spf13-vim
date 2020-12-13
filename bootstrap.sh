@@ -174,7 +174,7 @@ setup_vim_plug() {
         -u "$1" \
         "+set nomore" \
         "+PlugUpdate! 30" \
-        "+PlugClean!" \
+        "+PlugClean" \
         "+PlugSnapshot! snapshot.vim" \
         "+qall"
 
