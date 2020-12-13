@@ -15,6 +15,7 @@ rm $HOME/.vimrc
 rm $HOME/.vimrc.bundles
 rm $HOME/.vimrc.local
 rm $HOME/.vimrc.before
+rm $HOME/.viminfo
 
 rm -rf $HOME/.vim
 rm -rf $app_dir

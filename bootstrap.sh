@@ -18,7 +18,7 @@
 app_name='spf13-vim'
 [ -z "$APP_PATH" ] && APP_PATH="$HOME/.config/spf13-vim-master"
 [ -z "$REPO_URI" ] && REPO_URI='https://github.com/wk30/spf13-vim.git'
-[ -z "$REPO_BRANCH" ] && REPO_BRANCH='master'
+[ -z "$REPO_BRANCH" ] && REPO_BRANCH='lsp'
 debug_mode='0'
 fork_maintainer='0'
 [ -z "$VIM_PLUG_URI" ] && VIM_PLUG_URI="https://github.com/junegunn/vim-plug.git"
@@ -127,9 +127,10 @@ create_symlinks() {
 
     lnif "$source_path/.vim" "$target_path/.vim"
 
-    cp "$source_path/.vimrc"         "$target_path/.vimrc"
-    cp "$source_path/.vimrc.bundles" "$target_path/.vimrc.bundles"
-    cp "$source_path/.vimrc.before"  "$target_path/.vimrc.before"
+    lnif "$source_path/.vimrc"          "$target_path/.vimrc"
+    lnif "$source_path/coc.vim"         "$target_path/.vim/coc.vim"
+    lnif "$source_path/.vimrc.bundles"  "$target_path/.vimrc.bundles"
+    lnif "$source_path/.vimrc.before"   "$target_path/.vimrc.before"
 
     if program_exists "nvim"; then
         lnif "$source_path/.vim"     "$target_path/.config/nvim"
@@ -169,8 +170,8 @@ setup_vim_plug() {
     vim \
         -u "$1" \
         "+set nomore" \
-        "+PlugClean!" \
         "+PlugUpdate! 30" \
+        "+PlugClean!" \
         "+PlugSnapshot! snapshot.vim" \
         "+qall"
 

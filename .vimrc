@@ -46,6 +46,7 @@ if !exists('g:vscode')
 
     " Basics {
         set nocompatible        " Must be first line
+        set showcmd
         if !WINDOWS()
             set shell=/bin/sh
         endif
@@ -133,7 +134,16 @@ if !exists('g:vscode')
     set iskeyword-=#                    " '#' is an end of word designator
     set iskeyword-=-                    " '-' is an end of word designator
     set errorbells                      " Trigger bell on error
-    set nobackup
+
+    
+    set nobackup                        " Some servers have issues with backup files, see #649.
+    set nowritebackup
+    " set cmdheight=2                     " Give more space for displaying messages.
+    set shortmess+=c                    " Don't pass messages to |ins-completion-menu|.
+
+    " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+    " delays and poor user experience.
+    set updatetime=300
 
     if has('vim_starting')
         set encoding=utf-8
@@ -209,16 +219,16 @@ if !exists('g:vscode')
 
 " Vim UI {
 
-    if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-        colorscheme solarized
-        let g:solarized_termcolors="24bits"
-        let g:solarized_termtrans=1
-        let g:solarized_degrade=0
-        let g:solarized_bold=0
-        let g:solarized_contrast="high"
-        let g:solarized_visibility="normal"
-        syntax enable
-    endif
+    " if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+    "     colorscheme solarized
+    "     let g:solarized_termcolors="24bits"
+    "     let g:solarized_termtrans=1
+    "     let g:solarized_degrade=0
+    "     let g:solarized_bold=0
+    "     let g:solarized_contrast="high"
+    "     let g:solarized_visibility="normal"
+    "     syntax enable
+    " endif
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -496,11 +506,11 @@ if !exists('g:vscode')
     if !exists('g:coc_global_extension')
         let g:coc_global_extensions = [
             \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
-            \ 'coc-spell-checker', 'coc-vimlsp', 'coc-go', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint'
+            \ 'coc-vimlsp', 'coc-go', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint',
             \ ]
     endif
 
-    if count(g:spf13_bundle_groups, 'cos')
+    if count(g:spf13_bundle_groups, 'coc')
         source ~/.vim/coc.vim
     endif
 " }
@@ -520,15 +530,17 @@ if !exists('g:vscode')
             let g:syntastic_shell_checkers = ['shellcheck']
         endif
     " }
-    " Rust {
-        if count(g:spf13_bundle_groups, 'rust')
-            let g:rustfmt_autosave = 1
-            let g:rust_clip_command = 'pbcopy'
-        endif
-    " }
+
+    " " Rust {
+    "     if count(g:spf13_bundle_groups, 'rust')
+    "         let g:rustfmt_autosave = 1
+    "         let g:rust_clip_command = 'pbcopy'
+    "     endif
+    " " }
 
     " Golang {
         if count(g:spf13_bundle_groups, 'go')
+            let g:go_gopls_enabled = 0 " disable gopls in vim-go
             let g:go_highlight_extra_types = 1
             let g:go_highlight_operators = 0
             let g:go_highlight_functions = 1
@@ -545,15 +557,15 @@ if !exists('g:vscode')
             let g:go_fmt_command = "goimports"
             let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
             let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-            au FileType go nmap <Leader>s <Plug>(go-implements)
-            au FileType go nmap <Leader>i <Plug>(go-info)
-            au FileType go nmap <Leader>e <Plug>(go-rename)
-            au FileType go nmap <leader>r <Plug>(go-run)
-            au FileType go nmap <leader>b <Plug>(go-build)
-            au FileType go nmap <leader>t <Plug>(go-test)
-            au FileType go nmap <Leader>gd <Plug>(go-doc)
-            au FileType go nmap <Leader>gv <Plug>(go-doc-vertical)
-            au FileType go nmap <leader>co <Plug>(go-coverage)
+            au FileType go nmap <Leader>ggs <Plug>(go-implements)
+            au FileType go nmap <Leader>ggi <Plug>(go-info)
+            au FileType go nmap <Leader>gge <Plug>(go-rename)
+            au FileType go nmap <leader>ggr <Plug>(go-run)
+            au FileType go nmap <leader>ggb <Plug>(go-build)
+            au FileType go nmap <leader>ggt <Plug>(go-test)
+            au FileType go nmap <Leader>ggd <Plug>(go-doc)
+            au FileType go nmap <Leader>ggv <Plug>(go-doc-vertical)
+            au FileType go nmap <leader>ggo <Plug>(go-coverage)
         endif
     " }
 
@@ -580,12 +592,12 @@ if !exists('g:vscode')
         endif
     " }
 
-    " PIV {
-        if isdirectory(expand("~/.vim/bundle/PIV"))
-            let g:DisableAutoPHPFolding = 0
-            let g:PIVAutoClose = 0
-        endif
-    " }
+    " " PIV {
+    "     if isdirectory(expand("~/.vim/bundle/PIV"))
+    "         let g:DisableAutoPHPFolding = 0
+    "         let g:PIVAutoClose = 0
+    "     endif
+    " " }
 
     " Misc {
         if isdirectory(expand("~/.vim/bundle/nerdtree"))
@@ -596,36 +608,36 @@ if !exists('g:vscode')
         endif
     " }
 
-    " OmniComplete {
-        " To disable omni complete, add the following to your .vimrc.before.local file:
-        "   let g:spf13_no_omni_complete = 1
-        if !exists('g:spf13_no_omni_complete')
-            if has("autocmd") && exists("+omnifunc")
-                autocmd Filetype *
-                    \if &omnifunc == "" |
-                    \setlocal omnifunc=syntaxcomplete#Complete |
-                    \endif
-            endif
+    " " OmniComplete {
+    "     " To disable omni complete, add the following to your .vimrc.before.local file:
+    "     "   let g:spf13_no_omni_complete = 1
+    "     if !exists('g:spf13_no_omni_complete')
+    "         if has("autocmd") && exists("+omnifunc")
+    "             autocmd Filetype *
+    "                 \if &omnifunc == "" |
+    "                 \setlocal omnifunc=syntaxcomplete#Complete |
+    "                 \endif
+    "         endif
 
-            hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-            hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-            hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
+    "         hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
+    "         hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
+    "         hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
 
-            " Some convenient mappings
-            "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-            if exists('g:spf13_map_cr_omni_complete')
-                inoremap <expr> <CR>     pumvisible() ? "\<C-y>" : "\<CR>"
-            endif
-            inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-            inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-            inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-            inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
+    "         " Some convenient mappings
+    "         "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+    "         if exists('g:spf13_map_cr_omni_complete')
+    "             inoremap <expr> <CR>     pumvisible() ? "\<C-y>" : "\<CR>"
+    "         endif
+    "         inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+    "         inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+    "         inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
+    "         inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
 
-            " Automatically open and close the popup menu / preview window
-            au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-            set completeopt=menu,preview,longest
-        endif
-    " }
+    "         " Automatically open and close the popup menu / preview window
+    "         au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
+    "         set completeopt=menu,preview,longest
+    "     endif
+    " " }
 
     " Ctags {
         set tags=./tags;/,~/.vimtags
@@ -695,19 +707,19 @@ if !exists('g:vscode')
         let g:vim_json_syntax_conceal = 0
     " }
 
-    " PyMode {
-        " Disable if python support not present
-        if !has('python') && !has('python3')
-            let g:pymode = 0
-        endif
+    " " PyMode {
+    "     " Disable if python support not present
+    "     if !has('python') && !has('python3')
+    "         let g:pymode = 0
+    "     endif
 
-        if isdirectory(expand("~/.vim/bundle/python-mode"))
-            let g:pymode_lint_checkers = ['pyflakes']
-            let g:pymode_trim_whitespaces = 0
-            let g:pymode_options = 0
-            let g:pymode_rope = 0
-        endif
-    " }
+    "     if isdirectory(expand("~/.vim/bundle/python-mode"))
+    "         let g:pymode_lint_checkers = ['pyflakes']
+    "         let g:pymode_trim_whitespaces = 0
+    "         let g:pymode_options = 0
+    "         let g:pymode_rope = 0
+    "     endif
+    " " }
 
     " fzf {
         if isdirectory(expand("~/.vim/bundle/fzf")) &&
@@ -740,7 +752,7 @@ if !exists('g:vscode')
 
     " ctrlp {
         if isdirectory(expand("~/.vim/bundle/ctrlp.vim/"))
-            let g:ctrlp_cache_dir = g:spf13_consolidated_directory . "ctrlp"
+            let g:ctrlp_cache_dir = expand("~/.vim/tmp/ctrlp")
             let g:ctrlp_working_path_mode = 'ra'
             let g:ctrlp_custom_ignore = {
                 \ 'dir':  '\.git$\|\.hg$\|\.svn$',
@@ -809,63 +821,63 @@ if !exists('g:vscode')
         endif
     "}
 
-    " YouCompleteMe {
-        if count(g:spf13_bundle_groups, 'youcompleteme')
-            let g:acp_enableAtStartup = 0
+    " " YouCompleteMe {
+    "     if count(g:spf13_bundle_groups, 'youcompleteme')
+    "         let g:acp_enableAtStartup = 0
 
-            " enable completion from tags
-            let g:ycm_collect_identifiers_from_tags_files = 1
+    "         " enable completion from tags
+    "         let g:ycm_collect_identifiers_from_tags_files = 1
 
-            " remap Ultisnips for compatibility for YCM
-            let g:UltiSnipsExpandTrigger = '<C-j>'
-            let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-            let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
+    "         " remap Ultisnips for compatibility for YCM
+    "         let g:UltiSnipsExpandTrigger = '<C-j>'
+    "         let g:UltiSnipsJumpForwardTrigger = '<C-j>'
+    "         let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
 
-            " Enable omni completion.
-            autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-            autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-            autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-            autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-            autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-            autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-            autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    "         " Enable omni completion.
+    "         autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    "         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    "         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    "         autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    "         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    "         autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    "         autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-            " Haskell post write lint and check with ghcmod
-            " $ `cabal install ghcmod` if missing and ensure
-            " ~/.cabal/bin is in your $PATH.
-            if !executable("ghcmod")
-                autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-            endif
+    "         " Haskell post write lint and check with ghcmod
+    "         " $ `cabal install ghcmod` if missing and ensure
+    "         " ~/.cabal/bin is in your $PATH.
+    "         if !executable("ghcmod")
+    "             autocmd BufWritePost *.hs GhcModCheckAndLintAsync
+    "         endif
 
-            " For snippet_complete marker.
-            if !exists("g:spf13_no_conceal")
-                if has('conceal')
-                    set conceallevel=2 concealcursor=i
-                endif
-            endif
+    "         " For snippet_complete marker.
+    "         if !exists("g:spf13_no_conceal")
+    "             if has('conceal')
+    "                 set conceallevel=2 concealcursor=i
+    "             endif
+    "         endif
 
-            " Disable the neosnippet preview candidate window
-            " When enabled, there can be too much visual noise
-            " especially when splits are used.
-            set completeopt-=preview
-        endif
-    " }
+    "         " Disable the neosnippet preview candidate window
+    "         " When enabled, there can be too much visual noise
+    "         " especially when splits are used.
+    "         set completeopt-=preview
+    "     endif
+    " " }
 
-    " Normal Vim omni-completion {
-    " To disable omni complete, add the following to your .vimrc.before.local file:
-    "   let g:spf13_no_omni_complete = 1
-        if !exists('g:spf13_no_omni_complete')
-            " Enable omni-completion.
-            autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-            autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-            autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-            autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-            autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-            autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-            autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
+    " " Normal Vim omni-completion {
+    " " To disable omni complete, add the following to your .vimrc.before.local file:
+    " "   let g:spf13_no_omni_complete = 1
+    "     if !exists('g:spf13_no_omni_complete')
+    "         " Enable omni-completion.
+    "         autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    "         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    "         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    "         autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    "         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+    "         autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
+    "         autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
 
-        endif
-    " }
+    "     endif
+    " " }
 
     " FIXME: Isn't this for Syntastic to handle?
     " Haskell post write lint and check with ghcmod
@@ -920,9 +932,6 @@ if !exists('g:vscode')
             endif
         endif
     " }
-
-
-
 " }
 
 " GUI Settings {
@@ -944,7 +953,7 @@ if !exists('g:vscode')
         if &term == 'xterm' || &term == 'screen'
             set t_Co=256            " Enable 256 colors to stop the CSApprox warning and make xterm vim shine
         endif
-        "set term=builtin_ansi       " Make arrow and other keys work
+        " set term=builtin_ansi       " Make arrow and other keys work
     endif
 
 " }
@@ -953,8 +962,8 @@ if !exists('g:vscode')
 
     " Initialize directories {
     function! InitializeDirectories()
-        let parent = $HOME
-        let prefix = 'vim'
+        let parent = $HOME."/.vim/tmp/"
+        " let prefix = 'vim'
         let dir_list = {
                     \ 'backup': 'backupdir',
                     \ 'views': 'viewdir',
@@ -964,16 +973,20 @@ if !exists('g:vscode')
             let dir_list['undo'] = 'undodir'
         endif
 
+        " TODO:
+        " Specifing a different directory that doesn't in ~/.vim/ directory will
+        " make coc not working. and I can't figure it out at the moment.
         " To specify a different directory in which to place the vimbackup,
         " vimviews, vimundo, and vimswap files/directories, add the following to
         " your .vimrc.before.local file:
         "   let g:spf13_consolidated_directory = <full path to desired directory>
         "   eg: let g:spf13_consolidated_directory = $HOME . '/.vim/'
-        if exists('g:spf13_consolidated_directory')
-            let common_dir = g:spf13_consolidated_directory . prefix
-        else
-            let common_dir = parent . '/.' . prefix
-        endif
+        " if exists('g:spf13_consolidated_directory')
+        "     let common_dir = g:spf13_consolidated_directory . prefix
+        " else
+        "     let common_dir = parent . '/.' . prefix
+        " endif
+        let common_dir = parent
 
         for [dirname, settingname] in items(dir_list)
             let directory = common_dir . dirname . '/'
@@ -990,16 +1003,6 @@ if !exists('g:vscode')
                 exec "set " . settingname . "=" . directory
             endif
         endfor
-
-        " if count(g:spf13_bundle_groups, 'cos')
-        "     let g:coc_global_extensions = [
-        "         \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
-        "         \ 'coc-spell-checker', 'coc-vimlsp', 'coc-go', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint'
-        "         \ ]
-        "     for cocext in g:coc_global_extensions
-        "         call coc#util#install_extension(cocext)
-        "     endfor
-        " endif
     endfunction
     call InitializeDirectories()
     " }
