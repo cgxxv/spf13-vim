@@ -73,6 +73,9 @@ variable_set() {
 }
 
 lnif() {
+    if [ -e "$2" ]; then
+        rm -vf "$2"
+    fi
     if [ -e "$1" ]; then
         ln -sf "$1" "$2"
     fi
