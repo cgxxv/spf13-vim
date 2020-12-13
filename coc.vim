@@ -121,11 +121,11 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
-nnoremap <silent><nowait> <Leader>ca  :<C-u>CocList diagnostics<cr>     " Show all diagnostics.
-nnoremap <silent><nowait> <Leader>ce  :<C-u>CocList extensions<cr>      " Manage extensions.
-nnoremap <silent><nowait> <Leader>cmd  :<C-u>CocList commands<cr>        " Show commands.
-nnoremap <silent><nowait> <Leader>co  :<C-u>CocList outline<cr>         " Find symbol of current document.
-nnoremap <silent><nowait> <Leader>cs  :<C-u>CocList -I symbols<cr>      " Search workspace symbols.
+nnoremap <silent><nowait> <Leader>cla  :<C-u>CocList diagnostics<cr>     " Show all diagnostics.
+nnoremap <silent><nowait> <Leader>cle  :<C-u>CocList extensions<cr>      " Manage extensions.
+nnoremap <silent><nowait> <Leader>clc  :<C-u>CocList commands<cr>        " Show commands.
+nnoremap <silent><nowait> <Leader>clo  :<C-u>CocList outline<cr>         " Find symbol of current document.
+nnoremap <silent><nowait> <Leader>cls  :<C-u>CocList -I symbols<cr>      " Search workspace symbols.
 nnoremap <silent><nowait> <Leader>cj  :<C-u>CocNext<CR>                 " Do default action for next item.
 nnoremap <silent><nowait> <Leader>ck  :<C-u>CocPrev<CR>                 " Do default action for previous item.
 nnoremap <silent><nowait> <Leader>cp  :<C-u>CocListResume<CR>           " Resume latest coc list.
