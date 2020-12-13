@@ -98,7 +98,7 @@ call plug#begin('~/.vim/bundle')
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
             \ 'general', 'writing', 'programming', 'cheat.sh', 'misc',
-            \ 'coc',
+            \ 'coc', 'go',
             \ ]
     endif
 
@@ -117,7 +117,7 @@ call plug#begin('~/.vim/bundle')
                 Plug 'roxma/vim-hug-neovim-rpc'
             endif
             " Plug 'scrooloose/nerdtree'
-            " Plug 'altercation/vim-colors-solarized'
+            Plug 'altercation/vim-colors-solarized'
             " Plug 'spf13/vim-colors'
             Plug 'tpope/vim-surround'
             Plug 'tpope/vim-repeat'

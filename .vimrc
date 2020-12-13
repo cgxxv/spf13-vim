@@ -219,16 +219,16 @@ if !exists('g:vscode')
 
 " Vim UI {
 
-    " if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-    "     colorscheme solarized
-    "     let g:solarized_termcolors="24bits"
-    "     let g:solarized_termtrans=1
-    "     let g:solarized_degrade=0
-    "     let g:solarized_bold=0
-    "     let g:solarized_contrast="high"
-    "     let g:solarized_visibility="normal"
-    "     syntax enable
-    " endif
+    if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
+        colorscheme solarized
+        let g:solarized_termcolors="24bits"
+        let g:solarized_termtrans=1
+        let g:solarized_degrade=0
+        let g:solarized_bold=0
+        let g:solarized_contrast="high"
+        let g:solarized_visibility="normal"
+        syntax enable
+    endif
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -277,6 +277,10 @@ if !exists('g:vscode')
     set foldenable                  " Auto fold code
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
+
+    if has('nvim')
+        set termguicolors
+    endif
 
 " }
 
