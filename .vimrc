@@ -218,17 +218,9 @@ if !exists('g:vscode')
 " }
 
 " Vim UI {
-
-    if !exists('g:override_spf13_bundles') && filereadable(expand("~/.vim/bundle/vim-colors-solarized/colors/solarized.vim"))
-        colorscheme solarized
-        let g:solarized_termcolors="24bits"
-        let g:solarized_termtrans=1
-        let g:solarized_degrade=0
-        let g:solarized_bold=0
-        let g:solarized_contrast="high"
-        let g:solarized_visibility="normal"
-        syntax enable
-    endif
+    " theme section{
+    source ~/.vim/theme.vim
+    " }
 
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
@@ -277,11 +269,6 @@ if !exists('g:vscode')
     set foldenable                  " Auto fold code
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-
-    if has('nvim')
-        set termguicolors
-    endif
-
 " }
 
 " Formatting {
@@ -508,9 +495,11 @@ if !exists('g:vscode')
 
 " Coc.nvim {
     if !exists('g:coc_global_extension')
+        " 'coc-go' As highlight not support in gopls, so it's not good.
         let g:coc_global_extensions = [
-            \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
-            \ 'coc-vimlsp', 'coc-go', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint',
+            \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 
+            \ 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
+            \ 'coc-vimlsp', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint',
             \ ]
     endif
 
@@ -544,7 +533,6 @@ if !exists('g:vscode')
 
     " Golang {
         if count(g:spf13_bundle_groups, 'go')
-            let g:go_gopls_enabled = 0 " disable gopls in vim-go
             let g:go_highlight_extra_types = 1
             let g:go_highlight_operators = 0
             let g:go_highlight_functions = 1

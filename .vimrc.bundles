@@ -97,8 +97,8 @@ call plug#begin('~/.vim/bundle')
     " list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
-            \ 'general', 'writing', 'programming', 'cheat.sh', 'misc',
-            \ 'coc', 'go',
+            \ 'general', 'vim-colors-solarized', 'writing', 'programming', 'cheat.sh', 'misc',
+            \ 'coc', 'go', 
             \ ]
     endif
 
@@ -117,8 +117,6 @@ call plug#begin('~/.vim/bundle')
                 Plug 'roxma/vim-hug-neovim-rpc'
             endif
             " Plug 'scrooloose/nerdtree'
-            Plug 'altercation/vim-colors-solarized'
-            " Plug 'spf13/vim-colors'
             Plug 'tpope/vim-surround'
             Plug 'tpope/vim-repeat'
             Plug 'rhysd/conflict-marker.vim'
@@ -140,7 +138,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'bling/vim-bufferline'
             Plug 'easymotion/vim-easymotion'
             " Plug 'jistr/vim-nerdtree-tabs'
-            " Plug 'flazz/vim-colorschemes'
             Plug 'mbbill/undotree'
             Plug 'nathanaelkane/vim-indent-guides'
             if !exists('g:spf13_no_views')
@@ -156,6 +153,20 @@ call plug#begin('~/.vim/bundle')
             Plug 'antonk52/vim-tabber'
             Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
             Plug 'junegunn/fzf.vim'
+        endif
+    " }
+
+    " Theme section{
+        if count(g:spf13_bundle_groups, 'vim-colors-solarized')
+            Plug 'altercation/vim-colors-solarized'
+            Plug 'spf13/vim-colors'
+            Plug 'flazz/vim-colorschemes'
+        elseif count(g:spf13_bundle_groups, 'nvim-colors-solarized')
+            Plug 'arakashic/nvim-colors-solarized'
+        elseif count(g:spf13_bundle_groups, 'NeoSolarized')
+            Plug 'overcache/NeoSolarized'
+        elseif count(g:spf13_bundle_groups, 'vim-solarized8')
+            Plug 'lifepillar/vim-solarized8'
         endif
     " }
 
@@ -189,33 +200,6 @@ call plug#begin('~/.vim/bundle')
     " Coc {
         if count(g:spf13_bundle_groups, 'coc')
             Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-            " TODO: 
-            " This code here will expand the disk space usage and not ok currently.
-            " Recommand to use Coc extension manager will be better.
-            " Not ok currently.
-            " Plug 'neoclide/coc-json'", {'tag': '1.3.2', 'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-emmet', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-rls', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-python', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-html', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'voldikss/coc-cmake', {'do': 'yarn install --frozen-lockfile'}
-
-            " TODO: Temporarily Ok!
-            " Plug 'iamcco/coc-spell-checker', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'clangd/coc-clangd', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'josa42/coc-sh', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'fannheyward/coc-sql', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'marlonfan/coc-phpls', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'fannheyward/coc-markdownlint', {'do': 'yarn install --frozen-lockfile'}
-            " Plug 'voldikss/coc-todolist', {'do': 'yarn install --frozen-lockfile'}
         endif
     " }
 
