@@ -493,11 +493,12 @@ if !exists('g:vscode')
 " }
 
 " Plugins {
-    " EditorConfig
+    " EditorConfig{
         if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
             let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*'] "Excluded patterns.
             "let g:EditorConfig_disable_rules = ['trim_trailing_whitespace'] "Disable rules
         endif
+    " }
 
     " Cheat.sh {
         if count(g:spf13_bundle_groups, 'cheat.sh')
@@ -507,6 +508,7 @@ if !exists('g:vscode')
             let g:syntastic_shell_checkers = ['shellcheck']
         endif
     " }
+
     " Rust {
         if count(g:spf13_bundle_groups, 'rust')
             let g:rustfmt_autosave = 1
@@ -548,10 +550,10 @@ if !exists('g:vscode')
     " TextObj Sentence {
         if count(g:spf13_bundle_groups, 'writing')
             augroup textobj_sentence
-              autocmd!
-              autocmd FileType markdown call textobj#sentence#init()
-              autocmd FileType textile call textobj#sentence#init()
-              autocmd FileType text call textobj#sentence#init()
+                autocmd!
+                autocmd FileType markdown call textobj#sentence#init()
+                autocmd FileType textile call textobj#sentence#init()
+                autocmd FileType text call textobj#sentence#init()
             augroup END
         endif
     " }

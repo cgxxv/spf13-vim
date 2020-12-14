@@ -192,7 +192,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'dbeniamine/cheat.sh-vim'
         endif
     " }
-    "
+
     " Rust {
         if count(g:spf13_bundle_groups, 'rust')
             Plug 'rust-lang/rust.vim'
