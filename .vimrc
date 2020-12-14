@@ -495,11 +495,13 @@ if !exists('g:vscode')
 
 " Coc.nvim {
     if !exists('g:coc_global_extension')
-        " 'coc-go' As highlight not support in gopls, so it's not good.
+        " 'coc-go' As highlight not support in gopls, use vim-go for golang.
         let g:coc_global_extensions = [
             \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 
-            \ 'coc-rls', 'coc-python', 'coc-tsserver', 'coc-html', 'coc-html', 'coc-cmake',
-            \ 'coc-vimlsp', 'coc-clangd', 'coc-sh', 'coc-sql', 'coc-phpls', 'coc-markdownlint',
+            \ 'coc-tsserver', 'coc-html', 'coc-css',
+            \ 'coc-cmake', 'coc-sql', 'coc-sh', 'coc-markdownlint',
+            \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
+            \ 'coc-rls', 'coc-clangd',
             \ ]
     endif
 
@@ -524,12 +526,12 @@ if !exists('g:vscode')
         endif
     " }
 
-    " " Rust {
-    "     if count(g:spf13_bundle_groups, 'rust')
-    "         let g:rustfmt_autosave = 1
-    "         let g:rust_clip_command = 'pbcopy'
-    "     endif
-    " " }
+    " Rust {
+        if count(g:spf13_bundle_groups, 'rust')
+            let g:rustfmt_autosave = 1
+            let g:rust_clip_command = 'pbcopy'
+        endif
+    " }
 
     " Golang {
         if count(g:spf13_bundle_groups, 'go')

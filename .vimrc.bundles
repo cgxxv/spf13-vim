@@ -98,7 +98,7 @@ call plug#begin('~/.vim/bundle')
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
             \ 'general', 'vim-colors-solarized', 'writing', 'programming', 'cheat.sh', 'misc',
-            \ 'coc', 'go', 
+            \ 'coc', 'go',
             \ ]
     endif
 
