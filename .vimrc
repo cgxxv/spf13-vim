@@ -495,13 +495,13 @@ if !exists('g:vscode')
 
 " Coc.nvim {
     if !exists('g:coc_global_extension')
-        " 'coc-go' As highlight not support in gopls, use vim-go for golang.
         let g:coc_global_extensions = [
             \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 
             \ 'coc-tsserver', 'coc-html', 'coc-css',
             \ 'coc-cmake', 'coc-sql', 'coc-sh', 'coc-markdownlint',
             \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
             \ 'coc-rls', 'coc-clangd',
+            \ 'coc-go',
             \ ]
     endif
 
