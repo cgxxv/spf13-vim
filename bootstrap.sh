@@ -132,6 +132,7 @@ create_symlinks() {
 
     lnif "$source_path/.vimrc"          "$target_path/.vimrc"
     lnif "$source_path/theme.vim"       "$target_path/.vim/theme.vim"
+    lnif "$source_path/defx.vim"       "$target_path/.vim/defx.vim"
     lnif "$source_path/.vimrc.bundles"  "$target_path/.vimrc.bundles"
     lnif "$source_path/.vimrc.before"   "$target_path/.vimrc.before"
 

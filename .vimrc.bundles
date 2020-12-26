@@ -92,12 +92,11 @@ call plug#begin('~/.vim/bundle')
         endif
     " }
 
-    " 'youcompleteme', 'php', 'ruby', 'python', 'javascript', 'html', 'misc', 'go', 'scala', 'rust',
     " In your .vimrc.before.local file
     " list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
-            \ 'general', 'vim-colors-solarized', 'writing', 'programming', 'cheat.sh', 'misc',
+            \ 'general', 'vim-colors-solarized', 'defx', 'writing', 'programming', 'cheat.sh', 'misc',
             \ 'coc', 'go',
             \ ]
     endif
@@ -109,13 +108,6 @@ call plug#begin('~/.vim/bundle')
 
     " General {
         if count(g:spf13_bundle_groups, 'general')
-            if has('nvim')
-                Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-            else
-                Plug 'Shougo/defx.nvim'
-                Plug 'roxma/nvim-yarp'
-                Plug 'roxma/vim-hug-neovim-rpc'
-            endif
             " Plug 'scrooloose/nerdtree'
             Plug 'tpope/vim-surround'
             Plug 'tpope/vim-repeat'
@@ -170,6 +162,20 @@ call plug#begin('~/.vim/bundle')
         endif
     " }
 
+    " Defx {
+        if count(g:spf13_bundle_groups, 'defx')
+            if has('nvim')
+                Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+            else
+                Plug 'Shougo/defx.nvim'
+                Plug 'roxma/nvim-yarp'
+                Plug 'roxma/vim-hug-neovim-rpc'
+            endif
+            Plug 'kristijanhusak/defx-icons'
+            Plug 'kristijanhusak/defx-git'
+        endif
+    " }
+
     " Writing {
         if count(g:spf13_bundle_groups, 'writing')
             Plug 'reedes/vim-litecorrect'
@@ -194,20 +200,14 @@ call plug#begin('~/.vim/bundle')
                 Plug 'majutsushi/tagbar'
             endif
             Plug 'editorconfig/editorconfig-vim'
+            " highlighting langs
+            Plug 'sheerun/vim-polyglot'
         endif
     " }
 
     " Coc {
         if count(g:spf13_bundle_groups, 'coc')
             Plug 'neoclide/coc.nvim', {'branch': 'release'}
-        endif
-    " }
-
-    " Snippets & AutoComplete {
-        if count(g:spf13_bundle_groups, 'youcompleteme')
-            Plug 'valloric/youcompleteme', { 'do': './install.py --all' }
-            Plug 'sirVer/ultisnips'
-            Plug 'honza/vim-snippets'
         endif
     " }
 

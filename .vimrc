@@ -135,8 +135,8 @@ if !exists('g:vscode')
     set iskeyword-=-                    " '-' is an end of word designator
     set errorbells                      " Trigger bell on error
 
-    
-    set nobackup                        " Some servers have issues with backup files, see #649.
+
+    set nobackup                        " Some servers have issues with backup files, see https://github.com/neoclide/coc.nvim/issues/649.
     set nowritebackup
     " set cmdheight=2                     " Give more space for displaying messages.
     set shortmess+=c                    " Don't pass messages to |ins-completion-menu|.
@@ -496,7 +496,7 @@ if !exists('g:vscode')
 " Coc.nvim {
     if !exists('g:coc_global_extension')
         let g:coc_global_extensions = [
-            \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet', 
+            \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet',
             \ 'coc-tsserver', 'coc-html', 'coc-css',
             \ 'coc-cmake', 'coc-sql', 'coc-sh', 'coc-markdownlint',
             \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
@@ -563,7 +563,6 @@ if !exists('g:vscode')
         endif
     " }
 
-
     " TextObj Sentence {
         if count(g:spf13_bundle_groups, 'writing')
             augroup textobj_sentence
@@ -600,79 +599,9 @@ if !exists('g:vscode')
         if isdirectory(expand("~/.vim/bundle/matchit.zip"))
             let b:match_ignorecase = 1
         endif
-        if isdirectory(expand("~/.vim/bundle/defx.vim"))
-            " Define mappings
-            nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
-            nnoremap <silent><buffer><expr> c defx#do_action('copy')
-            nnoremap <silent><buffer><expr> m defx#do_action('move')
-            nnoremap <silent><buffer><expr> p defx#do_action('paste')
-            nnoremap <silent><buffer><expr> l defx#do_action('open')
-            nnoremap <silent><buffer><expr> E defx#do_action('open', 'vsplit')
-            nnoremap <silent><buffer><expr> P defx#do_action('preview')
-            nnoremap <silent><buffer><expr> o defx#do_action('open_tree', 'toggle')
-            nnoremap <silent><buffer><expr> K defx#do_action('new_directory')
-            nnoremap <silent><buffer><expr> N defx#do_action('new_file')
-            nnoremap <silent><buffer><expr> M defx#do_action('new_multiple_files')
-            nnoremap <silent><buffer><expr> C defx#do_action('toggle_columns', 'mark:indent:icon:filename:type:size:time')
-            nnoremap <silent><buffer><expr> S defx#do_action('toggle_sort', 'time')
-            nnoremap <silent><buffer><expr> d defx#do_action('remove')
-            nnoremap <silent><buffer><expr> r defx#do_action('rename')
-            nnoremap <silent><buffer><expr> ! defx#do_action('execute_command')
-            nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
-            nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
-            nnoremap <silent><buffer><expr> . defx#do_action('toggle_ignored_files')
-            nnoremap <silent><buffer><expr> ; defx#do_action('repeat')
-            nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
-            nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
-            nnoremap <silent><buffer><expr> q defx#do_action('quit')
-            nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
-            nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
-            nnoremap <silent><buffer><expr> j line('.') == line('$') ? 'gg' : 'j'
-            nnoremap <silent><buffer><expr> k line('.') == 1 ? 'G' : 'k'
-            nnoremap <silent><buffer><expr> <C-l> defx#do_action('redraw')
-            nnoremap <silent><buffer><expr> <C-g> defx#do_action('print')
-            nnoremap <silent><buffer><expr> cd defx#do_action('change_vim_cwd')
-        endif
-    " }
-
-    " " OmniComplete {
-    "     " To disable omni complete, add the following to your .vimrc.before.local file:
-    "     "   let g:spf13_no_omni_complete = 1
-    "     if !exists('g:spf13_no_omni_complete')
-    "         if has("autocmd") && exists("+omnifunc")
-    "             autocmd Filetype *
-    "                 \if &omnifunc == "" |
-    "                 \setlocal omnifunc=syntaxcomplete#Complete |
-    "                 \endif
-    "         endif
-
-    "         hi Pmenu  guifg=#000000 guibg=#F8F8F8 ctermfg=black ctermbg=Lightgray
-    "         hi PmenuSbar  guifg=#8A95A7 guibg=#F8F8F8 gui=NONE ctermfg=darkcyan ctermbg=lightgray cterm=NONE
-    "         hi PmenuThumb  guifg=#F8F8F8 guibg=#8A95A7 gui=NONE ctermfg=lightgray ctermbg=darkcyan cterm=NONE
-
-    "         " Some convenient mappings
-    "         "inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-    "         if exists('g:spf13_map_cr_omni_complete')
-    "             inoremap <expr> <CR>     pumvisible() ? "\<C-y>" : "\<CR>"
-    "         endif
-    "         inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-    "         inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-    "         inoremap <expr> <C-d>      pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<C-d>"
-    "         inoremap <expr> <C-u>      pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<C-u>"
-
-    "         " Automatically open and close the popup menu / preview window
-    "         au CursorMovedI,InsertLeave * if pumvisible() == 0|silent! pclose|endif
-    "         set completeopt=menu,preview,longest
-    "     endif
-    " " }
-
-    " Ctags {
-        set tags=./tags;/,~/.vimtags
-
-        " Make tags placed in .git/tags file available in all levels of a repository
-        let gitroot = substitute(system('git rev-parse --show-toplevel'), '[\n\r]', '', 'g')
-        if gitroot != ''
-            let &tags = &tags . ',' . gitroot . '/.git/tags'
+        if count(g:spf13_bundle_groups, 'defx')
+            noremap <Leader>de :Defx<CR>
+            source ~/.vim/defx.vim
         endif
     " }
 
@@ -847,64 +776,6 @@ if !exists('g:vscode')
             nnoremap <silent> <leader>gg :SignifyToggle<CR>
         endif
     "}
-
-    " " YouCompleteMe {
-    "     if count(g:spf13_bundle_groups, 'youcompleteme')
-    "         let g:acp_enableAtStartup = 0
-
-    "         " enable completion from tags
-    "         let g:ycm_collect_identifiers_from_tags_files = 1
-
-    "         " remap Ultisnips for compatibility for YCM
-    "         let g:UltiSnipsExpandTrigger = '<C-j>'
-    "         let g:UltiSnipsJumpForwardTrigger = '<C-j>'
-    "         let g:UltiSnipsJumpBackwardTrigger = '<C-k>'
-
-    "         " Enable omni completion.
-    "         autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    "         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    "         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    "         autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    "         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    "         autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    "         autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-    "         " Haskell post write lint and check with ghcmod
-    "         " $ `cabal install ghcmod` if missing and ensure
-    "         " ~/.cabal/bin is in your $PATH.
-    "         if !executable("ghcmod")
-    "             autocmd BufWritePost *.hs GhcModCheckAndLintAsync
-    "         endif
-
-    "         " For snippet_complete marker.
-    "         if !exists("g:spf13_no_conceal")
-    "             if has('conceal')
-    "                 set conceallevel=2 concealcursor=i
-    "             endif
-    "         endif
-
-    "         " Disable the neosnippet preview candidate window
-    "         " When enabled, there can be too much visual noise
-    "         " especially when splits are used.
-    "         set completeopt-=preview
-    "     endif
-    " " }
-
-    " " Normal Vim omni-completion {
-    " " To disable omni complete, add the following to your .vimrc.before.local file:
-    " "   let g:spf13_no_omni_complete = 1
-    "     if !exists('g:spf13_no_omni_complete')
-    "         " Enable omni-completion.
-    "         autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    "         autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-    "         autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-    "         autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-    "         autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    "         autocmd FileType ruby setlocal omnifunc=rubycomplete#Complete
-    "         autocmd FileType haskell setlocal omnifunc=necoghc#omnifunc
-
-    "     endif
-    " " }
 
     " FIXME: Isn't this for Syntastic to handle?
     " Haskell post write lint and check with ghcmod
