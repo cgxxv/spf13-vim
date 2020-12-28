@@ -1,7 +1,6 @@
-"mark:indent:git:icons:filename:type:size
 call defx#custom#option('_', {
-    \ 'columns': 'mark:git:icons:filename',
-    \ 'winwidth': 35,
+    \ 'columns': 'git:icons:indent:filename',
+    \ 'winwidth': 30,
     \ 'split': 'vertical',
     \ 'direction': 'leftabove',
     \ 'show_ignored_files': 1,
@@ -10,20 +9,31 @@ call defx#custom#option('_', {
     \ 'resume': 1
     \ })
 
-call defx#custom#column('mark', {
-    \ 'readonly_icon': '',
-    \ 'selected_icon': '',
+call defx#custom#column('git', 'indicators', {
+    \ 'Modified'  : '✹',
+    \ 'Staged'    : '✚',
+    \ 'Untracked' : 'ᵁ',
+    \ 'Renamed'   : '≫',
+    \ 'Unmerged'  : '≠',
+    \ 'Ignored'   : '☒',
+    \ 'Deleted'   : '✖',
+    \ 'Unknown'   : '⁇'
     \ })
 
-call defx#custom#column('icon', {
-    \ 'directory_icon': '▶',
-    \ 'opened_icon': '▼',
-    \ 'root_icon': ' ',
-    \ })
+" call defx#custom#column('mark', {
+"     \ 'readonly_icon': '',
+"     \ 'selected_icon': '',
+"     \ })
 
-call defx#custom#column('filename', {
-    \ 'max_width': -90,
-    \ })
+" call defx#custom#column('icon', {
+"     \ 'directory_icon': '▶',
+"     \ 'opened_icon': '▼',
+"     \ 'root_icon': ' ',
+"     \ })
+
+" call defx#custom#column('filename', {
+"     \ 'max_width': -90,
+"     \ })
 
 augroup vfinit
     au!
@@ -176,15 +186,3 @@ endfunction
 function! s:trim_right(str, trim)
     return substitute(a:str, printf('%s$', a:trim), '', 'g')
 endfunction
-
-" defx-git for each status
-let g:defx_git#indicators = {
-    \ 'Modified'  : '•',
-    \ 'Staged'    : '✚',
-    \ 'Untracked' : 'ᵁ',
-    \ 'Renamed'   : '≫',
-    \ 'Unmerged'  : '≠',
-    \ 'Ignored'   : 'ⁱ',
-    \ 'Deleted'   : '✖',
-    \ 'Unknown'   : '⁇'
-    \ }
