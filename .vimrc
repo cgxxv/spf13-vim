@@ -403,6 +403,15 @@ if !exists('g:vscode')
         map <S-L> gt
     endif
 
+    " Fast buffer switching.
+    " If you doesn't like the key-bindings, add the following to your
+    " .vimrc.before.local file:
+    " let g:spf13_no_fastBuffers = 1
+    if !exists('g:spf13_no_fastBuffers')
+        nnoremap <C-S-L> :bnext<CR>
+        nnoremap <C-S-H> :bprev<CR>
+    endif
+
     " Stupid shift key fixes
     if !exists('g:spf13_no_keyfixes')
         if has("user_commands")
@@ -526,12 +535,12 @@ if !exists('g:vscode')
         endif
     " }
 
-    " Rust {
-        if count(g:spf13_bundle_groups, 'rust')
-            let g:rustfmt_autosave = 1
-            let g:rust_clip_command = 'pbcopy'
-        endif
-    " }
+    "" Rust {
+    "    if count(g:spf13_bundle_groups, 'rust')
+    "        let g:rustfmt_autosave = 1
+    "        let g:rust_clip_command = 'pbcopy'
+    "    endif
+    "" }
 
     " Golang {
         if count(g:spf13_bundle_groups, 'go')
