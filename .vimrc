@@ -190,31 +190,6 @@ if !exists('g:vscode')
                 \ ]
         endif
     " }
-
-    " FIXME
-    " Alt key bindings
-    " https://unix.stackexchange.com/questions/49203/vim-customized-with-emacs-commands-insert-mode-only
-    " https://vi.stackexchange.com/questions/2350/how-to-map-alt-key
-    " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
-    " https://unix.stackexchange.com/questions/14765/how-to-map-alt-key-in-vimrc
-    " https://www.reddit.com/r/vim/comments/4w0lib/do_you_use_insert_mode_keybindings/
-    " https://vi.stackexchange.com/questions/7722/how-to-debug-a-mapping
-    " https://stackoverflow.com/questions/2483849/detect-if-a-key-is-bound-to-something-in-vim
-    " https://stackoverflow.com/questions/8750275/vim-super-fast-navigation
-    " https://medium.com/usevim/vim-101-quick-movement-c12889e759e0#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImRlZGMwMTJkMDdmNTJhZWRmZDVmOTc3ODRlMWJjYmUyM2MxOTcyNGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MDU5NjI5NjYsImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNzUxMjA0Nzk1NTQ1ODExODYxOSIsImVtYWlsIjoiZm9vc3RhY2tlci56enFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJrIHciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2oyVnc4bWxCU1pqMzh4MDVQckt4eVZDekljQUNtUEtQdEtlTEFtM1E9czk2LWMiLCJnaXZlbl9uYW1lIjoiayIsImZhbWlseV9uYW1lIjoidyIsImlhdCI6MTYwNTk2MzI2NiwiZXhwIjoxNjA1OTY2ODY2LCJqdGkiOiIyYjA3MGNkN2VmY2MyZTRmODVhY2MyMWE1N2Y5N2Y3YTFjYjIwY2FmIn0.hDgzsW-ALIZZELzh7y5ggy-OqVMS7DM_X5TtuIO8T-JorPnnZbyZ3VgDRraxBaIs5WL2fXwSXIYZyyxC1RqZAAT8vRpY8sQAVui-zeJj2s6Xl3c1tvU9lBH4GXstGgxVuFR1b8DdND_tnzzZV5Q-GUtwJ4R-NgHzgk1fj8DSQGw7Fl4_-ZuYN65brNWOJhE23tGudjnpQp5KYO8B4Irh6x-e5YLBTSGYbwYZK62MLdBPiSuf7NW1ZZZHTWI_LQWxDidD54Ha9ayeqHfnKn_SsA4wPewAVe9MjgXEtaQP09pVrmq_X3AXfPOK1ZxVxHvPcNr1Qy8l0FE8olE5qgOPRw
-    " Mimic Emacs Line Editing in Insert Mode Only
-    " movement
-    inoremap <C-A> <Home>
-    inoremap <C-E> <End>
-    inoremap <C-F> <Right>
-    inoremap <C-B> <Left>
-    " buffer
-    inoremap <C-U> <Esc>d0xi
-    inoremap <C-Y> <Esc>Pa
-    inoremap <C-X><C-E> <Esc>Da
-    inoremap <C-X><C-S> <Esc>:w<CR>i
-    inoremap <C-X><C-X> <Esc>ddi
-
 " }
 
 " Vim UI {
@@ -403,13 +378,31 @@ if !exists('g:vscode')
         map <S-L> gt
     endif
 
+    "" FIXME
+    "" Support Meta key mapping
+    "" iterm2 on mac is ok
+    "" https://unix.stackexchange.com/questions/14765/how-to-map-alt-key-in-vimrc
+    "for i in range(65,90)
+    "    " bind M-S-a..z (M-A..Z)
+    "    let C = nr2char(i)
+    "    exec "map \e".C." <M-".C.">"
+    "    exec "map! \e".C." <M-".C.">"
+
+    "    " bind M-a..z
+    "    let c = nr2char(i+32)
+    "    exec "map \e".c." <M-".c.">"
+    "    exec "map! \e".c." <M-".c.">"
+    "endfor
+
     " Fast buffer switching.
     " If you doesn't like the key-bindings, add the following to your
     " .vimrc.before.local file:
     " let g:spf13_no_fastBuffers = 1
     if !exists('g:spf13_no_fastBuffers')
-        nnoremap <C-S-L> :bnext<CR>
-        nnoremap <C-S-H> :bprev<CR>
+        exec "map \eH <M-H>"
+        exec "map \eL <M-L>"
+        nnoremap <M-H> :bprev<CR>
+        nnoremap <M-L> :bnext<CR>
     endif
 
     " Stupid shift key fixes
@@ -500,6 +493,29 @@ if !exists('g:vscode')
     " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
     map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
+    " FIXME
+    " Alt key bindings
+    " https://unix.stackexchange.com/questions/49203/vim-customized-with-emacs-commands-insert-mode-only
+    " https://vi.stackexchange.com/questions/2350/how-to-map-alt-key
+    " https://stackoverflow.com/questions/7501092/can-i-map-alt-key-in-vim
+    " https://unix.stackexchange.com/questions/14765/how-to-map-alt-key-in-vimrc
+    " https://www.reddit.com/r/vim/comments/4w0lib/do_you_use_insert_mode_keybindings/
+    " https://vi.stackexchange.com/questions/7722/how-to-debug-a-mapping
+    " https://stackoverflow.com/questions/2483849/detect-if-a-key-is-bound-to-something-in-vim
+    " https://stackoverflow.com/questions/8750275/vim-super-fast-navigation
+    " https://medium.com/usevim/vim-101-quick-movement-c12889e759e0#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImRlZGMwMTJkMDdmNTJhZWRmZDVmOTc3ODRlMWJjYmUyM2MxOTcyNGQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2MDU5NjI5NjYsImF1ZCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjEwNzUxMjA0Nzk1NTQ1ODExODYxOSIsImVtYWlsIjoiZm9vc3RhY2tlci56enFAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImF6cCI6IjIxNjI5NjAzNTgzNC1rMWs2cWUwNjBzMnRwMmEyamFtNGxqZGNtczAwc3R0Zy5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsIm5hbWUiOiJrIHciLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EtL0FPaDE0R2oyVnc4bWxCU1pqMzh4MDVQckt4eVZDekljQUNtUEtQdEtlTEFtM1E9czk2LWMiLCJnaXZlbl9uYW1lIjoiayIsImZhbWlseV9uYW1lIjoidyIsImlhdCI6MTYwNTk2MzI2NiwiZXhwIjoxNjA1OTY2ODY2LCJqdGkiOiIyYjA3MGNkN2VmY2MyZTRmODVhY2MyMWE1N2Y5N2Y3YTFjYjIwY2FmIn0.hDgzsW-ALIZZELzh7y5ggy-OqVMS7DM_X5TtuIO8T-JorPnnZbyZ3VgDRraxBaIs5WL2fXwSXIYZyyxC1RqZAAT8vRpY8sQAVui-zeJj2s6Xl3c1tvU9lBH4GXstGgxVuFR1b8DdND_tnzzZV5Q-GUtwJ4R-NgHzgk1fj8DSQGw7Fl4_-ZuYN65brNWOJhE23tGudjnpQp5KYO8B4Irh6x-e5YLBTSGYbwYZK62MLdBPiSuf7NW1ZZZHTWI_LQWxDidD54Ha9ayeqHfnKn_SsA4wPewAVe9MjgXEtaQP09pVrmq_X3AXfPOK1ZxVxHvPcNr1Qy8l0FE8olE5qgOPRw
+    " Mimic Emacs Line Editing in Insert Mode Only
+    " movement
+    "inoremap <C-A> <Home>
+    "inoremap <C-E> <End>
+    "inoremap <C-F> <Right>
+    "inoremap <C-B> <Left>
+    "" buffer
+    "inoremap <C-U> <Esc>d0xi
+    "inoremap <C-Y> <Esc>Pa
+    "inoremap <C-X><C-E> <Esc>Da
+    "inoremap <C-X><C-S> <Esc>:w<CR>i
+    "inoremap <C-X><C-X> <Esc>ddi
 " }
 
 " Coc.nvim {
