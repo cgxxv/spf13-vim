@@ -401,6 +401,8 @@ if !exists('g:vscode')
     if !exists('g:spf13_no_fastBuffers')
         exec "map \eH <M-H>"
         exec "map \eL <M-L>"
+        exec "map! \eH <M-H>"
+        exec "map! \eL <M-L>"
         nnoremap <M-H> :bprev<CR>
         nnoremap <M-L> :bnext<CR>
     endif
