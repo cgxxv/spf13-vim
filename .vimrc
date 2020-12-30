@@ -536,6 +536,14 @@ if !exists('g:vscode')
 " }
 
 " Plugins {
+    " BufferLine {
+        " If you want to see the full path, press {count}Ctrl-G
+        " https://vi.stackexchange.com/questions/104/how-can-i-see-the-full-path-of-the-current-file
+        if isdirectory(expand("~/.vim/bundle/vim-bufferline"))
+            let g:bufferline_echo = 0 " hidden buffers in command bar
+        endif
+    " }
+
     " EditorConfig
         if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
             let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*'] "Excluded patterns.
