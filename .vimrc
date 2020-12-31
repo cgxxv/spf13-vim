@@ -522,6 +522,7 @@ if !exists('g:vscode')
 
 " Coc.nvim {
     if !exists('g:coc_global_extension')
+        let g:coc_node_path = '/usr/local/bin/node'
         let g:coc_global_extensions = [
             \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet',
             \ 'coc-tsserver', 'coc-html', 'coc-css',
