@@ -521,19 +521,28 @@ if !exists('g:vscode')
 " }
 
 " Coc.nvim {
-    if !exists('g:coc_global_extension')
-        let g:coc_node_path = '/usr/local/bin/node'
-        let g:coc_global_extensions = [
-            \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet',
-            \ 'coc-tsserver', 'coc-html', 'coc-css',
-            \ 'coc-cmake', 'coc-sql', 'coc-sh', 'coc-markdownlint',
-            \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
-            \ 'coc-rls', 'coc-clangd',
-            \ 'coc-go',
-            \ ]
-    endif
+
 
     if count(g:spf13_bundle_groups, 'coc')
+        " Specify your node path in .vimrc.before.local
+        " let g:coc_node_path = '/usr/local/bin/node'
+        if !exists('g:coc_node_path')
+            let g:coc_node_path = '/usr/local/bin/node'
+        endif
+
+        " Custom you coc extensions in .vimrc.before.local
+        " let g:coc_global_extensions = []
+        if !exists('g:coc_global_extension')
+            let g:coc_global_extensions = [
+                \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet',
+                \ 'coc-tsserver', 'coc-html', 'coc-css',
+                \ 'coc-cmake', 'coc-sql', 'coc-sh', 'coc-markdownlint',
+                \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
+                \ 'coc-rls', 'coc-clangd',
+                \ 'coc-go',
+                \ ]
+        endif
+
         source ~/.vim/coc.vim
     endif
 " }
