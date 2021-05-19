@@ -527,7 +527,7 @@ if !exists('g:vscode')
         " Specify your node path in .vimrc.before.local
         " let g:coc_node_path = '/usr/local/bin/node'
         if !exists('g:coc_node_path')
-            let g:coc_node_path = '/usr/local/bin/node'
+            let g:coc_node_path = trim(system('which node'))
         endif
 
         " Custom you coc extensions in .vimrc.before.local
