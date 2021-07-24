@@ -10,7 +10,8 @@
         let g:solarized_bold=0
         let g:solarized_contrast="high"
         let g:solarized_visibility="normal"
-        colorscheme solarized
+        " colorscheme solarized
+        colorscheme solarized8_dark_high
     elseif count(g:spf13_bundle_groups, 'nvim-colors-solarized') && filereadable(expand("~/.vim/bundle/nvim-colors-solarized/colors/solarized.vim"))
         if exists('+termguicolors')
             let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -57,7 +58,6 @@
         " text output by commands like `ls` aren't what you expect, you might want to
         " try disabling this option. Default value:
         let g:neosolarized_termBoldAsBright = 1
-        
         colorscheme NeoSolarized
     elseif count(g:spf13_bundle_groups, 'vim-solarized8') && filereadable(expand("~/.vim/bundle/vim-solarized8/colors/solarized8.vim"))
         if exists('+termguicolors')
@@ -73,8 +73,8 @@
         let g:solarized_statusline = "normal" "one of 'normal' (default), 'low' or 'flat';
         let g:solarized_italics = 1           "set to 0 to suppress italics (default is 1).
 
-        "set to 1 if you want to use the original Solarized's cursor style (default: 0). 
-        "By default, the cursor is orange/red in light themes, and blue in dark themes 
+        "set to 1 if you want to use the original Solarized's cursor style (default: 0).
+        "By default, the cursor is orange/red in light themes, and blue in dark themes
         "(but please note that your terminal may override the cursor's color).
         let g:solarized_old_cursor_style = 0
         let g:solarized_use16 = 0             "set to 1 to force using your 16 ANSI terminal colors.

@@ -538,7 +538,7 @@ if !exists('g:vscode')
                 \ 'coc-tsserver', 'coc-html', 'coc-css',
                 \ 'coc-cmake', 'coc-sql', 'coc-sh', 'coc-markdownlint',
                 \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
-                \ 'coc-rls', 'coc-clangd',
+                \ 'coc-clangd',
                 \ 'coc-go',
                 \ ]
         endif
@@ -571,12 +571,58 @@ if !exists('g:vscode')
         endif
     " }
 
-    "" Rust {
-    "    if count(g:spf13_bundle_groups, 'rust')
-    "        let g:rustfmt_autosave = 1
-    "        let g:rust_clip_command = 'pbcopy'
-    "    endif
-    "" }
+    " Rust {
+        if count(g:spf13_bundle_groups, 'rust')
+            let g:rustfmt_autosave = 1
+            let g:rust_clip_command = 'pbcopy'
+
+            "" c. cargo-process-repeat
+            " c/ cargo-process-search
+            noremap <Leader>c/ :Cargo -- search
+            " c= cargo-process-fmt
+            noremap <Leader>c= :Cargo -- fmt<CR>
+            " ca cargo-process-add
+            noremap <Leader>ca :Cadd
+            " cc cargo-process-build
+            noremap <Leader>cc :Cbuild<CR>
+            " cd cargo-process-doc
+            noremap <Leader>cd :Cdoc<CR>
+            " ce cargo-process-bench
+            noremap <Leader>ce :Cbench<CR>
+            " cf cargo-process-feature
+            noremap <Leader>cf :Cargo -- feature +
+            " ci cargo-process-init
+            noremap <Leader>ci :Cinit<CR>
+            " cl cargo-process-clipy
+            noremap <Leader>cl :Cargo -- clipy
+            " cn cargo-process-new
+            noremap <Leader>cn :Cnew
+            " co cargo-process-outdated
+            noremap <Leader>co :Cargo -- outdated
+            " cr cargo-process-rm"
+            noremap <Leader>cr :Cargo -- rm
+            " ct cargo-process-test"
+            noremap <Leader>ct :Ctest -- --nocapture --test-threads=1<CR>
+            " cu cargo-process-update"
+            noremap <Leader>cu :Cupdate
+            " cv cargo-process-check"
+            noremap <Leader>cv :Ccheck<CR>
+            " cx cargo-process-run
+            noremap <Leader>cx :Crun<CR>
+            " cA cargo-process-audit"
+            noremap <Leader>cA :Cargo -- audit
+            " cC cargo-process-clean"
+            noremap <Leader>cC :Cclean<CR>
+            " cD cargo-process-doc-open
+            noremap <Leader>cD :Cdoc -- --open<CR>
+            " cE cargo-process-run-example"
+            noremap <Leader>cE :Crun -- --example=
+            "" cU cargo-process-upgrade
+            " cX cargo-process-run-bin
+            noremap <Leader>cX :Crun -- --bin=
+            noremap <Leader>cmd :Cargo
+        endif
+    " }
 
     " Golang {
         if count(g:spf13_bundle_groups, 'go')

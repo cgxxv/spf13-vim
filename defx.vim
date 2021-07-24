@@ -2,7 +2,7 @@ call defx#custom#option('_', {
     \ 'columns': 'git:icons:indent:filename',
     \ 'winwidth': 30,
     \ 'split': 'vertical',
-    \ 'direction': 'rightbelow',
+    \ 'direction': 'topleft',
     \ 'show_ignored_files': 1,
     \ 'buffer_name': '',
     \ 'toggle': 1,

@@ -97,7 +97,7 @@ call plug#begin('~/.vim/bundle')
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
             \ 'general', 'vim-colors-solarized', 'defx', 'writing', 'programming', 'cheat.sh', 'misc',
-            \ 'coc', 'go',
+            \ 'coc', 'go', 'rust',
             \ ]
     endif
 
@@ -210,13 +210,12 @@ call plug#begin('~/.vim/bundle')
         endif
     " }
 
-    "" Rust {
-    "    if count(g:spf13_bundle_groups, 'rust')
-    "        Plug 'rust-lang/rust.vim'
-    "        Plug 'phildawes/racer'
-    "        Plug 'timonv/vim-cargo'
-    "    endif
-    "" }
+    " Rust {
+        if count(g:spf13_bundle_groups, 'rust')
+            Plug 'rust-lang/rust.vim'
+            Plug 'racer-rust/vim-racer'
+        endif
+    " }
 
     "" PHP {
     "    if count(g:spf13_bundle_groups, 'php')

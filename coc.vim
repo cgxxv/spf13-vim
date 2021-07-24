@@ -77,8 +77,8 @@ augroup end
 " Example: `<leader>aap` for current paragraph
 xmap <leader>ccs  <Plug>(coc-codeaction-selected)
 nmap <leader>ccs  <Plug>(coc-codeaction-selected)
-nmap <leader>cc  <Plug>(coc-codeaction)             " Remap keys for applying codeAction to the current buffer.
-nmap <leader>cqf  <Plug>(coc-fix-current)            " Apply AutoFix to problem on the current line.
+nmap <leader>cca  <Plug>(coc-codeaction)             " Remap keys for applying codeAction to the current buffer.
+nmap <leader>ccf  <Plug>(coc-fix-current)            " Apply AutoFix to problem on the current line.
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
