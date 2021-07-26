@@ -518,6 +518,12 @@ if !exists('g:vscode')
     "inoremap <C-X><C-E> <Esc>Da
     "inoremap <C-X><C-S> <Esc>:w<CR>i
     "inoremap <C-X><C-X> <Esc>ddi
+
+
+    "quickrun
+    if isdirectory(expand("~/.vim/bundle/vim-quickrun"))
+        noremap <Leader>q :QuickRun<CR>
+    endif
 " }
 
 " Coc.nvim {

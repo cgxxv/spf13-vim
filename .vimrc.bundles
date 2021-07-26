@@ -195,6 +195,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'editorconfig/editorconfig-vim'
             " highlighting langs
             Plug 'sheerun/vim-polyglot'
+            Plug 'thinca/vim-quickrun'
         endif
     " }
 
