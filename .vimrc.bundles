@@ -120,7 +120,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'vim-scripts/matchit.zip'
             Plug 'vim-airline/vim-airline'
             Plug 'vim-airline/vim-airline-themes'
-            Plug 'bling/vim-bufferline'
+            " Plug 'bling/vim-bufferline'
             Plug 'easymotion/vim-easymotion'
             " Plug 'jistr/vim-nerdtree-tabs'
             Plug 'mbbill/undotree'
@@ -182,10 +182,12 @@ call plug#begin('~/.vim/bundle')
         if count(g:spf13_bundle_groups, 'programming')
             " Pick one of the checksyntax, jslint, or syntastic
             Plug 'vim-syntastic/syntastic'
-            Plug 'tpope/vim-fugitive'
+            if !has('nvim')
+               Plug 'tpope/vim-fugitive'
+            endif
             Plug 'mattn/webapi-vim'
             Plug 'mattn/gist-vim'
-            Plug 'preservim/nerdcommenter'
+            "Plug 'preservim/nerdcommenter'
             Plug 'tpope/vim-commentary'
             Plug 'godlygeek/tabular'
             Plug 'luochen1990/rainbow'
@@ -196,6 +198,7 @@ call plug#begin('~/.vim/bundle')
             " highlighting langs
             Plug 'sheerun/vim-polyglot'
             Plug 'thinca/vim-quickrun'
+            Plug 'puremourning/vimspector'
         endif
     " }
 

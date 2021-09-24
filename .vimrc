@@ -519,10 +519,15 @@ if !exists('g:vscode')
     "inoremap <C-X><C-S> <Esc>:w<CR>i
     "inoremap <C-X><C-X> <Esc>ddi
 
-
     "quickrun
     if isdirectory(expand("~/.vim/bundle/vim-quickrun"))
         noremap <Leader>q :QuickRun<CR>
+    endif
+
+    "vim debugging with vimspector
+    if isdirectory(expand("~/.vim/bundle/vimspector"))
+        let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
+        noremap <Leader>di <Plug>VimspectorBalloonEval
     endif
 " }
 
@@ -559,6 +564,7 @@ if !exists('g:vscode')
         " https://vi.stackexchange.com/questions/104/how-can-i-see-the-full-path-of-the-current-file
         if isdirectory(expand("~/.vim/bundle/vim-bufferline"))
             let g:bufferline_echo = 0 " hidden buffers in command bar
+            let g:bufferline_show_bufnr = 0
         endif
     " }
 
@@ -588,7 +594,7 @@ if !exists('g:vscode')
             " c= cargo-process-fmt
             noremap <Leader>c= :Cargo -- fmt<CR>
             " ca cargo-process-add
-            noremap <Leader>ca :Cadd
+            noremap <Leader>ca :Cargo -- add
             " cc cargo-process-build
             noremap <Leader>cc :Cbuild<CR>
             " cd cargo-process-doc
@@ -596,7 +602,7 @@ if !exists('g:vscode')
             " ce cargo-process-bench
             noremap <Leader>ce :Cbench<CR>
             " cf cargo-process-feature
-            noremap <Leader>cf :Cargo -- feature +
+            noremap <Leader>cf :Cargo -- feature
             " ci cargo-process-init
             noremap <Leader>ci :Cinit<CR>
             " cl cargo-process-clipy
@@ -858,7 +864,7 @@ if !exists('g:vscode')
     "}
 
     " Fugitive {
-        if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+        if !has('nvim') && isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
             nnoremap <silent> <leader>gs :Gstatus<CR>
             nnoremap <silent> <leader>gd :Gdiff<CR>
             nnoremap <silent> <leader>gc :Gcommit<CR>
@@ -925,6 +931,17 @@ if !exists('g:vscode')
                 let g:airline_left_sep='›'  " Slightly fancier than '>'
                 let g:airline_right_sep='‹' " Slightly fancier than '<'
             endif
+        endif
+
+        if isdirectory(expand("~/.vim/bundle/vim-airline/"))
+            let g:airline#extensions#tabline#enabled = 1
+            let g:airline#extensions#tabline#tab_nr_type = 1 " tab number
+            let g:airline#extensions#tabline#show_tab_nr = 1
+            let g:airline#extensions#tabline#formatter = 'default'
+            let g:airline#extensions#tabline#buffer_nr_show = 0
+            let g:airline#extensions#tabline#fnametruncate = 16
+            let g:airline#extensions#tabline#fnamecollapse = 2
+            let g:airline#extensions#tabline#buffer_idx_mode = 1
         endif
     " }
 " }
