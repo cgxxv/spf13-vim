@@ -197,6 +197,22 @@ if !exists('g:vscode')
     source ~/.vim/theme.vim
     " }
 
+    " minimap section {
+    ""if isdirectory(expand("~/.vim/bundle/minimap.vim/"))
+    ""   let g:minimap_width = 10
+    ""   let g:minimap_auto_start = 1
+    ""   let g:minimap_auto_start_win_enter = 1
+    ""   let g:minimap_highlight_range = 1
+    ""   let g:minimap_highlight_search = 1
+    ""   let g:minimap_block_filetypes = ['fugitive', 'nerdtree', 'tagbar', 'defx.nvim' ]
+
+    ""   "hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f
+    ""   "let g:minimap_highlight = 'MinimapCurrentLine'
+
+    ""   nnoremap <silent> `` :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
+    ""endif
+    " }
+
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
 
@@ -241,7 +257,7 @@ if !exists('g:vscode')
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
-    set foldenable                  " Auto fold code
+    "set foldenable                  " Auto fold code
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 " }
