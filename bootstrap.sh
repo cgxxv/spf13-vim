@@ -217,5 +217,9 @@ sync_repo       "$HOME/.vim/autoload" \
 
 setup_vim_plug  "$APP_PATH/.vimrc.bundles.default"
 
+pip install cmake-language-server
+nix-env -i -f https://github.com/nix-community/rnix-lsp/archive/master.tar.gz
+npm i -g graphql-language-service-cli
+
 msg             "\nThanks for installing $app_name."
 msg             "© `date +%Y` http://vim.spf13.com/"

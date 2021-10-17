@@ -1,5 +1,23 @@
 {
     "languageserver": {
+        "nix": {
+            "command": "rnix-lsp",
+            "filetypes": [
+                "nix"
+            ]
+        },
+        "cmake": {
+            "command": "cmake-language-server",
+            "filetypes": [
+                "cmake"
+            ],
+            "rootPatterns": [
+                "build/"
+            ],
+            "initializationOptions": {
+                "buildDirectory": "build"
+            }
+        },
         "clojure-lsp": {
             "command": "bash",
             "args": [

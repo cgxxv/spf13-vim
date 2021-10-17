@@ -562,8 +562,8 @@ if !exists('g:vscode')
         if !exists('g:coc_global_extension')
             let g:coc_global_extensions = [
                 \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet',
-                \ 'coc-tsserver', 'coc-html', 'coc-css',
-                \ 'coc-cmake', 'coc-sql', 'coc-sh', 'coc-markdownlint',
+                \ 'coc-tsserver', 'coc-html', 'coc-css', 'coc-vetur',
+                \ 'coc-sql', 'coc-sh', 'coc-markdownlint',
                 \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
                 \ 'coc-clangd',
                 \ 'coc-go',
@@ -881,11 +881,11 @@ if !exists('g:vscode')
 
     " Fugitive {
         if !has('nvim') && isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
-            nnoremap <silent> <leader>gs :Gstatus<CR>
-            nnoremap <silent> <leader>gd :Gdiff<CR>
-            nnoremap <silent> <leader>gc :Gcommit<CR>
-            nnoremap <silent> <leader>gb :Gblame<CR>
-            nnoremap <silent> <leader>gl :Glog<CR>
+            nnoremap <silent> <leader>gs :G<CR>
+            nnoremap <silent> <leader>gd :G diff<CR>
+            nnoremap <silent> <leader>gc :G commit<CR>
+            nnoremap <silent> <leader>gb :G blame<CR>
+            nnoremap <silent> <leader>gl :G log<CR>
             nnoremap <silent> <leader>gp :Git push<CR>
             nnoremap <silent> <leader>gr :Gread<CR>
             nnoremap <silent> <leader>gw :Gwrite<CR>
