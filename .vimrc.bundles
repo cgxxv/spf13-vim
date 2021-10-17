@@ -200,6 +200,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'sheerun/vim-polyglot'
             Plug 'thinca/vim-quickrun'
             Plug 'puremourning/vimspector'
+            Plug 'pboettch/vim-cmake-syntax'
         endif
     " }
 
