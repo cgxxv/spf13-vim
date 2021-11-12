@@ -201,6 +201,8 @@ call plug#begin('~/.vim/bundle')
             Plug 'thinca/vim-quickrun'
             Plug 'puremourning/vimspector'
             Plug 'pboettch/vim-cmake-syntax'
+            Plug 'tyru/open-browser.vim'
+            Plug 'kannokanno/previm'
         endif
     " }
 
@@ -312,6 +314,13 @@ call plug#begin('~/.vim/bundle')
             Plug 'elixir-lang/vim-elixir'
             Plug 'carlosgaldino/elixir-snippets'
             Plug 'mattreduce/vim-mix'
+        endif
+    " }
+
+    " PlantUML {
+        if count(g:spf13_bundle_groups, 'plantuml')
+            Plug 'aklt/plantuml-syntax'
+            Plug 'weirongxu/plantuml-previewer.vim'
         endif
     " }
 
