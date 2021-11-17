@@ -960,6 +960,42 @@ if !exists('g:vscode')
             let g:airline#extensions#tabline#buffer_idx_mode = 1
         endif
     " }
+    "
+    " lightline {
+        if isdirectory(expand("~/.vim/bundle/lightline.vim/"))
+            function! LightlineGitBlame() abort
+                let blame = get(b:, 'coc_git_blame', '')
+                " return blame
+                return winwidth(0) > 120 ? blame : ''
+            endfunction
+			let g:lightline = {
+				\ 'colorscheme': 'solarized(background=dark)',
+				\ 'active': {
+				\   'left': [
+                \       [ 'mode', 'paste' ],
+				\       [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ],
+                \       [ 'ctrlpmark', 'git', 'diagnostic', 'method' ],
+                \   ],
+                \   'right': [ [ 'lineinfo' ],
+                \              [ 'percent' ],
+                \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+				\ },
+                \ 'tabline': {
+                \   'left': [ ['buffers'] ],
+                \   'right': [ ['close'] ]
+                \ },
+				\ 'component_function': {
+				\   'cocstatus': 'coc#status',
+				\   'currentfunction': 'CocCurrentFunction',
+                \   'blame': 'LightlineGitBlame',
+                \   'buffers': 'lightline#bufferline#buffers',
+				\ },
+                \ 'component_type': {
+                \   'buffers': 'tabsel'
+                \ },
+			\ }
+        endif
+    " }
 " }
 
 " GUI Settings {
