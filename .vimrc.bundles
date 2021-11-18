@@ -118,6 +118,9 @@ call plug#begin('~/.vim/bundle')
             Plug 'terryma/vim-multiple-cursors'
             Plug 'vim-scripts/sessionman.vim'
             Plug 'vim-scripts/matchit.zip'
+            " Plug 'vim-airline/vim-airline'
+            " Plug 'vim-airline/vim-airline-themes'
+            Plug 'zivyangll/git-blame.vim'
             " Plug 'bling/vim-bufferline'
             Plug 'easymotion/vim-easymotion'
             " Plug 'jistr/vim-nerdtree-tabs'
@@ -142,10 +145,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'itchyny/lightline.vim'
             Plug 'mengelbrecht/lightline-bufferline'
         endif
-    " }
-
-    " Statusline {
-    "
     " }
 
     " Theme section{

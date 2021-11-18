@@ -561,7 +561,7 @@ if !exists('g:vscode')
         " let g:coc_global_extensions = []
         if !exists('g:coc_global_extension')
             let g:coc_global_extensions = [
-                \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-git', 'coc-emmet',
+                \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-emmet',
                 \ 'coc-tsserver', 'coc-html', 'coc-css', 'coc-vetur',
                 \ 'coc-sql', 'coc-sh', 'coc-markdownlint',
                 \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
@@ -944,8 +944,8 @@ if !exists('g:vscode')
             endif
             if !exists('g:airline_powerline_fonts')
                 " Use the default set of separators with a few customizations
-                let g:airline_left_sep='›'  " Slightly fancier than '>'
-                let g:airline_right_sep='‹' " Slightly fancier than '<'
+                let g:airline_left_sep=''  " Slightly fancier than '>'
+                let g:airline_right_sep='' " Slightly fancier than '<'
             endif
         endif
 
@@ -958,6 +958,10 @@ if !exists('g:vscode')
             let g:airline#extensions#tabline#fnametruncate = 16
             let g:airline#extensions#tabline#fnamecollapse = 2
             let g:airline#extensions#tabline#buffer_idx_mode = 1
+        endif
+
+        if isdirectory(expand("~/.vim/bundle/vim-airline/"))
+            nnoremap <Leader>bb :<C-u>call gitblame#echo()<CR>
         endif
     " }
     "
