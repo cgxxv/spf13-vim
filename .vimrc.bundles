@@ -108,7 +108,6 @@ call plug#begin('~/.vim/bundle')
 
     " General {
         if count(g:spf13_bundle_groups, 'general')
-            " Plug 'scrooloose/nerdtree'
             Plug 'tpope/vim-surround'
             Plug 'tpope/vim-repeat'
             Plug 'rhysd/conflict-marker.vim'
@@ -118,12 +117,8 @@ call plug#begin('~/.vim/bundle')
             Plug 'terryma/vim-multiple-cursors'
             Plug 'vim-scripts/sessionman.vim'
             Plug 'vim-scripts/matchit.zip'
-            " Plug 'vim-airline/vim-airline'
-            " Plug 'vim-airline/vim-airline-themes'
             Plug 'zivyangll/git-blame.vim'
-            " Plug 'bling/vim-bufferline'
             Plug 'easymotion/vim-easymotion'
-            " Plug 'jistr/vim-nerdtree-tabs'
             Plug 'mbbill/undotree'
             Plug 'nathanaelkane/vim-indent-guides'
             if !exists('g:spf13_no_views')
