@@ -139,6 +139,7 @@ call plug#begin('~/.vim/bundle')
             "Plug 'vim-airline/vim-airline-themes'
             Plug 'itchyny/lightline.vim'
             Plug 'mengelbrecht/lightline-bufferline'
+            Plug 'antoinemadec/FixCursorHold.nvim'
         endif
     " }
 
@@ -202,6 +203,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'thinca/vim-quickrun'
             Plug 'puremourning/vimspector'
             Plug 'pboettch/vim-cmake-syntax'
+            Plug 'cdelledonne/vim-cmake'
             Plug 'tyru/open-browser.vim'
             Plug 'kannokanno/previm'
         endif

@@ -565,7 +565,7 @@ if !exists('g:vscode')
                 \ 'coc-tsserver', 'coc-html', 'coc-css', 'coc-vetur',
                 \ 'coc-sql', 'coc-sh', 'coc-markdownlint',
                 \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
-                \ 'coc-clangd',
+                \ 'coc-clangd', 'coc-cmake',
                 \ 'coc-go',
                 \ ]
         endif
@@ -584,11 +584,12 @@ if !exists('g:vscode')
         endif
     " }
 
-    " EditorConfig
+    " EditorConfig {
         if isdirectory(expand("~/.vim/bundle/editorconfig-vim"))
             let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*'] "Excluded patterns.
             "let g:EditorConfig_disable_rules = ['trim_trailing_whitespace'] "Disable rules
         endif
+    " }
 
     " Cheat.sh {
         if count(g:spf13_bundle_groups, 'cheat.sh')
@@ -596,6 +597,20 @@ if !exists('g:vscode')
             let g:syntastic_ocaml_checkers = ['merlin']
             let g:syntastic_python_checkers = ['pylint']
             let g:syntastic_shell_checkers = ['shellcheck']
+        endif
+    " }
+    "
+    " Nvim problems {
+        if has('nvim') && isdirectory(expand("~/.vim/bundle/FixCursorHold.nvim/"))
+            let g:cursorhold_updatetime = 100
+        endif
+    " }
+    "
+    " Cmake {
+        if isdirectory(expand("~/.vim/bundle/vim-cmake/"))
+            let g:cmake_link_compile_commands = 1
+            noremap <leader>cmg :CMakeGenerate<cr>
+            noremap <leader>cmb :CMakeBuild<cr>
         endif
     " }
 
