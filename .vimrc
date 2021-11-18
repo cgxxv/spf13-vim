@@ -963,6 +963,8 @@ if !exists('g:vscode')
     "
     " lightline {
         if isdirectory(expand("~/.vim/bundle/lightline.vim/"))
+            set showtabline=2
+            autocmd BufWritePost,TextChanged,TextChangedI * call lightline#update()
             function! LightlineGitBlame() abort
                 let blame = get(b:, 'coc_git_blame', '')
                 " return blame
@@ -988,12 +990,20 @@ if !exists('g:vscode')
 				\   'cocstatus': 'coc#status',
 				\   'currentfunction': 'CocCurrentFunction',
                 \   'blame': 'LightlineGitBlame',
-                \   'buffers': 'lightline#bufferline#buffers',
+				\ },
+            	\ 'component_expand': {
+				\   'buffers': 'lightline#bufferline#buffers'
 				\ },
                 \ 'component_type': {
                 \   'buffers': 'tabsel'
                 \ },
+                \ 'component_raw' : {
+                \ 'buffers': 1,
+                \ }
 			\ }
+            let g:lightline#bufferline#show_number  = 4
+            let g:lightline#bufferline#shorten_path = 1
+            let g:lightline#bufferline#auto_hide = 10000
         endif
     " }
 " }
