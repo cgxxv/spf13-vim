@@ -895,6 +895,12 @@ if !exists('g:vscode')
             nnoremap <silent> <leader>gg :SignifyToggle<CR>
         endif
     "}
+    "
+    " Git-blame {
+        if isdirectory(expand("~/.vim/bundle/git-blame.vim/"))
+            nnoremap <Leader>bb :<C-u>call gitblame#echo()<CR>
+        endif
+    " }
 
     " FIXME: Isn't this for Syntastic to handle?
     " Haskell post write lint and check with ghcmod
@@ -959,10 +965,6 @@ if !exists('g:vscode')
             let g:airline#extensions#tabline#fnamecollapse = 2
             let g:airline#extensions#tabline#buffer_idx_mode = 1
         endif
-
-        if isdirectory(expand("~/.vim/bundle/vim-airline/"))
-            nnoremap <Leader>bb :<C-u>call gitblame#echo()<CR>
-        endif
     " }
     "
     " lightline {
@@ -975,7 +977,6 @@ if !exists('g:vscode')
                 return winwidth(0) > 120 ? blame : ''
             endfunction
 			let g:lightline = {
-				\ 'colorscheme': 'solarized(background=dark)',
 				\ 'active': {
 				\   'left': [
                 \       [ 'mode', 'paste' ],
@@ -1005,6 +1006,11 @@ if !exists('g:vscode')
                 \ 'buffers': 1,
                 \ }
 			\ }
+            if has('nvim')
+               let g:lightline.colorscheme = 'solarized'
+            else
+                let g:lightline.colorscheme = 'solarized(background=dark)'
+            endif
             let g:lightline#bufferline#show_number  = 4
             let g:lightline#bufferline#shorten_path = 1
             let g:lightline#bufferline#auto_hide = 10000
