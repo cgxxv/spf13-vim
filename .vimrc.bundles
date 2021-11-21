@@ -178,6 +178,13 @@ call plug#begin('~/.vim/bundle')
             Plug 'reedes/vim-textobj-quote'
             Plug 'reedes/vim-wordy'
             Plug 'ntpeters/vim-better-whitespace'
+            if has('nvim')
+                Plug 'kyazdani42/nvim-web-devicons'
+                Plug 'nvim-lua/plenary.nvim'
+                Plug 'folke/todo-comments.nvim'
+                Plug 'folke/trouble.nvim'
+                Plug 'nvim-telescope/telescope.nvim'
+            endif
         endif
     " }
 
@@ -202,8 +209,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'sheerun/vim-polyglot'
             Plug 'thinca/vim-quickrun'
             Plug 'puremourning/vimspector'
-            Plug 'pboettch/vim-cmake-syntax'
-            Plug 'cdelledonne/vim-cmake'
             Plug 'tyru/open-browser.vim'
             Plug 'kannokanno/previm'
         endif
@@ -335,6 +340,8 @@ call plug#begin('~/.vim/bundle')
             Plug 'cespare/vim-toml'
             Plug 'quentindecock/vim-cucumber-align-pipes'
             Plug 'saltstack/salt-vim'
+            Plug 'pboettch/vim-cmake-syntax'
+            Plug 'cdelledonne/vim-cmake'
         endif
     " }
 

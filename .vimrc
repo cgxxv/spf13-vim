@@ -719,6 +719,38 @@ if !exists('g:vscode')
         endif
     " }
 
+    " TODO unfinished configuration
+    " Todo Comments {
+        if has('nvim') && count(g:spf13_bundle_groups, 'writing')
+lua <<EOF
+require("todo-comments").setup {
+-- your configuration comes here
+-- or leave it empty to use the default settings
+-- refer to the configuration section below
+}
+local actions = require("telescope.actions")
+local trouble = require("trouble.providers.telescope")
+
+local telescope = require("telescope")
+
+telescope.setup {
+    defaults = {
+        mappings = {
+            i = { ["<c-t>"] = trouble.open_with_trouble },
+            n = { ["<c-t>"] = trouble.open_with_trouble },
+        },
+    },
+}
+EOF
+            nnoremap <leader>xx <cmd>TroubleToggle<cr>
+            nnoremap <leader>xw <cmd>TroubleToggle lsp_workspace_diagnostics<cr>
+            nnoremap <leader>xd <cmd>TroubleToggle lsp_document_diagnostics<cr>
+            nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+            nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+            nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+        endif
+    " }
+
     " " PIV {
     "     if isdirectory(expand("~/.vim/bundle/PIV"))
     "         let g:DisableAutoPHPFolding = 0
