@@ -927,7 +927,7 @@ EOF
     "}
 
     " Fugitive {
-        if !has('nvim') && isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
+        if isdirectory(expand("~/.vim/bundle/vim-fugitive/"))
             nnoremap <silent> <leader>gs :G<CR>
             nnoremap <silent> <leader>gd :G diff<CR>
             nnoremap <silent> <leader>gc :G commit<CR>
@@ -1026,7 +1026,7 @@ EOF
             endif
             let g:lightline#bufferline#show_number  = 4
             let g:lightline#bufferline#shorten_path = 1
-            let g:lightline#bufferline#auto_hide = 10000
+            let g:lightline#bufferline#auto_hide = 0
         endif
     " }
 " }

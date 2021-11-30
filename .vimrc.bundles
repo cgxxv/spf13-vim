@@ -192,9 +192,7 @@ call plug#begin('~/.vim/bundle')
         if count(g:spf13_bundle_groups, 'programming')
             " Pick one of the checksyntax, jslint, or syntastic
             Plug 'vim-syntastic/syntastic'
-            if !has('nvim')
-               Plug 'tpope/vim-fugitive'
-            endif
+            Plug 'tpope/vim-fugitive'
             Plug 'mattn/webapi-vim'
             Plug 'mattn/gist-vim'
             "Plug 'preservim/nerdcommenter'
