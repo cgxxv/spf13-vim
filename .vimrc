@@ -993,7 +993,7 @@ EOF
 				\ 'active': {
 				\   'left': [
                 \       [ 'mode', 'paste' ],
-				\       [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ],
+				\       [ 'cocstatus', 'currentfunction', 'readonly', 'absolutepath', 'modified' ],
                 \       [ 'ctrlpmark', 'git', 'diagnostic', 'method' ],
                 \   ],
                 \   'right': [ [ 'lineinfo' ],
@@ -1010,13 +1010,14 @@ EOF
                 \   'blame': 'LightlineGitBlame',
 				\ },
             	\ 'component_expand': {
-				\   'buffers': 'lightline#bufferline#buffers'
+				\   'buffers': 'lightline#bufferline#buffers',
+                \   'syntastic': 'SyntasticStatuslineFlag',
 				\ },
                 \ 'component_type': {
                 \   'buffers': 'tabsel'
                 \ },
                 \ 'component_raw' : {
-                \ 'buffers': 1,
+                \   'buffers': 1,
                 \ }
 			\ }
             if has('nvim')
