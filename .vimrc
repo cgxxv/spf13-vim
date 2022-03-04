@@ -566,7 +566,7 @@ if !exists('g:vscode')
                 \ 'coc-sql', 'coc-sh', 'coc-markdownlint',
                 \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
                 \ 'coc-clangd', 'coc-cmake',
-                \ 'coc-go',
+                \ 'coc-go', 'coc-tabnine',
                 \ ]
         endif
 
