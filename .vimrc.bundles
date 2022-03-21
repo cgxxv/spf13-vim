@@ -140,6 +140,9 @@ call plug#begin('~/.vim/bundle')
             Plug 'itchyny/lightline.vim'
             Plug 'mengelbrecht/lightline-bufferline'
             Plug 'antoinemadec/FixCursorHold.nvim'
+            if has('nvim')
+                Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+            endif
         endif
     " }
 
@@ -214,7 +217,7 @@ call plug#begin('~/.vim/bundle')
 
     " Coc {
         if count(g:spf13_bundle_groups, 'coc')
-            Plug 'neoclide/coc.nvim', {'branch': 'release'}
+            Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
         endif
     " }
 
