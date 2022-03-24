@@ -564,7 +564,7 @@ if !exists('g:vscode')
                 \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-emmet',
                 \ 'coc-tsserver', 'coc-html', 'coc-css', 'coc-vetur',
                 \ 'coc-sql', 'coc-sh', 'coc-markdownlint',
-                \ 'coc-vimlsp', 'coc-phpls', 'coc-python',
+                \ 'coc-vimlsp', 'coc-phpls', 'coc-pyright',
                 \ 'coc-clangd', 'coc-cmake',
                 \ 'coc-go', 'coc-tabnine',
                 \ ]
