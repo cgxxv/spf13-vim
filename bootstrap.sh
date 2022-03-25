@@ -17,8 +17,8 @@
 ############################  SETUP PARAMETERS
 app_name='spf13-vim'
 [ -z "$APP_PATH" ] && APP_PATH="$HOME/.config/spf13-vim-master"
-[ -z "$REPO_URI" ] && REPO_URI='https://github.com/wk30/spf13-vim.git'
-[ -z "$REPO_BRANCH" ] && REPO_BRANCH='lsp'
+[ -z "$REPO_URI" ] && REPO_URI='https://github.com/cgxxv/spf13-vim.git'
+[ -z "$REPO_BRANCH" ] && REPO_BRANCH='main'
 debug_mode='0'
 fork_maintainer='0'
 [ -z "$VIM_PLUG_URI" ] && VIM_PLUG_URI="https://github.com/junegunn/vim-plug.git"
