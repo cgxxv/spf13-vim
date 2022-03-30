@@ -12,7 +12,7 @@
 
 ## Installation
 ```bash
-    sh <(curl https://raw.githubusercontent.com/wk30/spf13-vim/lsp/bootstrap.sh -L)
+    sh <(curl https://raw.githubusercontent.com/cgxxv/spf13-vim/lsp/bootstrap.sh -L)
 ```
 
 ## Key-bindings
