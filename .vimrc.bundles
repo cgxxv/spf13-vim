@@ -79,25 +79,30 @@ call plug#begin('~/.vim/bundle')
 
     " Deps {
         " Plug 'gmarik/vundle'
-        Plug 'MarcWeber/vim-addon-mw-utils'
+        "  Plug 'MarcWeber/vim-addon-mw-utils'
         Plug 'tomtom/tlib_vim'
-        if executable('ag')
-            Plug 'mileszs/ack.vim'
-            let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-        elseif executable('ack-grep')
-            let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-            Plug 'mileszs/ack.vim'
-        elseif executable('ack')
-            Plug 'mileszs/ack.vim'
-        endif
+        "  if executable('ag')
+        "      Plug 'mileszs/ack.vim'
+        "      let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
+        "  elseif executable('ack-grep')
+        "      let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+        "      Plug 'mileszs/ack.vim'
+        "  elseif executable('ack')
+        "      Plug 'mileszs/ack.vim'
+        "  endif
     " }
 
     " In your .vimrc.before.local file
     " list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
-            \ 'general', 'vim-colors-solarized', 'defx', 'writing', 'programming', 'cheat.sh', 'misc',
-            \ 'coc', 'go', 'rust',
+            \ 'general', 'vim-colors-solarized',
+            \ 'coc',
+            \ 'writing',
+            \ 'misc',
+            \ 'cheat.sh',
+            \ 'programming',
+            \ 'plantuml',
             \ ]
     endif
 
@@ -116,7 +121,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'tacahiroy/ctrlp-funky'
             Plug 'terryma/vim-multiple-cursors'
             Plug 'vim-scripts/sessionman.vim'
-            Plug 'vim-scripts/matchit.zip'
+            "  Plug 'vim-scripts/matchit.zip'
             Plug 'zivyangll/git-blame.vim'
             Plug 'easymotion/vim-easymotion'
             Plug 'mbbill/undotree'
@@ -130,8 +135,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'kana/vim-textobj-user'
             Plug 'kana/vim-textobj-indent'
             Plug 'gcmt/wildfire.vim'
-            Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-            Plug 'junegunn/fzf.vim'
             Plug 'mhinz/vim-startify'
             "Plug 'wfxr/minimap.vim'
             " statusline
@@ -143,6 +146,9 @@ call plug#begin('~/.vim/bundle')
             if has('nvim')
                 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
             endif
+            Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+            Plug 'junegunn/fzf.vim'
+            Plug 'liuchengxu/vim-clap', { 'do': ':Clap install-binary!' }
         endif
     " }
 
@@ -161,14 +167,8 @@ call plug#begin('~/.vim/bundle')
     " }
 
     " Defx {
-        if count(g:spf13_bundle_groups, 'defx')
-            if has('nvim')
-                Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-            else
-                Plug 'Shougo/defx.nvim'
-                Plug 'roxma/nvim-yarp'
-                Plug 'roxma/vim-hug-neovim-rpc'
-            endif
+        if count(g:spf13_bundle_groups, 'defx') && has('nvim')
+            Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
             Plug 'kristijanhusak/defx-icons'
             Plug 'kristijanhusak/defx-git'
         endif
@@ -196,7 +196,7 @@ call plug#begin('~/.vim/bundle')
             " Pick one of the checksyntax, jslint, or syntastic
             Plug 'vim-syntastic/syntastic'
             Plug 'tpope/vim-fugitive'
-            Plug 'mattn/webapi-vim'
+            " Plug 'mattn/webapi-vim'
             Plug 'mattn/gist-vim'
             "Plug 'preservim/nerdcommenter'
             Plug 'tpope/vim-commentary'

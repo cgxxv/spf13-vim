@@ -60,25 +60,13 @@ endfunction
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
-
-nmap <leader>crn <Plug>(coc-rename)            " Symbol renaming.
-xmap <leader>cfs  <Plug>(coc-format-selected)   " Formatting selected code.
-nmap <leader>cfs  <Plug>(coc-format-selected)   " Formatting selected code.
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>ccs  <Plug>(coc-codeaction-selected)
-nmap <leader>ccs  <Plug>(coc-codeaction-selected)
-nmap <leader>cca  <Plug>(coc-codeaction)             " Remap keys for applying codeAction to the current buffer.
-nmap <leader>ccf  <Plug>(coc-fix-current)            " Apply AutoFix to problem on the current line.
+"  augroup mygroup
+"    autocmd!
+"    " Setup formatexpr specified filetype(s).
+"    autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+"    " Update signature help on jump placeholder.
+"    autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+"  augroup end
 
 " Map function and class text objects
 " NOTE: Requires 'textDocument.documentSymbol' support from the language server.
@@ -120,16 +108,26 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 " provide custom statusline: lightline.vim, vim-airline.
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+"  nmap <leader>crn <Plug>(coc-rename)            " Symbol renaming.
+"  xmap <leader>cfs  <Plug>(coc-format-selected)   " Formatting selected code.
+"  nmap <leader>cfs  <Plug>(coc-format-selected)   " Formatting selected code.
+"  xmap <leader>ccs  <Plug>(coc-codeaction-selected)
+"  nmap <leader>ccs  <Plug>(coc-codeaction-selected)
+"  nmap <leader>cca  <Plug>(coc-codeaction)             " Remap keys for applying codeAction to the current buffer.
+"  nmap <leader>ccf  <Plug>(coc-fix-current)            " Apply AutoFix to problem on the current line.
+
 " Mappings for CoCList
-"nnoremap <silent><nowait> <Leader>cla  :<C-u>CocList diagnostics<cr>     " Show all diagnostics.
-"nnoremap <silent><nowait> <Leader>cle  :<C-u>CocList extensions<cr>      " Manage extensions.
-"nnoremap <silent><nowait> <Leader>clc  :<C-u>CocList commands<cr>        " Show commands.
-"nnoremap <silent><nowait> <Leader>clo  :<C-u>CocList outline<cr>         " Find symbol of current document.
-"nnoremap <silent><nowait> <Leader>cls  :<C-u>CocList -I symbols<cr>      " Search workspace symbols.
-nnoremap <silent><nowait> <Leader>cl  :<C-u>CocList<CR>                 " Open coc list.
-nnoremap <silent><nowait> <Leader>cn  :<C-u>CocNext<CR>                 " Do default action for next item.
-nnoremap <silent><nowait> <Leader>cp  :<C-u>CocPrev<CR>                 " Do default action for previous item.
-nnoremap <silent><nowait> <Leader>clr  :<C-u>CocListResume<CR>           " Resume latest coc list.
+"  nnoremap <silent><nowait> <Leader>cla  :<C-u>CocList diagnostics<cr>     " Show all diagnostics.
+"  nnoremap <silent><nowait> <Leader>cle  :<C-u>CocList extensions<cr>      " Manage extensions.
+"  nnoremap <silent><nowait> <Leader>clc  :<C-u>CocList commands<cr>        " Show commands.
+"  nnoremap <silent><nowait> <Leader>clo  :<C-u>CocList outline<cr>         " Find symbol of current document.
+"  nnoremap <silent><nowait> <Leader>cls  :<C-u>CocList -I symbols<cr>      " Search workspace symbols.
+"  nnoremap <silent><nowait> <Leader>cl  :<C-u>CocList<CR>                 " Open coc list.
+"  nnoremap <silent><nowait> <Leader>cn  :<C-u>CocNext<CR>                 " Do default action for next item.
+"  nnoremap <silent><nowait> <Leader>cp  :<C-u>CocPrev<CR>                 " Do default action for previous item.
+"  nnoremap <silent><nowait> <Leader>clr  :<C-u>CocListResume<CR>           " Resume latest coc list.
 
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')

@@ -548,8 +548,6 @@ if !exists('g:vscode')
 " }
 
 " Coc.nvim {
-
-
     if count(g:spf13_bundle_groups, 'coc')
         " Specify your node path in .vimrc.before.local
         " let g:coc_node_path = '/usr/local/bin/node'
@@ -567,6 +565,7 @@ if !exists('g:vscode')
                 \ 'coc-vimlsp', 'coc-phpls', 'coc-pyright',
                 \ 'coc-clangd', 'coc-cmake',
                 \ 'coc-go', 'coc-tabnine',
+                \ 'coc-rust-analyzer',
                 \ ]
         endif
 
@@ -609,61 +608,62 @@ if !exists('g:vscode')
     " Cmake {
         if isdirectory(expand("~/.vim/bundle/vim-cmake/"))
             let g:cmake_link_compile_commands = 1
-            noremap <leader>cmg :CMakeGenerate<cr>
-            noremap <leader>cmb :CMakeBuild<cr>
+            noremap <leader>mg :CMakeGenerate<cr>
+            noremap <leader>mb :CMakeBuild<cr>
         endif
     " }
 
+    " cargo shortcuts
+    " r. cargo-process-repeat
+    " r/ cargo-process-search
+    " r= cargo-process-fmt
+    " ra cargo-process-add
+    " rc cargo-process-build
+    " rd cargo-process-doc
+    " re cargo-process-bench
+    " rf cargo-process-feature
+    " ri cargo-process-init
+    " rl cargo-process-clipy
+    " rn cargo-process-new
+    " ro cargo-process-outdated
+    " rr cargo-process-rm"
+    " rt cargo-process-test"
+    " ru cargo-process-update"
+    " rv cargo-process-check"
+    " rx cargo-process-run
+    " rA cargo-process-audit"
+    " rC cargo-process-clean"
+    " rD cargo-process-doc-open
+    " rE cargo-process-run-example"
+    " rU cargo-process-upgrade
+    " rX cargo-process-run-bin
     " Rust {
         if count(g:spf13_bundle_groups, 'rust')
             let g:rustfmt_autosave = 1
             let g:rust_clip_command = 'pbcopy'
 
-            "" c. cargo-process-repeat
-            " c/ cargo-process-search
-            noremap <Leader>c/ :Cargo -- search
-            " c= cargo-process-fmt
-            noremap <Leader>c= :Cargo -- fmt<CR>
-            " ca cargo-process-add
-            noremap <Leader>ca :Cargo -- add
-            " cc cargo-process-build
-            noremap <Leader>cc :Cbuild<CR>
-            " cd cargo-process-doc
-            noremap <Leader>cd :Cdoc<CR>
-            " ce cargo-process-bench
-            noremap <Leader>ce :Cbench<CR>
-            " cf cargo-process-feature
-            noremap <Leader>cf :Cargo -- feature
-            " ci cargo-process-init
-            noremap <Leader>ci :Cinit<CR>
-            " cl cargo-process-clipy
-            noremap <Leader>cl :Cargo -- clipy
-            " cn cargo-process-new
-            noremap <Leader>cn :Cnew
-            " co cargo-process-outdated
-            noremap <Leader>co :Cargo -- outdated
-            " cr cargo-process-rm"
-            noremap <Leader>cr :Cargo -- rm
-            " ct cargo-process-test"
-            noremap <Leader>ct :Ctest -- --nocapture --test-threads=1<CR>
-            " cu cargo-process-update"
-            noremap <Leader>cu :Cupdate
-            " cv cargo-process-check"
-            noremap <Leader>cv :Ccheck<CR>
-            " cx cargo-process-run
-            noremap <Leader>cx :Crun<CR>
-            " cA cargo-process-audit"
-            noremap <Leader>cA :Cargo -- audit
-            " cC cargo-process-clean"
-            noremap <Leader>cC :Cclean<CR>
-            " cD cargo-process-doc-open
-            noremap <Leader>cD :Cdoc -- --open<CR>
-            " cE cargo-process-run-example"
-            noremap <Leader>cE :Crun -- --example=
-            "" cU cargo-process-upgrade
-            " cX cargo-process-run-bin
-            noremap <Leader>cX :Crun -- --bin=
-            noremap <Leader>cmd :Cargo
+            noremap <Leader>r/ :Cargo -- search
+            noremap <Leader>r= :Cargo -- fmt<CR>
+            noremap <Leader>ra :Cargo -- add
+            noremap <Leader>rc :Cbuild<CR>
+            noremap <Leader>rd :Cdoc<CR>
+            noremap <Leader>re :Cbench<CR>
+            noremap <Leader>rf :Cargo -- feature
+            noremap <Leader>ri :Cinit<CR>
+            noremap <Leader>rl :Cargo -- clipy
+            noremap <Leader>rn :Cnew
+            noremap <Leader>ro :Cargo -- outdated
+            noremap <Leader>rr :Cargo -- rm
+            noremap <Leader>rt :Ctest -- --nocapture --test-threads=1<CR>
+            noremap <Leader>ru :Cupdate
+            noremap <Leader>rv :Ccheck<CR>
+            noremap <Leader>rx :Crun<CR>
+            noremap <Leader>rA :Cargo -- audit
+            noremap <Leader>rC :Cclean<CR>
+            noremap <Leader>rD :Cdoc -- --open<CR>
+            noremap <Leader>rE :Crun -- --example=
+            noremap <Leader>rX :Crun -- --bin=
+            noremap <Leader>r: :Cargo
         endif
     " }
 
@@ -758,14 +758,17 @@ EOF
     "     endif
     " " }
 
-    " Misc {
+    " matchit.zip {
+        "  if isdirectory(expand("~/.vim/bundle/matchit.zip"))
+        "      let b:match_ignorecase = 1
+        "  endif
+    " }
+
+    " plugins like nerdtree {
         " if isdirectory(expand("~/.vim/bundle/nerdtree"))
         "     let g:NERDShutUp=1
         " endif
-        if isdirectory(expand("~/.vim/bundle/matchit.zip"))
-            let b:match_ignorecase = 1
-        endif
-        if count(g:spf13_bundle_groups, 'defx')
+        if count(g:spf13_bundle_groups, 'defx') && has('nvim')
             noremap <Leader>de :Defx<CR>
             source ~/.vim/defx.vim
         endif
@@ -862,13 +865,48 @@ EOF
             nnoremap <Leader>zh :History<CR>
             nnoremap <Leader>zH :History:<CR>
             nnoremap <Leader>z/ :History/<CR>
-            nnoremap <Leader>zS :Snippets<CR>
+            "  nnoremap <Leader>zS :Snippets<CR> " coc-snippets take care of this
             nnoremap <Leader>zc :Commits<CR>
-            nnoremap <Leader>zbm :BCommits<CR>
+            nnoremap <Leader>zB :BCommits<CR>
             nnoremap <Leader>z: :Commands<CR>
             nnoremap <Leader>zm :Maps<CR>
             nnoremap <Leader>zht :Helptags<CR>
             nnoremap <Leader>zft :Filetypes<CR>
+        endif
+    " }
+
+    " vim-clap {
+        if isdirectory(expand("~/.vim/bundle/vim-clap/"))
+            let g:clap_enable_background_shadow = v:false
+
+            nnoremap <Leader>cf :Clap filer<CR>
+            nnoremap <Leader>cg :Clap git_diff_files<CR>
+            nnoremap <Leader>cG :Clap git_files<CR>
+            nnoremap <Leader>cb :Clap buffers<CR>
+            nnoremap <Leader>cC :Clap colors<CR>
+            nnoremap <Leader>cs :Clap grep<CR>
+            nnoremap <Leader>cl :Clap lines<CR>
+            nnoremap <Leader>cL :Clap blines<CR>
+            nnoremap <Leader>ct :Clap proj_tags<CR> " Tags in the current project
+            nnoremap <Leader>cT :Clap tags<CR>      " Tags in the current buffer
+            nnoremap <Leader>cM :Clap marks<CR>
+            nnoremap <Leader>cw :Clap windows<CR>
+            nnoremap <Leader>cF :Clap loclist<CR>
+            nnoremap <Leader>ch :Clap history<CR> " Open buffers and v:oldfiles
+            nnoremap <Leader>cH :Clap command_history<CR>
+            nnoremap <Leader>c/ :Clap search_history<CR>
+            "  nnoremap <Leader>cS :Snippets<CR>
+            nnoremap <Leader>cc :Clap commits<CR>
+            nnoremap <Leader>cB :Clap bcommits<CR>
+            nnoremap <Leader>c: :Clap command<CR>
+            nnoremap <Leader>cm :Clap maps<CR>
+            nnoremap <Leader>cr :Clap recent_files<CR>
+            nnoremap <Leader>cd :Clap dumb_jump<CR>
+            nnoremap <Leader>cq :Clap quickfix<CR>
+            nnoremap <Leader>cR :Clap registers<CR>
+
+            nnoremap <Leader>cht :Clap help_tags<CR>
+            nnoremap <Leader>cft :Clap filetypes<CR>
         endif
     " }
 
@@ -974,7 +1012,7 @@ EOF
     " }
 
     " Wildfire {
-    let g:wildfire_objects = {
+        let g:wildfire_objects = {
                 \ "*" : ["i'", 'i"', "i)", "i]", "i}", "ip"],
                 \ "html,xml" : ["at"],
                 \ }
