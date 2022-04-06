@@ -879,7 +879,7 @@ EOF
         if isdirectory(expand("~/.vim/bundle/vim-clap/"))
             let g:clap_enable_background_shadow = v:false
 
-            nnoremap <Leader>cf :Clap filer<CR>
+            nnoremap <Leader>cf :Clap gfiles<CR>
             nnoremap <Leader>cg :Clap git_diff_files<CR>
             nnoremap <Leader>cG :Clap git_files<CR>
             nnoremap <Leader>cb :Clap buffers<CR>
