@@ -258,6 +258,7 @@ if !exists('g:vscode')
     set scrolljump=5                " Lines to scroll when cursor leaves screen
     set scrolloff=3                 " Minimum lines to keep above and below cursor
     "set foldenable                  " Auto fold code
+    set nofoldenable                " Disable fold code
     set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 " }
@@ -444,16 +445,16 @@ if !exists('g:vscode')
     nnoremap Y y$
 
     " Code folding options
-    nmap <leader>f0 :set foldlevel=0<CR>
-    nmap <leader>f1 :set foldlevel=1<CR>
-    nmap <leader>f2 :set foldlevel=2<CR>
-    nmap <leader>f3 :set foldlevel=3<CR>
-    nmap <leader>f4 :set foldlevel=4<CR>
-    nmap <leader>f5 :set foldlevel=5<CR>
-    nmap <leader>f6 :set foldlevel=6<CR>
-    nmap <leader>f7 :set foldlevel=7<CR>
-    nmap <leader>f8 :set foldlevel=8<CR>
-    nmap <leader>f9 :set foldlevel=9<CR>
+    nmap <leader>l0 :set foldlevel=0<CR>
+    nmap <leader>l1 :set foldlevel=1<CR>
+    nmap <leader>l2 :set foldlevel=2<CR>
+    nmap <leader>l3 :set foldlevel=3<CR>
+    nmap <leader>l4 :set foldlevel=4<CR>
+    nmap <leader>l5 :set foldlevel=5<CR>
+    nmap <leader>l6 :set foldlevel=6<CR>
+    nmap <leader>l7 :set foldlevel=7<CR>
+    nmap <leader>l8 :set foldlevel=8<CR>
+    nmap <leader>l9 :set foldlevel=9<CR>
 
     " Most prefer to toggle search highlighting rather than clear the current
     " search results. To clear search highlighting rather than toggle it on
@@ -560,11 +561,12 @@ if !exists('g:vscode')
         if !exists('g:coc_global_extension')
             let g:coc_global_extensions = [
                 \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-emmet',
+                \ 'coc-tabnine',
                 \ 'coc-tsserver', 'coc-html', 'coc-css', 'coc-vetur',
                 \ 'coc-sql', 'coc-sh', 'coc-markdownlint',
                 \ 'coc-vimlsp', 'coc-phpls', 'coc-pyright',
                 \ 'coc-clangd', 'coc-cmake',
-                \ 'coc-go', 'coc-tabnine',
+                \ 'coc-go',
                 \ 'coc-rust-analyzer',
                 \ ]
         endif
@@ -685,15 +687,15 @@ if !exists('g:vscode')
             let g:go_fmt_command = "goimports"
             let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
             let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-            au FileType go nmap <Leader>ggs <Plug>(go-implements)
-            au FileType go nmap <Leader>ggi <Plug>(go-info)
-            au FileType go nmap <Leader>gge <Plug>(go-rename)
-            au FileType go nmap <leader>ggr <Plug>(go-run)
-            au FileType go nmap <leader>ggb <Plug>(go-build)
-            au FileType go nmap <leader>ggt <Plug>(go-test)
-            au FileType go nmap <Leader>ggd <Plug>(go-doc)
-            au FileType go nmap <Leader>ggv <Plug>(go-doc-vertical)
-            au FileType go nmap <leader>ggo <Plug>(go-coverage)
+            au FileType go nmap <Leader>oi <Plug>(go-implements)
+            au FileType go nmap <Leader>oo <Plug>(go-info)
+            au FileType go nmap <Leader>oe <Plug>(go-rename)
+            au FileType go nmap <leader>or <Plug>(go-run)
+            au FileType go nmap <leader>ob <Plug>(go-build)
+            au FileType go nmap <leader>ot <Plug>(go-test)
+            au FileType go nmap <Leader>od <Plug>(go-doc)
+            au FileType go nmap <Leader>ov <Plug>(go-doc-vertical)
+            au FileType go nmap <leader>oc <Plug>(go-coverage)
         endif
     " }
 

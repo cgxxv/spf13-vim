@@ -78,8 +78,8 @@ call plug#begin('~/.vim/bundle')
 " Plugs {
 
     " Deps {
-        " Plug 'gmarik/vundle'
-        "  Plug 'MarcWeber/vim-addon-mw-utils'
+        "Plug 'gmarik/vundle'
+        "Plug 'MarcWeber/vim-addon-mw-utils'
         Plug 'tomtom/tlib_vim'
         "  if executable('ag')
         "      Plug 'mileszs/ack.vim'
@@ -102,6 +102,7 @@ call plug#begin('~/.vim/bundle')
             \ 'misc',
             \ 'cheat.sh',
             \ 'programming',
+            \ 'go',
             \ 'plantuml',
             \ ]
     endif
@@ -121,7 +122,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'tacahiroy/ctrlp-funky'
             Plug 'terryma/vim-multiple-cursors'
             Plug 'vim-scripts/sessionman.vim'
-            "  Plug 'vim-scripts/matchit.zip'
+            "Plug 'vim-scripts/matchit.zip'
             Plug 'zivyangll/git-blame.vim'
             Plug 'easymotion/vim-easymotion'
             Plug 'mbbill/undotree'
