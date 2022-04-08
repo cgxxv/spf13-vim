@@ -881,20 +881,20 @@ EOF
         if isdirectory(expand("~/.vim/bundle/vim-clap/"))
             let g:clap_enable_background_shadow = v:false
 
-            nnoremap <Leader>cf :Clap gfiles<CR>
-            nnoremap <Leader>cg :Clap git_diff_files<CR>
-            nnoremap <Leader>cG :Clap git_files<CR>
+            nnoremap <Leader>cf :Clap files<CR>
+            nnoremap <Leader>cg :Clap gfiles<CR>
+            nnoremap <Leader>cG :Clap git_diff_files<CR>
             nnoremap <Leader>cb :Clap buffers<CR>
             nnoremap <Leader>cC :Clap colors<CR>
-            nnoremap <Leader>cs :Clap grep<CR>
+            nnoremap <Leader>cs :Clap grep2<CR>
             nnoremap <Leader>cl :Clap lines<CR>
             nnoremap <Leader>cL :Clap blines<CR>
-            nnoremap <Leader>ct :Clap proj_tags<CR> " Tags in the current project
-            nnoremap <Leader>cT :Clap tags<CR>      " Tags in the current buffer
+            nnoremap <Leader>ct :Clap proj_tags<CR>
+            nnoremap <Leader>cT :Clap tags<CR>
             nnoremap <Leader>cM :Clap marks<CR>
             nnoremap <Leader>cw :Clap windows<CR>
             nnoremap <Leader>cF :Clap loclist<CR>
-            nnoremap <Leader>ch :Clap history<CR> " Open buffers and v:oldfiles
+            nnoremap <Leader>ch :Clap history<CR>
             nnoremap <Leader>cH :Clap command_history<CR>
             nnoremap <Leader>c/ :Clap search_history<CR>
             "  nnoremap <Leader>cS :Snippets<CR>
@@ -904,8 +904,10 @@ EOF
             nnoremap <Leader>cm :Clap maps<CR>
             nnoremap <Leader>cr :Clap recent_files<CR>
             nnoremap <Leader>cd :Clap dumb_jump<CR>
+            nnoremap <Leader>cj :Clap jumps<CR>
             nnoremap <Leader>cq :Clap quickfix<CR>
             nnoremap <Leader>cR :Clap registers<CR>
+            nnoremap <Leader>cp :Clap providers<CR>
 
             nnoremap <Leader>cht :Clap help_tags<CR>
             nnoremap <Leader>cft :Clap filetypes<CR>
