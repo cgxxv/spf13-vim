@@ -1062,11 +1062,6 @@ EOF
                 \   'buffers': 1,
                 \ }
 			\ }
-            if has('nvim')
-               let g:lightline.colorscheme = 'solarized'
-            else
-                let g:lightline.colorscheme = 'solarized(background=dark)'
-            endif
             let g:lightline#bufferline#show_number  = 4
             let g:lightline#bufferline#shorten_path = 1
             let g:lightline#bufferline#auto_hide = 0
