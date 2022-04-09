@@ -576,6 +576,51 @@ if !exists('g:vscode')
 " }
 
 " Plugins {
+
+    " easymotion {
+        if isdirectory(expand("~/.vim/bundle/vim-easymotion"))
+			 " type `l` and match `l`&`L`
+			let g:EasyMotion_smartcase = 1
+			" Smartsign (type `3` and match `3`&`#`)
+			let g:EasyMotion_use_smartsign_us = 1
+			let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+
+            " JK motions: Line motions
+			map <Leader>h <Plug>(easymotion-linebackward)
+            map <Leader>j <Plug>(easymotion-j)
+            map <Leader>k <Plug>(easymotion-k)
+			map <Leader>l <Plug>(easymotion-lineforward)
+			" Move to line
+			map <Leader>L <Plug>(easymotion-bd-jk)
+			nmap <Leader>L <Plug>(easymotion-overwin-line)
+			" Move to word
+			map  <Leader>w <Plug>(easymotion-bd-w)
+			nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+            " <Leader>f{char} to move to {char}
+			map  <Leader>f <Plug>(easymotion-bd-f)
+			nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+            " Require tpope/vim-repeat to enable dot repeat support
+            " Jump to anywhere with only `s{char}{target}`
+			" `s<CR>` repeat last find motion.
+			nmap s <Plug>(easymotion-s)
+			nmap s2 <Plug>(easymotion-s2)
+			" Bidirectional & within line 't' motion
+			nmap t <Plug>(easymotion-t)
+			nmap t <Plug>(easymotion-t2)
+			omap t <Plug>(easymotion-bd-tl)
+			map  / <Plug>(easymotion-sn)
+			omap / <Plug>(easymotion-tn)
+
+			" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+			" Without these mappings, `n` & `N` works fine. (These mappings just provide
+			" different highlight method and have some other features )
+			map  n <Plug>(easymotion-next)
+			map  N <Plug>(easymotion-prev)
+        endif
+    " }
+
     " BufferLine {
         " If you want to see the full path, press {count}Ctrl-G
         " https://vi.stackexchange.com/questions/104/how-can-i-see-the-full-path-of-the-current-file
