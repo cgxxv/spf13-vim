@@ -811,13 +811,26 @@ EOF
         "  endif
     " }
 
-    " plugins like nerdtree {
+    " Choosewin {
+        if isdirectory(expand("~/.vim/bundle/vim-choosewin"))
+            nmap  -  <Plug>(choosewin)
+            let g:choosewin_overlay_enable = 1
+        endif
+    " }
+
+    " vim-floaterm {
+        if isdirectory(expand("~/.vim/bundle/vim-floaterm"))
+            nnoremap <Leader>fn :FloatermNew nnn<CR>
+        endif
+    " }
+
+    " Defx {
         " if isdirectory(expand("~/.vim/bundle/nerdtree"))
         "     let g:NERDShutUp=1
         " endif
-        if count(g:spf13_bundle_groups, 'defx') && has('nvim')
-            noremap <Leader>de :Defx<CR>
+        if count(g:spf13_bundle_groups, 'defx')
             source ~/.vim/defx.vim
+            nnoremap <Leader>de :Defx<CR>
         endif
     " }
 

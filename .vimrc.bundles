@@ -150,6 +150,8 @@ call plug#begin('~/.vim/bundle')
             Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
             Plug 'junegunn/fzf.vim'
             Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
+            Plug 'voldikss/vim-floaterm'
+            Plug 't9md/vim-choosewin'
         endif
     " }
 
@@ -168,8 +170,14 @@ call plug#begin('~/.vim/bundle')
     " }
 
     " Defx {
-        if count(g:spf13_bundle_groups, 'defx') && has('nvim')
-            Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+        if count(g:spf13_bundle_groups, 'defx')
+            if has('nvim')
+                Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
+            else
+                Plug 'Shougo/defx.nvim'
+                Plug 'roxma/nvim-yarp'
+                Plug 'roxma/vim-hug-neovim-rpc'
+            endif
             Plug 'kristijanhusak/defx-icons'
             Plug 'kristijanhusak/defx-git'
         endif
