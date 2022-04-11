@@ -824,16 +824,6 @@ EOF
         endif
     " }
 
-    " Defx {
-        " if isdirectory(expand("~/.vim/bundle/nerdtree"))
-        "     let g:NERDShutUp=1
-        " endif
-        if count(g:spf13_bundle_groups, 'defx')
-            source ~/.vim/defx.vim
-            nnoremap <Leader>de :Defx<CR>
-        endif
-    " }
-
     " AutoCloseTag {
         " Make it so AutoCloseTag works for xml and xhtml files as well
         au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim

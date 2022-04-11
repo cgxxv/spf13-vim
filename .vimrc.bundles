@@ -169,20 +169,6 @@ call plug#begin('~/.vim/bundle')
         endif
     " }
 
-    " Defx {
-        if count(g:spf13_bundle_groups, 'defx')
-            if has('nvim')
-                Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
-            else
-                Plug 'Shougo/defx.nvim'
-                Plug 'roxma/nvim-yarp'
-                Plug 'roxma/vim-hug-neovim-rpc'
-            endif
-            Plug 'kristijanhusak/defx-icons'
-            Plug 'kristijanhusak/defx-git'
-        endif
-    " }
-
     " Writing {
         if count(g:spf13_bundle_groups, 'writing')
             Plug 'reedes/vim-litecorrect'

@@ -4,7 +4,6 @@
 * Change vundle to vim-plug for fast plugin installation.
 * Support coc.nvim for perfect lsp development.
 * Remove OmniComplete, YouCompleteMe, Ctags, NerdTree configuration (They are already the yesterday).
-* Support defx.nvim (Another very good, fast file browser plugin).
 * Support cheat.sh (A very good plugin for developer).
 * Support editorconfig.
 * Support fzf (The great command line fuzzy search).
