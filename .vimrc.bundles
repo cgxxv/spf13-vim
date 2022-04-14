@@ -152,6 +152,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
             Plug 'voldikss/vim-floaterm'
             Plug 't9md/vim-choosewin'
+            Plug 'tpope/vim-eunuch'
         endif
     " }
 
