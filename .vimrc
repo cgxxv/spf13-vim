@@ -577,6 +577,12 @@ if !exists('g:vscode')
 
 " Plugins {
 
+    " vim-startify {
+        if isdirectory(expand("~/.vim/bundle/vim-startify"))
+            "let g:startify_enable_special = 0
+        endif
+    " }
+
     " easymotion {
         if isdirectory(expand("~/.vim/bundle/vim-easymotion"))
 			 " type `l` and match `l`&`L`
@@ -651,7 +657,7 @@ if !exists('g:vscode')
             let g:cursorhold_updatetime = 100
         endif
     " }
-    "
+
     " Cmake {
         if isdirectory(expand("~/.vim/bundle/vim-cmake/"))
             let g:cmake_link_compile_commands = 1

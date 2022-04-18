@@ -208,6 +208,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'puremourning/vimspector'
             Plug 'tyru/open-browser.vim'
             Plug 'kannokanno/previm'
+            "Plug 'rhysd/vim-clang-format'
         endif
     " }
 
