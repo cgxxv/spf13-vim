@@ -96,7 +96,9 @@ call plug#begin('~/.vim/bundle')
     " list only the plugin groups you will use
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
-            \ 'general', 'vim-colors-solarized',
+            \ 'general',
+            \ 'vim-clap',
+            \ 'vim-colors-solarized',
             \ 'coc',
             \ 'writing',
             \ 'misc',
@@ -147,12 +149,19 @@ call plug#begin('~/.vim/bundle')
             if has('nvim')
                 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
             endif
-            Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
-            Plug 'junegunn/fzf.vim'
-            Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
             Plug 'voldikss/vim-floaterm'
             Plug 't9md/vim-choosewin'
             Plug 'tpope/vim-eunuch'
+            Plug 'kassio/neoterm'
+        endif
+    " }
+
+    " fzf.vim or vim-clap, or nothing {
+        if count(g:spf13_bundle_groups, 'fzf.vim')
+            Plug 'junegunn/fzf', { 'do': { -> fzf#install()  }  }
+            Plug 'junegunn/fzf.vim'
+        elseif count(g:spf13_bundle_groups, 'vim-clap')
+            Plug 'liuchengxu/vim-clap', { 'do': { -> clap#installer#force_download() } }
         endif
     " }
 

@@ -48,7 +48,7 @@ if !exists('g:vscode')
         set nocompatible        " Must be first line
         set showcmd
         if !WINDOWS()
-            set shell=/bin/sh
+            set shell=$SHELL
         endif
     " }
 
@@ -908,25 +908,25 @@ EOF
                     \ isdirectory(expand("~/.vim/bundle/fzf.vim"))
             nnoremap <Leader>zf :Files<CR>
             nnoremap <Leader>zg :GFiles<CR>
-            nnoremap <Leader>zG :GFiles?<CR>
+            nnoremap <Leader>zgd :GFiles?<CR>
             nnoremap <Leader>zb :Buffers<CR>
-            nnoremap <Leader>zC :Colors<CR>
-            nnoremap <Leader>zs :Rg<CR>
+            "nnoremap <Leader>zc :Colors<CR>
+            nnoremap <Leader>zr :Rg<CR>
             nnoremap <Leader>zl :Lines<CR>
-            nnoremap <Leader>zL :BLines<CR>
+            nnoremap <Leader>zbl :BLines<CR>
             nnoremap <Leader>zt :Tags<CR>
-            nnoremap <Leader>zT :BTags<CR>
-            nnoremap <Leader>zM :Marks<CR>
+            nnoremap <Leader>zbt :BTags<CR>
+            nnoremap <Leader>zm :Marks<CR>
             nnoremap <Leader>zw :Windows<CR>
-            nnoremap <Leader>zF :Locate <Space>
+            nnoremap <Leader>zle :Locate <Space>
             nnoremap <Leader>zh :History<CR>
-            nnoremap <Leader>zH :History:<CR>
-            nnoremap <Leader>z/ :History/<CR>
-            "  nnoremap <Leader>zS :Snippets<CR> " coc-snippets take care of this
+            nnoremap <Leader>zh: :History:<CR>
+            nnoremap <Leader>zsh :History/<CR>
+            "nnoremap <Leader>zss :Snippets<CR> " coc-snippets take care of this
             nnoremap <Leader>zc :Commits<CR>
-            nnoremap <Leader>zB :BCommits<CR>
-            nnoremap <Leader>z: :Commands<CR>
-            nnoremap <Leader>zm :Maps<CR>
+            nnoremap <Leader>zbc :BCommits<CR>
+            nnoremap <Leader>z :Commands<CR>
+            nnoremap <Leader>zmp :Maps<CR>
             nnoremap <Leader>zht :Helptags<CR>
             nnoremap <Leader>zft :Filetypes<CR>
         endif
@@ -934,38 +934,42 @@ EOF
 
     " vim-clap {
         if isdirectory(expand("~/.vim/bundle/vim-clap/"))
-            let g:clap_enable_background_shadow = v:false
+            "let g:clap_enable_background_shadow = v:false
+            let g:clap_layout = { 'relative': 'editor' }
+            let g:clap_provider_grep_executable = "rg"
+            let g:clap_provider_grep_opts = '-H --no-heading --smart-case --hidden -g "!.git/"'
+            let g:clap_provider_grep_delay = 10
 
-            nnoremap <Leader>cf :Clap files<CR>
-            nnoremap <Leader>cg :Clap gfiles<CR>
-            nnoremap <Leader>cG :Clap git_diff_files<CR>
-            nnoremap <Leader>cb :Clap buffers<CR>
-            nnoremap <Leader>cC :Clap colors<CR>
-            nnoremap <Leader>cs :Clap grep2<CR>
-            nnoremap <Leader>cl :Clap lines<CR>
-            nnoremap <Leader>cL :Clap blines<CR>
-            nnoremap <Leader>ct :Clap proj_tags<CR>
-            nnoremap <Leader>cT :Clap tags<CR>
-            nnoremap <Leader>cM :Clap marks<CR>
-            nnoremap <Leader>cw :Clap windows<CR>
-            nnoremap <Leader>cF :Clap loclist<CR>
-            nnoremap <Leader>ch :Clap history<CR>
-            nnoremap <Leader>cH :Clap command_history<CR>
-            nnoremap <Leader>c/ :Clap search_history<CR>
-            "  nnoremap <Leader>cS :Snippets<CR>
-            nnoremap <Leader>cc :Clap commits<CR>
-            nnoremap <Leader>cB :Clap bcommits<CR>
-            nnoremap <Leader>c: :Clap command<CR>
-            nnoremap <Leader>cm :Clap maps<CR>
-            nnoremap <Leader>cr :Clap recent_files<CR>
-            nnoremap <Leader>cd :Clap dumb_jump<CR>
-            nnoremap <Leader>cj :Clap jumps<CR>
-            nnoremap <Leader>cq :Clap quickfix<CR>
-            nnoremap <Leader>cR :Clap registers<CR>
-            nnoremap <Leader>cp :Clap providers<CR>
-
-            nnoremap <Leader>cht :Clap help_tags<CR>
-            nnoremap <Leader>cft :Clap filetypes<CR>
+            nnoremap <Leader>zf :Clap files<CR>
+            nnoremap <Leader>zgf :Clap gfiles<CR>
+            nnoremap <Leader>zgd :Clap git_diff_files<CR>
+            nnoremap <Leader>zb :Clap buffers<CR>
+            "nnoremap <Leader>zc :Clap colors<CR>
+            nnoremap <Leader>zg :Clap grep<CR>
+            nnoremap <Leader>zg2 :Clap grep2<CR>
+            nnoremap <Leader>zl :Clap lines<CR>
+            nnoremap <Leader>zbl :Clap blines<CR>
+            nnoremap <Leader>zpt :Clap proj_tags<CR>
+            nnoremap <Leader>zt :Clap tags<CR>
+            nnoremap <Leader>zm :Clap marks<CR>
+            nnoremap <Leader>zw :Clap windows<CR>
+            nnoremap <Leader>zlt :Clap loclist<CR>
+            nnoremap <Leader>zh :Clap history<CR>
+            nnoremap <Leader>zch :Clap command_history<CR>
+            nnoremap <Leader>zsh :Clap search_history<CR>
+            "nnoremap <Leader>zs :Snippets<CR>
+            nnoremap <Leader>zc :Clap commits<CR>
+            nnoremap <Leader>zbc :Clap bcommits<CR>
+            nnoremap <Leader>zc: :Clap command<CR>
+            nnoremap <Leader>zmp :Clap maps<CR>
+            nnoremap <Leader>zrf :Clap recent_files<CR>
+            nnoremap <Leader>zdj :Clap dumb_jump<CR>
+            nnoremap <Leader>zj :Clap jumps<CR>
+            nnoremap <Leader>zqf :Clap quickfix<CR>
+            nnoremap <Leader>zr :Clap registers<CR>
+            nnoremap <Leader>zp :Clap providers<CR>
+            nnoremap <Leader>zht :Clap help_tags<CR>
+            nnoremap <Leader>zft :Clap filetypes<CR>
         endif
     " }
 
