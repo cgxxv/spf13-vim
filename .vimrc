@@ -722,6 +722,7 @@ if !exists('g:vscode')
 
     " Golang {
         if count(g:spf13_bundle_groups, 'go')
+            let g:go_gopls_enabled = 0
             let g:go_highlight_extra_types = 1
             let g:go_highlight_operators = 0
             let g:go_highlight_functions = 1
@@ -738,15 +739,36 @@ if !exists('g:vscode')
             let g:go_fmt_command = "goimports"
             let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
             let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
-            au FileType go nmap <Leader>oi <Plug>(go-implements)
-            au FileType go nmap <Leader>oo <Plug>(go-info)
-            au FileType go nmap <Leader>oe <Plug>(go-rename)
-            au FileType go nmap <leader>or <Plug>(go-run)
-            au FileType go nmap <leader>ob <Plug>(go-build)
-            au FileType go nmap <leader>ot <Plug>(go-test)
-            au FileType go nmap <Leader>od <Plug>(go-doc)
-            au FileType go nmap <Leader>ov <Plug>(go-doc-vertical)
-            au FileType go nmap <leader>oc <Plug>(go-coverage)
+            au FileType go nmap <Leader>odoc <Plug>(go-doc)
+            "au FileType go nmap <Leader>odocs <Plug>(go-doc-split)
+            au FileType go nmap <Leader>odocv <Plug>(go-doc-vertical)
+            "au FileType go nmap <Leader>odoctb <Plug>(go-doc-tab)
+            au FileType go nmap <Leader>odocb <Plug>(go-doc-browser)
+            au FileType go nmap <Leader>odef <Plug>(go-def)
+            "au FileType go nmap <Leader>odefs <Plug>(go-def-split)
+            "au FileType go nmap <Leader>odefv <Plug>(go-def-vertical)
+            "au FileType go nmap <Leader>odeftb <Plug>(go-def-tab)
+            "au FileType go nmap <Leader>odeft <Plug>(go-def-type)
+            "au FileType go nmap <Leader>odeftv <Plug>(go-def-type-vertical)
+            "au FileType go nmap <Leader>odefts <Plug>(go-def-type-split)
+            "au FileType go nmap <Leader>odeftt <Plug>(go-def-type-tab)
+            "au FileType go nmap <Leader>odefs <Plug>(go-def-stack)
+            "au FileType go nmap <Leader>odefsc <Plug>(go-def-stack-clear)
+            "au FileType go nmap <Leader>odefp <Plug>(go-def-pop)
+            au FileType go nmap <Leader>oimpl <Plug>(go-implements)
+            au FileType go nmap <Leader>oi <Plug>(go-info)
+            au FileType go nmap <Leader>ore <Plug>(go-rename)
+            au FileType go nmap <Leader>or <Plug>(go-run)
+            au FileType go nmap <Leader>ob <Plug>(go-build)
+            au FileType go nmap <Leader>ot <Plug>(go-test)
+            au FileType go nmap <Leader>ode <Plug>(go-describe)
+            au FileType go nmap <Leader>ocov <Plug>(go-coverage)
+            au FileType go nmap <Leader>ogen <Plug>(go-generate)
+            au FileType go nmap <Leader>oca <Plug>(go-callers)
+            au FileType go nmap <Leader>ocas <Plug>(go-callstack)
+            au FileType go nmap <Leader>ochp <Plug>(go-channelpeers)
+            au FileType go nmap <Leader>oref <Plug>(go-referrers)
+            au FileType go nmap <Leader>opto <Plug>(go-pointsto)
         endif
     " }
 
