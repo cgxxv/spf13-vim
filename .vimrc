@@ -722,7 +722,6 @@ if !exists('g:vscode')
 
     " Golang {
         if count(g:spf13_bundle_groups, 'go')
-            let g:go_gopls_enabled = 0
             let g:go_highlight_extra_types = 1
             let g:go_highlight_operators = 0
             let g:go_highlight_functions = 1
