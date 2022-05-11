@@ -850,6 +850,7 @@ EOF
         if isdirectory(expand("~/.vim/bundle/vim-floaterm"))
             let g:floaterm_opener = 'tabe'"open file in new tab
             nnoremap <Leader>3n :FloatermNew nnn<CR>
+            nnoremap <Leader>ft :FloatermToggle<CR>
         endif
     " }
 

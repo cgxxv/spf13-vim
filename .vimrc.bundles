@@ -152,7 +152,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'voldikss/vim-floaterm'
             Plug 't9md/vim-choosewin'
             Plug 'tpope/vim-eunuch'
-            Plug 'kassio/neoterm'
         endif
     " }
 
