@@ -543,8 +543,8 @@ if !exists('g:vscode')
 
     "vim debugging with vimspector
     if isdirectory(expand("~/.vim/bundle/vimspector"))
-        let g:vimspector_enable_mappings = 'VISUAL_STUDIO'
-        noremap <Leader>di <Plug>VimspectorBalloonEval
+        let g:vimspector_enable_mappings = 'HUMAN'
+        noremap <Leader>dr :VimspectorReset<CR>
     endif
 " }
 
