@@ -543,8 +543,33 @@ if !exists('g:vscode')
 
     "vim debugging with vimspector
     if isdirectory(expand("~/.vim/bundle/vimspector"))
+        function! s:spf13_vimspector_winbar()
+            call win_gotoid( g:vimspector_session_windows.code)
+            aunmenu WinBar
+            nnoremenu WinBar.▷\F5 :call vimspector#Continue()<CR>
+            nnoremenu WinBar.❘❘\F6 :call vimspector#Pause()<CR>
+            nnoremenu WinBar.↷\F10 :call vimspector#StepOver()<CR>
+            nnoremenu WinBar.↓\F11 :call vimspector#StepInto()<CR>
+            nnoremenu WinBar.↑\F12 :call vimspector#StepOut()<CR>
+            nnoremenu WinBar.⟲\F4 :call vimspector#Restart()<CR>
+            nnoremenu WinBar.□\F3 :call vimspector#Stop()<CR>
+            nnoremenu WinBar.✕\F7 :call vimspector#Reset()<CR>
+        endfunction
+
+        augroup spf13_vim_ui_customistaion
+            autocmd!
+            if !has('nvim')
+                autocmd User VimspectorUICreated call s:spf13_vimspector_winbar()
+            endif
+        augroup END
+
         let g:vimspector_enable_mappings = 'HUMAN'
-        noremap <Leader>dr :VimspectorReset<CR>
+        let g:vimspector_sidebar_width = 75
+        let g:vimspector_bottombar_height = 15
+        let g:vimspector_code_minwidth = 90
+        let g:vimspector_terminal_maxwidth = 75
+        let g:vimspector_terminal_minwidth = 20
+        noremap <silent> <F7> :VimspectorReset<CR>
     endif
 " }
 
