@@ -31,6 +31,9 @@ if !exists('g:vscode')
 " }
 
 " Environment {
+    if !exists('g:spf13_vim_home')
+        let g:spf13_vim_home = '~/.config/spf13-vim-master'
+    endif
 
     " Identify platform {
         silent function! OSX()
@@ -39,26 +42,31 @@ if !exists('g:vscode')
         silent function! LINUX()
             return has('unix') && !has('macunix') && !has('win32unix')
         endfunction
-        silent function! WINDOWS()
-            return  (has('win32') || has('win64'))
-        endfunction
+        "silent function! WINDOWS()
+        "    return  (has('win32') || has('win64'))
+        "endfunction
     " }
 
     " Basics {
         set nocompatible        " Must be first line
         set showcmd
-        if !WINDOWS()
+        if !empty($SHELL)
             set shell=$SHELL
+        else
+            set shell=/bin/sh
         endif
+        "if !WINDOWS()
+        "    set shell=$SHELL
+        "endif
     " }
 
-    " Windows Compatible {
-        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-        " across (heterogeneous) systems easier.
-        if WINDOWS()
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-        endif
-    " }
+    "" Windows Compatible {
+    "    " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
+    "    " across (heterogeneous) systems easier.
+    "    if WINDOWS()
+    "      set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
+    "    endif
+    "" }
 
     " Arrow Key Fix {
         " https://github.com/spf13/spf13-vim/issues/780
@@ -70,14 +78,14 @@ if !exists('g:vscode')
 " }
 
 " Use before config if available {
-    if filereadable(expand("~/.vimrc.before"))
-        source ~/.vimrc.before
+    if filereadable(expand(g:spf13_vim_home . "/.vimrc.before"))
+        execute 'source' g:spf13_vim_home . "/.vimrc.before"
     endif
 " }
 
 " Use bundles config {
-    if filereadable(expand("~/.vimrc.bundles"))
-        source ~/.vimrc.bundles
+    if filereadable(expand(g:spf13_vim_home . "/.vimrc.bundles"))
+        execute 'source' g:spf13_vim_home . "/.vimrc.bundles"
     endif
 " }
 
@@ -194,7 +202,8 @@ if !exists('g:vscode')
 
 " Vim UI {
     " theme section{
-    source ~/.vim/theme.vim
+    "  source ~/.vim/theme.vim
+    execute 'source' g:spf13_vim_home . '/theme.vim'
     " }
 
     " minimap section {
@@ -249,7 +258,7 @@ if !exists('g:vscode')
     set showmatch                   " Show matching brackets/parenthesis
     set incsearch                   " Find as you type search
     set hlsearch                    " Highlight search terms
-    set winminheight=0              " Windows can be 0 line high
+    set winminheight=1              " Windows can be 0 line high
     set ignorecase                  " Case insensitive search
     set smartcase                   " Case sensitive when uc present
     set wildmenu                    " Show list instead of just completing
@@ -510,7 +519,7 @@ if !exists('g:vscode')
 
     " FIXME: Revert this f70be548
     " fullscreen mode for GVIM and Terminal, need 'wmctrl' in you PATH
-    map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+    " map <silent> <F11> :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
     " FIXME
     " Alt key bindings
@@ -543,6 +552,7 @@ if !exists('g:vscode')
 
     "vim debugging with vimspector
     if isdirectory(expand("~/.vim/bundle/vimspector"))
+        "execute 'source' g:spf13_vim_home . '/vimspector.vim'
         function! s:spf13_vimspector_winbar()
             call win_gotoid( g:vimspector_session_windows.code)
             aunmenu WinBar
@@ -564,11 +574,11 @@ if !exists('g:vscode')
         augroup END
 
         let g:vimspector_enable_mappings = 'HUMAN'
-        let g:vimspector_sidebar_width = 75
-        let g:vimspector_bottombar_height = 15
-        let g:vimspector_code_minwidth = 90
-        let g:vimspector_terminal_maxwidth = 75
-        let g:vimspector_terminal_minwidth = 20
+        "let g:vimspector_sidebar_width = 75
+        "let g:vimspector_bottombar_height = 15
+        "let g:vimspector_code_minwidth = 90
+        "let g:vimspector_terminal_maxwidth = 75
+        "let g:vimspector_terminal_minwidth = 20
         noremap <silent> <F7> :VimspectorReset<CR>
     endif
 " }
@@ -596,7 +606,8 @@ if !exists('g:vscode')
                 \ ]
         endif
 
-        source ~/.vim/coc.vim
+        "  source ~/.vim/coc.vim
+        execute 'source' g:spf13_vim_home . '/coc.vim'
     endif
 " }
 
@@ -1044,9 +1055,9 @@ EOF
                 let s:ctrlp_fallback = 'ack-grep %s --nocolor -f'
             elseif executable('ack')
                 let s:ctrlp_fallback = 'ack %s --nocolor -f'
-            " On Windows use "dir" as fallback command.
-            elseif WINDOWS()
-                let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
+            "" On Windows use "dir" as fallback command.
+            "elseif WINDOWS()
+            "    let s:ctrlp_fallback = 'dir %s /-n /b /s /a-d'
             else
                 let s:ctrlp_fallback = 'find %s -type f'
             endif
@@ -1196,8 +1207,8 @@ EOF
                 set guifont=Andale\ Mono\ Regular\ 12,Menlo\ Regular\ 11,Consolas\ Regular\ 12,Courier\ New\ Regular\ 14
             elseif OSX() && has("gui_running")
                 set guifont=Andale\ Mono\ Regular:h12,Menlo\ Regular:h11,Consolas\ Regular:h12,Courier\ New\ Regular:h14
-            elseif WINDOWS() && has("gui_running")
-                set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
+            "  elseif WINDOWS() && has("gui_running")
+            "      set guifont=Andale_Mono:h10,Menlo:h10,Consolas:h10,Courier_New:h10
             endif
         endif
     else
@@ -1213,7 +1224,7 @@ EOF
 
     " Initialize directories {
     function! InitializeDirectories()
-        let parent = $HOME."/.vim/tmp/"
+        let parent = g:spf13_vim_home . "/.vim/tmp/"
         " let prefix = 'vim'
         let dir_list = {
                     \ 'backup': 'backupdir',
@@ -1362,14 +1373,6 @@ EOF
 " Use local vimrc if available {
     if filereadable(expand("~/.vimrc.local"))
         source ~/.vimrc.local
-    endif
-" }
-
-" Use local gvimrc if available and gui is running {
-    if has('gui_running')
-        if filereadable(expand("~/.gvimrc.local"))
-            source ~/.gvimrc.local
-        endif
     endif
 " }
 endif

@@ -1,14 +1,17 @@
 " Default Bundles {
+    if !exists('g:spf13_vim_home')
+        let g:spf13_vim_home = '~/.config/spf13-vim-master'
+    endif
 
     " Use before config if available {
-        if filereadable(expand("~/.vimrc.before"))
-            source ~/.vimrc.before
+        if filereadable(expand(g:spf13_vim_home . "/.vimrc.before"))
+            execute 'source' g:spf13_vim_home . "/.vimrc.before"
         endif
     " }
 
     " Use bundles config {
-        if filereadable(expand("~/.vimrc.bundles"))
-            source ~/.vimrc.bundles
+        if filereadable(expand(g:spf13_vim_home . "/.vimrc.bundles"))
+            execute 'source' g:spf13_vim_home . "/.vimrc.bundles"
         endif
     " }
 " }
