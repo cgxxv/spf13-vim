@@ -98,7 +98,7 @@ call plug#begin('~/.vim/bundle')
         let g:spf13_bundle_groups = [
             \ 'general',
             \ 'fzf.vim',
-            \ 'vim-colors-solarized',
+            \ 'vim-solarized8',
             \ 'coc',
             \ 'writing',
             \ 'misc',
@@ -167,14 +167,18 @@ call plug#begin('~/.vim/bundle')
     " Theme section{
         if count(g:spf13_bundle_groups, 'vim-colors-solarized')
             Plug 'altercation/vim-colors-solarized'
-            Plug 'spf13/vim-colors'
-            Plug 'flazz/vim-colorschemes'
+            "Plug 'spf13/vim-colors'
+            "Plug 'flazz/vim-colorschemes'
         elseif count(g:spf13_bundle_groups, 'nvim-colors-solarized')
             Plug 'arakashic/nvim-colors-solarized'
         elseif count(g:spf13_bundle_groups, 'NeoSolarized')
             Plug 'overcache/NeoSolarized'
         elseif count(g:spf13_bundle_groups, 'vim-solarized8')
             Plug 'lifepillar/vim-solarized8'
+        elseif count(g:spf13_bundle_groups, 'vim-one')
+            Plug 'rakr/vim-one'
+        elseif count(g:spf13_bundle_groups, 'vim-github-colorscheme')
+            Plug 'endel/vim-github-colorscheme'
         endif
     " }
 
