@@ -98,7 +98,7 @@ call plug#begin('~/.vim/bundle')
         let g:spf13_bundle_groups = [
             \ 'general',
             \ 'fzf.vim',
-            \ 'vim-solarized8',
+            \ 'gruvbox',
             \ 'coc',
             \ 'writing',
             \ 'misc',
@@ -179,6 +179,16 @@ call plug#begin('~/.vim/bundle')
             Plug 'rakr/vim-one'
         elseif count(g:spf13_bundle_groups, 'vim-github-colorscheme')
             Plug 'endel/vim-github-colorscheme'
+        elseif count(g:spf13_bundle_groups, 'dracula')
+            Plug 'dracula/vim', { 'as': 'dracula' }
+        elseif count(g:spf13_bundle_groups, 'material')
+            Plug 'kaicataldo/material.vim', { 'branch': 'main' }
+        elseif count(g:spf13_bundle_groups, 'onehalf')
+            Plug 'sonph/onehalf', { 'rtp': 'vim' }
+        elseif count(g:spf13_bundle_groups, 'gruvbox')
+            Plug 'morhetz/gruvbox'
+        elseif count(g:spf13_bundle_groups, 'molokai')
+            Plug 'tomasr/molokai'
         endif
     " }
 
