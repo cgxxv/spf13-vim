@@ -1,68 +1,83 @@
 {
-	"languageserver": {
-		"golangci-lint-languageserver": {
-			"command": "golangci-lint-langserver",
-			"filetypes": [
-				"go"
-			],
-			"initializationOptions": {
-				"command": [
-					"golangci-lint",
-					"run",
-					"--enable-all",
-					"--disable",
-					"lll",
-					"--out-format",
-					"json"
-				]
-			}
-		},
-		"nix": {
-			"command": "rnix-lsp",
-			"filetypes": [
-				"nix"
-			]
-		},
-		"cmake": {
-			"command": "cmake-language-server",
-			"filetypes": [
-				"cmake"
-			],
-			"rootPatterns": [
-				"build/"
-			],
-			"initializationOptions": {
-				"buildDirectory": "build"
-			}
-		},
-		"clojure-lsp": {
-			"command": "bash",
-			"args": [
-				"-c",
-				"clojure-lsp"
-			],
-			"filetypes": [
-				"clojure"
-			],
-			"rootPatterns": [
-				"project.clj"
-			],
-			"additionalSchemes": [
-				"jar",
-				"zipfile"
-			],
-			"trace.server": "verbose",
-			"initializationOptions": {}
-		},
-		"dockerfile": {
-			"command": "docker-langserver",
-			"filetypes": [
-				"dockerfile"
-			],
-			"args": [
-				"--stdio"
-			]
-		}
-	},
-	"clangd.path": "~/.config/coc/extensions/coc-clangd-data/install/14.0.0/clangd_14.0.0/bin/clangd"
+    "languageserver": {
+        //"clangd": {
+        //    "command": "clangd",
+        //    "path": "/usr/local/bin/clangd",
+        //    "rootPatterns": [
+        //        "compile_flags.txt",
+        //        "compile_commands.json"
+        //    ],
+        //    "filetypes": [
+        //        "c",
+        //        "cc",
+        //        "cpp",
+        //        "c++",
+        //        "objc",
+        //        "objcpp"
+        //    ]
+        //},
+        "golangci-lint-languageserver": {
+            "command": "golangci-lint-langserver",
+            "filetypes": [
+                "go"
+            ],
+            "initializationOptions": {
+                "command": [
+                    "golangci-lint",
+                    "run",
+                    "--enable-all",
+                    "--disable",
+                    "lll",
+                    "--out-format",
+                    "json"
+                ]
+            }
+        },
+        "nix": {
+            "command": "rnix-lsp",
+            "filetypes": [
+                "nix"
+            ]
+        },
+        "cmake": {
+            "command": "cmake-language-server",
+            "filetypes": [
+                "cmake"
+            ],
+            "rootPatterns": [
+                "build/"
+            ],
+            "initializationOptions": {
+                "buildDirectory": "build"
+            }
+        },
+        "clojure-lsp": {
+            "command": "bash",
+            "args": [
+                "-c",
+                "clojure-lsp"
+            ],
+            "filetypes": [
+                "clojure"
+            ],
+            "rootPatterns": [
+                "project.clj"
+            ],
+            "additionalSchemes": [
+                "jar",
+                "zipfile"
+            ],
+            "trace.server": "verbose",
+            "initializationOptions": {}
+        },
+        "dockerfile": {
+            "command": "docker-langserver",
+            "filetypes": [
+                "dockerfile"
+            ],
+            "args": [
+                "--stdio"
+            ]
+        }
+    }
 }
