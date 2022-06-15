@@ -1185,7 +1185,7 @@ EOF
     " }
     " vim-clang-format {
         if isdirectory(expand("~/.vim/bundle/vim-clang-format/"))
-            let g:clang_format#auto_format_on_insert_leave=1
+            "let g:clang_format#auto_format_on_insert_leave=1
         endif
     " }
 " }
