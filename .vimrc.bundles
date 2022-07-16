@@ -131,7 +131,7 @@ call plug#begin('~/.vim/bundle')
             "if !exists('g:spf13_no_views')
             "    Plug 'vim-scripts/restore_view.vim'
             "endif
-            Plug 'mhinz/vim-signify'
+            Plug 'airblade/vim-gitgutter'
             Plug 'tpope/vim-abolish'
             Plug 'osyo-manga/vim-over'
             Plug 'kana/vim-textobj-user'
