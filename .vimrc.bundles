@@ -99,12 +99,14 @@ call plug#begin('~/.vim/bundle')
             \ 'general',
             \ 'fzf.vim',
             \ 'gruvbox',
-            \ 'coc',
+            \ 'vim-lsp',
+            \ 'tabnine',
             \ 'writing',
             \ 'misc',
             \ 'programming',
             \ 'go',
             \ 'plantuml',
+            \ 'debugging',
             \ ]
     endif
 
@@ -223,19 +225,43 @@ call plug#begin('~/.vim/bundle')
                 Plug 'majutsushi/tagbar'
             endif
             Plug 'editorconfig/editorconfig-vim'
-            " highlighting langs
-            Plug 'sheerun/vim-polyglot'
+            "Plug 'sheerun/vim-polyglot' "slow down about 20ms
             Plug 'thinca/vim-quickrun'
-            Plug 'puremourning/vimspector'
             Plug 'tyru/open-browser.vim'
             Plug 'kannokanno/previm'
             Plug 'rhysd/vim-clang-format'
         endif
     " }
 
-    " Coc {
+    " Debugging {
+        if count(g:spf13_bundle_groups, 'debugging')
+            Plug 'puremourning/vimspector'
+        endif
+    " }
+
+    " Coc or vim-lsp {
         if count(g:spf13_bundle_groups, 'coc')
             Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+        elseif count(g:spf13_bundle_groups, 'vim-lsp')
+            Plug 'prabirshrestha/vim-lsp'
+            "Plug 'prabirshrestha/async.vim'
+            "" FIXME: got some problems for vim9 temporarily {
+            "if has('nvim')
+            "    Plug 'SirVer/ultisnips'
+            "endif
+            "Plug 'honza/vim-snippets'
+            "Plug 'thomasfaingnaert/vim-lsp-snippets'
+            "Plug 'thomasfaingnaert/vim-lsp-ultisnips'
+            "" }
+            "Plug 'prabirshrestha/asyncomplete.vim'
+            "Plug 'prabirshrestha/asyncomplete-lsp.vim'
+        endif
+    " }
+
+    " tabnine {
+        if count(g:spf13_bundle_groups, 'tabnine')
+            Plug 'tabnine/YouCompleteMe'
+            "  Plug 'codota/tabnine-vim'
         endif
     " }
 
@@ -354,7 +380,7 @@ call plug#begin('~/.vim/bundle')
     " Misc {
         if count(g:spf13_bundle_groups, 'misc')
             Plug 'tpope/vim-markdown'
-            Plug 'spf13/vim-preview'
+            Plug 'greyblake/vim-preview'
             Plug 'tpope/vim-cucumber'
             Plug 'cespare/vim-toml'
             Plug 'quentindecock/vim-cucumber-align-pipes'

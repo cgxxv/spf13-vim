@@ -543,7 +543,7 @@ if !exists('g:vscode')
     endif
 
     "vim debugging with vimspector
-    if isdirectory(expand("~/.vim/bundle/vimspector"))
+    if count(g:spf13_bundle_groups, 'debugging') && isdirectory(expand("~/.vim/bundle/vimspector"))
         function! s:spf13_vimspector_winbar()
             call win_gotoid( g:vimspector_session_windows.code)
             aunmenu WinBar
@@ -582,22 +582,230 @@ if !exists('g:vscode')
             let g:coc_node_path = trim(system('which node'))
         endif
 
+        " FIXME: remove coc-snippets for unknown issues
         " Custom you coc extensions in .vimrc.before.local
         " let g:coc_global_extensions = []
         if !exists('g:coc_global_extension')
             let g:coc_global_extensions = [
-                \ 'coc-json', 'coc-highlight', 'coc-snippets', 'coc-emmet',
+                \ 'coc-json',
+                \ 'coc-highlight',
+                \ 'coc-emmet',
                 \ 'coc-tabnine',
-                \ 'coc-tsserver', 'coc-html', 'coc-css', 'coc-vetur',
-                \ 'coc-sql', 'coc-sh', 'coc-markdownlint',
-                \ 'coc-vimlsp', 'coc-phpls', 'coc-pyright',
-                \ 'coc-clangd', 'coc-cmake',
+                \ 'coc-tsserver',
+                \ 'coc-html',
+                \ 'coc-css',
+                \ 'coc-vetur',
+                \ 'coc-sql',
+                \ 'coc-sh',
+                \ 'coc-markdownlint',
+                \ 'coc-vimlsp',
+                \ 'coc-phpls',
+                \ 'coc-pyright',
+                \ 'coc-clangd',
+                \ 'coc-cmake',
                 \ 'coc-go',
                 \ 'coc-rust-analyzer',
+                \ 'coc-yaml',
                 \ ]
         endif
 
         source ~/.vim/coc.vim
+    endif
+" }
+
+" Vim-lsp {
+    if count(g:spf13_bundle_groups, 'vim-lsp')
+        if executable('bash-language-server')
+            augroup LspBash
+              autocmd!
+              autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'bash-language-server',
+                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'bash-language-server start']},
+                    \ 'allowlist': ['sh'],
+                    \ })
+            augroup END
+        endif
+
+        if executable('clangd')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'clangd',
+                \ 'cmd': {server_info->['clangd', '-background-index']},
+                \ 'whitelist': ['c', 'cpp', 'objc', 'objcpp'],
+                \ })
+        endif
+
+        if executable('css-languageserver')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'css-languageserver',
+                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'css-languageserver --stdio']},
+                \ 'whitelist': ['css', 'less', 'sass'],
+                \ })
+        endif
+
+        if executable('gopls')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'gopls',
+                \ 'cmd': {server_info->['gopls', '-remote=auto']},
+                \ 'allowlist': ['go'],
+                \ })
+            autocmd BufWritePre *.go LspDocumentFormatSync
+        endif
+
+        if executable('docker-langserver')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'docker-langserver',
+                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'docker-langserver --stdio']},
+                \ 'whitelist': ['dockerfile'],
+                \ })
+        endif
+
+        if executable('html-languageserver')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'html-languageserver',
+                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'html-languageserver --stdio']},
+                \ 'whitelist': ['html'],
+                \ })
+        endif
+
+        if executable('typescript-language-server')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'javascript support using typescript-language-server',
+                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+                \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'package.json'))},
+                \ 'whitelist': ['javascript', 'javascript.jsx', 'javascriptreact'],
+                \ })
+        endif
+
+        if executable('lua-lsp')
+            au User lsp_setup call lsp#register_server({
+                        \ 'name': 'lua-lsp',
+                        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
+                        \ 'whitelist': ['lua'],
+                        \ })
+        endif
+
+        if executable('intelephense')
+            augroup LspPHPIntelephense
+              au!
+              au User lsp_setup call lsp#register_server({
+                  \ 'name': 'intelephense',
+                  \ 'cmd': {server_info->[&shell, &shellcmdflag, 'intelephense --stdio']},
+                  \ 'whitelist': ['php'],
+                  \ 'initialization_options': {'storagePath': '/tmp/intelephense'},
+                  \ 'workspace_config': {
+                  \   'intelephense': {
+                  \     'files': {
+                  \       'maxSize': 1000000,
+                  \       'associations': ['*.php', '*.phtml'],
+                  \       'exclude': [],
+                  \     },
+                  \     'completion': {
+                  \       'insertUseDeclaration': v:true,
+                  \       'fullyQualifyGlobalConstantsAndFunctions': v:false,
+                  \       'triggerParameterHints': v:true,
+                  \       'maxItems': 100,
+                  \     },
+                  \     'format': {
+                  \       'enable': v:true
+                  \     },
+                  \   },
+                  \ }
+                  \})
+            augroup END
+        endif
+
+        if executable('pyls')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'pyls',
+                \ 'cmd': {server_info->['pyls']},
+                \ 'whitelist': ['python'],
+                \ 'workspace_config': {'pyls': {'plugins': {'pydocstyle': {'enabled': v:true}}}}
+                \ })
+        endif
+
+        if executable('rls')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'rls',
+                \ 'cmd': {server_info->['rustup', 'run', 'stable', 'rls']},
+                \ 'workspace_config': {'rust': {'clippy_preference': 'on'}},
+                \ 'whitelist': ['rust'],
+                \ })
+        endif
+
+        if executable('typescript-language-server')
+            au User lsp_setup call lsp#register_server({
+                \ 'name': 'typescript-language-server',
+                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'typescript-language-server --stdio']},
+                \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'tsconfig.json'))},
+                \ 'whitelist': ['typescript', 'typescript.tsx', 'typescriptreact'],
+                \ })
+        endif
+
+        if executable('vim-language-server')
+            augroup LspVim
+              autocmd!
+              autocmd User lsp_setup call lsp#register_server({
+                  \ 'name': 'vim-language-server',
+                  \ 'cmd': {server_info->['vim-language-server', '--stdio']},
+                  \ 'whitelist': ['vim'],
+                  \ 'initialization_options': {
+                  \   'vimruntime': $VIMRUNTIME,
+                  \   'runtimepath': &rtp,
+                  \ }})
+            augroup END
+        endif
+
+        if executable('yaml-language-server')
+            augroup LspYaml
+             autocmd!
+             autocmd User lsp_setup call lsp#register_server({
+                 \ 'name': 'yaml-language-server',
+                 \ 'cmd': {server_info->['yaml-language-server', '--stdio']},
+                 \ 'whitelist': ['yaml', 'yaml.ansible'],
+                 \ 'workspace_config': {
+                 \   'yaml': {
+                 \     'validate': v:true,
+                 \     'hover': v:true,
+                 \     'completion': v:true,
+                 \     'customTags': [],
+                 \     'schemas': {
+                 \          'kubernetes': '/*.yaml',
+                 \      },
+                 \     'schemaStore': { 'enable': v:true },
+                 \   }
+                 \ }
+                 \})
+            augroup END
+        endif
+
+        function! s:on_lsp_buffer_enabled() abort
+            setlocal omnifunc=lsp#complete
+            setlocal signcolumn=yes
+            if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+            nmap <buffer> gd <plug>(lsp-definition)
+            nmap <buffer> gs <plug>(lsp-document-symbol-search)
+            nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+            nmap <buffer> gr <plug>(lsp-references)
+            nmap <buffer> gi <plug>(lsp-implementation)
+            nmap <buffer> gt <plug>(lsp-type-definition)
+            nmap <buffer> <leader>rn <plug>(lsp-rename)
+            nmap <buffer> [g <plug>(lsp-previous-diagnostic)
+            nmap <buffer> ]g <plug>(lsp-next-diagnostic)
+            nmap <buffer> K <plug>(lsp-hover)
+            nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
+            nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
+
+            let g:lsp_format_sync_timeout = 1000
+            autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+            " refer to doc to add more commands
+        endfunction
+
+        augroup lsp_install
+            au!
+            " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+            autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+        augroup END
     endif
 " }
 
@@ -611,45 +819,45 @@ if !exists('g:vscode')
 
     " easymotion {
         if isdirectory(expand("~/.vim/bundle/vim-easymotion"))
-			 " type `l` and match `l`&`L`
-			let g:EasyMotion_smartcase = 1
-			" Smartsign (type `3` and match `3`&`#`)
-			let g:EasyMotion_use_smartsign_us = 1
-			let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
+             " type `l` and match `l`&`L`
+            let g:EasyMotion_smartcase = 1
+            " Smartsign (type `3` and match `3`&`#`)
+            let g:EasyMotion_use_smartsign_us = 1
+            let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
             " JK motions: Line motions
-			map <Leader>h <Plug>(easymotion-linebackward)
+            map <Leader>h <Plug>(easymotion-linebackward)
             map <Leader>j <Plug>(easymotion-j)
             map <Leader>k <Plug>(easymotion-k)
-			map <Leader>l <Plug>(easymotion-lineforward)
-			" Move to line
-			map <Leader>L <Plug>(easymotion-bd-jk)
-			nmap <Leader>L <Plug>(easymotion-overwin-line)
-			" Move to word
-			map  <Leader>w <Plug>(easymotion-bd-w)
-			nmap <Leader>w <Plug>(easymotion-overwin-w)
+            map <Leader>l <Plug>(easymotion-lineforward)
+            " Move to line
+            map <Leader>L <Plug>(easymotion-bd-jk)
+            nmap <Leader>L <Plug>(easymotion-overwin-line)
+            " Move to word
+            map  <Leader>w <Plug>(easymotion-bd-w)
+            nmap <Leader>w <Plug>(easymotion-overwin-w)
 
             " <Leader>f{char} to move to {char}
-			map  <Leader>f <Plug>(easymotion-bd-f)
-			nmap <Leader>f <Plug>(easymotion-overwin-f)
+            map  <Leader>f <Plug>(easymotion-bd-f)
+            nmap <Leader>f <Plug>(easymotion-overwin-f)
 
             " Require tpope/vim-repeat to enable dot repeat support
             " Jump to anywhere with only `s{char}{target}`
-			" `s<CR>` repeat last find motion.
-			nmap s <Plug>(easymotion-s)
-			nmap s2 <Plug>(easymotion-s2)
-			" Bidirectional & within line 't' motion
-			nmap t <Plug>(easymotion-t)
-			nmap t <Plug>(easymotion-t2)
-			omap t <Plug>(easymotion-bd-tl)
-			map  / <Plug>(easymotion-sn)
-			omap / <Plug>(easymotion-tn)
+            " `s<CR>` repeat last find motion.
+            nmap s <Plug>(easymotion-s)
+            nmap s2 <Plug>(easymotion-s2)
+            " Bidirectional & within line 't' motion
+            nmap t <Plug>(easymotion-t)
+            nmap t <Plug>(easymotion-t2)
+            omap t <Plug>(easymotion-bd-tl)
+            map  / <Plug>(easymotion-sn)
+            omap / <Plug>(easymotion-tn)
 
-			" These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
-			" Without these mappings, `n` & `N` works fine. (These mappings just provide
-			" different highlight method and have some other features )
-			map  n <Plug>(easymotion-next)
-			map  N <Plug>(easymotion-prev)
+            " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
+            " Without these mappings, `n` & `N` works fine. (These mappings just provide
+            " different highlight method and have some other features )
+            map  n <Plug>(easymotion-next)
+            map  N <Plug>(easymotion-prev)
         endif
     " }
 
@@ -1148,37 +1356,37 @@ EOF
                 " return blame
                 return winwidth(0) > 120 ? blame : ''
             endfunction
-			let g:lightline = {
-				\ 'active': {
-				\   'left': [
+            let g:lightline = {
+                \ 'active': {
+                \   'left': [
                 \       [ 'mode', 'paste' ],
-				\       [ 'cocstatus', 'currentfunction', 'readonly', 'absolutepath', 'modified' ],
+                \       [ 'cocstatus', 'currentfunction', 'readonly', 'absolutepath', 'modified' ],
                 \       [ 'ctrlpmark', 'git', 'diagnostic', 'method' ],
                 \   ],
                 \   'right': [ [ 'lineinfo' ],
                 \              [ 'percent' ],
                 \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
-				\ },
+                \ },
                 \ 'tabline': {
                 \   'left': [ ['buffers'] ],
                 \   'right': [ ['close'] ]
                 \ },
-				\ 'component_function': {
-				\   'cocstatus': 'coc#status',
-				\   'currentfunction': 'CocCurrentFunction',
+                \ 'component_function': {
+                \   'cocstatus': 'coc#status',
+                \   'currentfunction': 'CocCurrentFunction',
                 \   'blame': 'LightlineGitBlame',
-				\ },
-            	\ 'component_expand': {
-				\   'buffers': 'lightline#bufferline#buffers',
+                \ },
+                \ 'component_expand': {
+                \   'buffers': 'lightline#bufferline#buffers',
                 \   'syntastic': 'SyntasticStatuslineFlag',
-				\ },
+                \ },
                 \ 'component_type': {
                 \   'buffers': 'tabsel'
                 \ },
                 \ 'component_raw' : {
                 \   'buffers': 1,
                 \ }
-			\ }
+            \ }
             let g:lightline#bufferline#show_number  = 4
             let g:lightline#bufferline#shorten_path = 1
             let g:lightline#bufferline#auto_hide = 0

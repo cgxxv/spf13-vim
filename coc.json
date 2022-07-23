@@ -1,4 +1,7 @@
 {
+    "yaml.schemas": {
+        "kubernetes": "/*.yaml"
+    },
     "languageserver": {
         "golangci-lint-languageserver": {
             "command": "golangci-lint-langserver",
