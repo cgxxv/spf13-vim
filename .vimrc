@@ -822,10 +822,16 @@ if !exists('g:vscode')
             let g:syntastic_shell_checkers = ['shellcheck']
         endif
     " }
-    "
+
     " Nvim problems {
         if has('nvim') && isdirectory(expand("~/.vim/bundle/FixCursorHold.nvim/"))
             let g:cursorhold_updatetime = 100
+        endif
+    " }
+
+    " Vim-gitgutter {
+        if isdirectory(expand("~/.vim/bundle/vim-gitgutter/"))
+            let $VIM_GITGUTTER_TEST=1
         endif
     " }
 
@@ -993,6 +999,21 @@ EOF
             nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
             nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
             nnoremap gR <cmd>TroubleToggle lsp_references<cr>
+        endif
+    " }
+
+    " NORMAL mode
+    " `gcc` - Toggles the current line using linewise comment
+    " `gbc` - Toggles the current line using blockwise comment
+    " `[count]gcc` - Toggles the number of line given as a prefix-count using linewise
+    " `[count]gbc` - Toggles the number of line given as a prefix-count using blockwise
+    " `gc[count]{motion}` - (Op-pending) Toggles the region using linewise comment
+    " `gb[count]{motion}` - (Op-pending) Toggles the region using blockwise comment
+    " VISUAL mode
+    " `gc` - Toggles the region using linewise comment
+    " `gb` - Toggles the region using blockwise comment
+    " comment {
+        if isdirectory(expand("~/.vim/bundle/comment.nvim"))
         endif
     " }
 

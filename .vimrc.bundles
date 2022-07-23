@@ -149,6 +149,7 @@ call plug#begin('~/.vim/bundle')
                 Plug 'folke/trouble.nvim'
                 Plug 'nvim-telescope/telescope.nvim'
             endif
+            Plug 'numToStr/Comment.nvim'
         endif
     " }
 
