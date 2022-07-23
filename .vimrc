@@ -52,14 +52,6 @@ if !exists('g:vscode')
         endif
     " }
 
-    " Windows Compatible {
-        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-        " across (heterogeneous) systems easier.
-        if WINDOWS()
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-        endif
-    " }
-
     " Arrow Key Fix {
         " https://github.com/spf13/spf13-vim/issues/780
         if &term[:4] == "xterm" || &term[:5] == 'screen' || &term[:3] == 'rxvt'
@@ -114,15 +106,15 @@ if !exists('g:vscode')
         endif
     endif
 
-    " FIXME: Temporarily block autochdir for vim-floaterm in vim
     " Most prefer to automatically switch to the current file directory when
     " a new buffer is opened; to prevent this behavior, add the following to
     " your .vimrc.before.local file:
-    "   let g:spf13_no_autochdir = 1
-    "if !exists('g:spf13_no_autochdir')
-    "    autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
-    "    " Always switch to the current file directory
-    "endif
+    " FIXME: Also for fix vim-floaterm warning in vim
+    " let g:spf13_no_autochdir = 1
+    if !exists('g:spf13_no_autochdir')
+        autocmd BufEnter * if bufname("") !~ "^\[A-Za-z0-9\]*://" | lcd %:p:h | endif
+        " Always switch to the current file directory
+    endif
 
     set autowrite                       " Automatically write a file when leaving a modified buffer
     set shortmess+=filmnrxoOtT          " Abbrev. of messages (avoids 'hit enter')
@@ -139,7 +131,7 @@ if !exists('g:vscode')
 
     set nobackup                        " Some servers have issues with backup files, see https://github.com/neoclide/coc.nvim/issues/649.
     set nowritebackup
-    " set cmdheight=2                     " Give more space for displaying messages.
+    "set cmdheight=2                     " Give more space for displaying messages.
     set shortmess+=c                    " Don't pass messages to |ins-completion-menu|.
 
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
@@ -196,22 +188,6 @@ if !exists('g:vscode')
 " Vim UI {
     " theme section{
     source ~/.vim/theme.vim
-    " }
-
-    " minimap section {
-    ""if isdirectory(expand("~/.vim/bundle/minimap.vim/"))
-    ""   let g:minimap_width = 10
-    ""   let g:minimap_auto_start = 1
-    ""   let g:minimap_auto_start_win_enter = 1
-    ""   let g:minimap_highlight_range = 1
-    ""   let g:minimap_highlight_search = 1
-    ""   let g:minimap_block_filetypes = ['fugitive', 'nerdtree', 'tagbar', 'defx.nvim' ]
-
-    ""   "hi MinimapCurrentLine ctermfg=Green guifg=#50FA7B guibg=#32302f
-    ""   "let g:minimap_highlight = 'MinimapCurrentLine'
-
-    ""   nnoremap <silent> `` :nohlsearch<CR>:call minimap#vim#ClearColorSearch()<CR>
-    ""endif
     " }
 
     set tabpagemax=15               " Only show 15 tabs
@@ -574,45 +550,6 @@ if !exists('g:vscode')
     endif
 " }
 
-" Coc.nvim {
-    if count(g:spf13_bundle_groups, 'coc')
-        " Specify your node path in .vimrc.before.local
-        " let g:coc_node_path = '/usr/local/bin/node'
-        if !exists('g:coc_node_path')
-            let g:coc_node_path = trim(system('which node'))
-        endif
-
-        " FIXME: remove coc-snippets for unknown issues
-        " Custom you coc extensions in .vimrc.before.local
-        " let g:coc_global_extensions = []
-        if !exists('g:coc_global_extension')
-            let g:coc_global_extensions = [
-                \ 'coc-json',
-                \ 'coc-highlight',
-                \ 'coc-emmet',
-                \ 'coc-tabnine',
-                \ 'coc-tsserver',
-                \ 'coc-html',
-                \ 'coc-css',
-                \ 'coc-vetur',
-                \ 'coc-sql',
-                \ 'coc-sh',
-                \ 'coc-markdownlint',
-                \ 'coc-vimlsp',
-                \ 'coc-phpls',
-                \ 'coc-pyright',
-                \ 'coc-clangd',
-                \ 'coc-cmake',
-                \ 'coc-go',
-                \ 'coc-rust-analyzer',
-                \ 'coc-yaml',
-                \ ]
-        endif
-
-        source ~/.vim/coc.vim
-    endif
-" }
-
 " Vim-lsp {
     if count(g:spf13_bundle_groups, 'vim-lsp')
         if executable('bash-language-server')
@@ -678,10 +615,10 @@ if !exists('g:vscode')
 
         if executable('lua-lsp')
             au User lsp_setup call lsp#register_server({
-                        \ 'name': 'lua-lsp',
-                        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
-                        \ 'whitelist': ['lua'],
-                        \ })
+                \ 'name': 'lua-lsp',
+                \ 'cmd': {server_info->[&shell, &shellcmdflag, 'lua-lsp']},
+                \ 'whitelist': ['lua'],
+                \ })
         endif
 
         if executable('intelephense')
@@ -1059,19 +996,6 @@ EOF
         endif
     " }
 
-    " " PIV {
-    "     if isdirectory(expand("~/.vim/bundle/PIV"))
-    "         let g:DisableAutoPHPFolding = 0
-    "         let g:PIVAutoClose = 0
-    "     endif
-    " " }
-
-    " matchit.zip {
-        "  if isdirectory(expand("~/.vim/bundle/matchit.zip"))
-        "      let b:match_ignorecase = 1
-        "  endif
-    " }
-
     " Choosewin {
         if isdirectory(expand("~/.vim/bundle/vim-choosewin"))
             nmap  -  <Plug>(choosewin)
@@ -1093,23 +1017,6 @@ EOF
         au FileType xhtml,xml ru ftplugin/html/autoclosetag.vim
         nmap <Leader>ac <Plug>ToggleAutoCloseMappings
     " }
-
-    " " NerdTree {
-    "     if isdirectory(expand("~/.vim/bundle/nerdtree"))
-    "         map <C-e> <plug>NERDTreeTabsToggle<CR>
-    "         map <leader>e :NERDTreeFind<CR>
-    "         nmap <leader>nt :NERDTreeFind<CR>
-
-    "         let NERDTreeShowBookmarks=1
-    "         let NERDTreeIgnore=['\.py[cd]$', '\~$', '\.swo$', '\.swp$', '^\.git$', '^\.hg$', '^\.svn$', '\.bzr$']
-    "         let NERDTreeChDirMode=0
-    "         let NERDTreeQuitOnOpen=1
-    "         let NERDTreeMouseMode=2
-    "         let NERDTreeShowHidden=1
-    "         let NERDTreeKeepTreeInNewTab=1
-    "         let g:nerdtree_tabs_open_on_gui_startup=0
-    "     endif
-    " " }
 
     " Tabularize {
         if isdirectory(expand("~/.vim/bundle/tabular"))
@@ -1392,6 +1299,7 @@ EOF
             let g:lightline#bufferline#auto_hide = 0
         endif
     " }
+
     " vim-clang-format {
         if isdirectory(expand("~/.vim/bundle/vim-clang-format/"))
             "let g:clang_format#auto_format_on_insert_leave=1
@@ -1471,20 +1379,6 @@ EOF
     endfunction
     call InitializeDirectories()
     " }
-
-    " " Initialize NERDTree as needed {
-    " function! NERDTreeInitAsNeeded()
-    "     redir => bufoutput
-    "     buffers!
-    "     redir END
-    "     let idx = stridx(bufoutput, "NERD_tree")
-    "     if idx > -1
-    "         NERDTreeMirror
-    "         NERDTreeFind
-    "         wincmd l
-    "     endif
-    " endfunction
-    " " }
 
     " Strip whitespace {
     function! StripTrailingWhitespace()

@@ -28,47 +28,6 @@
         set background=dark     " Assume a dark background
     " }
 
-    " Windows Compatible {
-        " On Windows, also use '.vim' instead of 'vimfiles'; this makes synchronization
-        " across (heterogeneous) systems easier.
-        if has('win32') || has('win64')
-          set runtimepath=$HOME/.vim,$VIM/vimfiles,$VIMRUNTIME,$VIM/vimfiles/after,$HOME/.vim/after
-
-          " Be nice and check for multi_byte even if the config requires
-          " multi_byte support most of the time
-          if has("multi_byte")
-            " Windows cmd.exe still uses cp850. If Windows ever moved to
-            " Powershell as the primary terminal, this would be utf-8
-            set termencoding=cp850
-            " Let Vim use utf-8 internally, because many scripts require this
-            set encoding=utf-8
-            setglobal fileencoding=utf-8
-            " Windows has traditionally used cp1252, so it's probably wise to
-            " fallback into cp1252 instead of eg. iso-8859-15.
-            " Newer Windows files might contain utf-8 or utf-16 LE so we might
-            " want to try them first.
-            set fileencodings=ucs-bom,utf-8,utf-16le,cp1252,iso-8859-15
-          endif
-        endif
-    " }
-
-    " " Setup Plug Support {
-    "     " The next three lines ensure that the ~/.vim/bundle/ system works
-    "     filetype off
-    "     set rtp+=~/.vim/bundle
-    "     " call vundle#rc()
-    " " }
-
-    " " Add an UnPlug command {
-    " function! UnBundle(arg, ...)
-    "   let Plug = vundle#config#init_bundle(a:arg, a:000)
-    "   call filter(g:vundle#bundles, 'v:val["name_spec"] != "' . a:arg . '"')
-    " endfunction
-
-    " com! -nargs=+         UnBundle
-    " \ call UnBundle(<args>)
-    " " }
-
 " }
 
 " Specify a directory for plugins
@@ -78,18 +37,7 @@ call plug#begin('~/.vim/bundle')
 " Plugs {
 
     " Deps {
-        "Plug 'gmarik/vundle'
-        "Plug 'MarcWeber/vim-addon-mw-utils'
         Plug 'tomtom/tlib_vim'
-        "  if executable('ag')
-        "      Plug 'mileszs/ack.vim'
-        "      let g:ackprg = 'ag --nogroup --nocolor --column --smart-case'
-        "  elseif executable('ack-grep')
-        "      let g:ackprg="ack-grep -H --nocolor --nogroup --column"
-        "      Plug 'mileszs/ack.vim'
-        "  elseif executable('ack')
-        "      Plug 'mileszs/ack.vim'
-        "  endif
     " }
 
     " In your .vimrc.before.local file
@@ -125,7 +73,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'tacahiroy/ctrlp-funky'
             "Plug 'terryma/vim-multiple-cursors'
             "Plug 'vim-scripts/sessionman.vim'
-            "Plug 'vim-scripts/matchit.zip'
             Plug 'zivyangll/git-blame.vim'
             Plug 'easymotion/vim-easymotion'
             "Plug 'mbbill/undotree'
@@ -140,10 +87,7 @@ call plug#begin('~/.vim/bundle')
             Plug 'kana/vim-textobj-indent'
             Plug 'gcmt/wildfire.vim'
             Plug 'mhinz/vim-startify'
-            "Plug 'wfxr/minimap.vim'
             " statusline
-            "Plug 'vim-airline/vim-airline'
-            "Plug 'vim-airline/vim-airline-themes'
             Plug 'itchyny/lightline.vim'
             Plug 'mengelbrecht/lightline-bufferline'
             Plug 'antoinemadec/FixCursorHold.nvim'
@@ -168,8 +112,6 @@ call plug#begin('~/.vim/bundle')
     " Theme section{
         if count(g:spf13_bundle_groups, 'vim-colors-solarized')
             Plug 'altercation/vim-colors-solarized'
-            "Plug 'spf13/vim-colors'
-            "Plug 'flazz/vim-colorschemes'
         elseif count(g:spf13_bundle_groups, 'nvim-colors-solarized')
             Plug 'arakashic/nvim-colors-solarized'
         elseif count(g:spf13_bundle_groups, 'NeoSolarized')
@@ -239,29 +181,15 @@ call plug#begin('~/.vim/bundle')
         endif
     " }
 
-    " Coc or vim-lsp {
-        if count(g:spf13_bundle_groups, 'coc')
-            Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
-        elseif count(g:spf13_bundle_groups, 'vim-lsp')
+    " Vim-lsp {
+        if count(g:spf13_bundle_groups, 'vim-lsp')
             Plug 'prabirshrestha/vim-lsp'
-            "Plug 'prabirshrestha/async.vim'
-            "" FIXME: got some problems for vim9 temporarily {
-            "if has('nvim')
-            "    Plug 'SirVer/ultisnips'
-            "endif
-            "Plug 'honza/vim-snippets'
-            "Plug 'thomasfaingnaert/vim-lsp-snippets'
-            "Plug 'thomasfaingnaert/vim-lsp-ultisnips'
-            "" }
-            "Plug 'prabirshrestha/asyncomplete.vim'
-            "Plug 'prabirshrestha/asyncomplete-lsp.vim'
         endif
     " }
 
     " tabnine {
         if count(g:spf13_bundle_groups, 'tabnine')
             Plug 'tabnine/YouCompleteMe'
-            "  Plug 'codota/tabnine-vim'
         endif
     " }
 
@@ -277,35 +205,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'racer-rust/vim-racer'
         endif
     " }
-
-    "" PHP {
-    "    if count(g:spf13_bundle_groups, 'php')
-    "        Plug 'spf13/PIV'
-    "        Plug 'stanangeloff/php.vim'
-    "        Plug 'arnaud-lb/vim-php-namespace'
-    "        Plug 'beyondwords/vim-twig'
-    "    endif
-    "" }
-
-    "" Python {
-    "    if count(g:spf13_bundle_groups, 'python')
-    "        " Pick either python-mode or pyflakes & pydoc
-    "        Plug 'klen/python-mode'
-    "        Plug 'yssource/python.vim'
-    "        Plug 'vim-scripts/python_match.vim'
-    "        Plug 'vim-scripts/pythoncomplete'
-    "    endif
-    "" }
-
-    "" Javascript {
-    "    if count(g:spf13_bundle_groups, 'javascript')
-    "        Plug 'elzr/vim-json'
-    "        Plug 'groenewege/vim-less'
-    "        Plug 'pangloss/vim-javascript'
-    "        Plug 'briancollins/vim-jst'
-    "        Plug 'kchmck/vim-coffee-script'
-    "    endif
-    "" }
 
     " Scala {
         if count(g:spf13_bundle_groups, 'scala')
@@ -329,16 +228,6 @@ call plug#begin('~/.vim/bundle')
             Plug 'bitc/vim-hdevtools'
         endif
     " }
-
-    "" HTML {
-    "    if count(g:spf13_bundle_groups, 'html')
-    "        Plug 'vim-scripts/HTML-AutoCloseTag'
-    "        Plug 'hail2u/vim-css3-syntax'
-    "        Plug 'gorodinskiy/vim-coloresque'
-    "        Plug 'tpope/vim-haml'
-    "        Plug 'mattn/emmet-vim'
-    "    endif
-    "" }
 
     " Ruby {
         if count(g:spf13_bundle_groups, 'ruby')

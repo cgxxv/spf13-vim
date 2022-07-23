@@ -135,9 +135,6 @@ create_symlinks() {
     lnif "$source_path/.vimrc.bundles"  "$target_path/.vimrc.bundles"
     lnif "$source_path/.vimrc.before"   "$target_path/.vimrc.before"
 
-    lnif "$source_path/coc.vim"  "$target_path/.vim/coc.vim"
-    lnif "$source_path/coc.json" "$target_path/.vim/coc-settings.json"
-
     if program_exists "nvim"; then
         lnif "$source_path/.vim"     "$target_path/.config/nvim"
         lnif "$target_path/.vimrc"   "$target_path/.config/nvim/init.vim"
