@@ -1028,8 +1028,9 @@ EOF
         if isdirectory(expand("~/.vim/bundle/vim-floaterm"))
             let g:floaterm_autoclose = 2
             let g:floaterm_opener = 'tabe'"open file in new tab
-            nnoremap <Leader>3n :FloatermNew! nnn<CR>
-            nnoremap <Leader>ft :FloatermToggle!<CR>
+            "nnoremap <Leader>2f :FloatermNew lf<CR>
+            nnoremap <Leader>3n :FloatermNew nnn<CR>
+            nnoremap <Leader>ft :FloatermToggle<CR>
         endif
     " }
 
@@ -1321,9 +1322,11 @@ EOF
         endif
     " }
 
-    " vim-clang-format {
-        if isdirectory(expand("~/.vim/bundle/vim-clang-format/"))
-            "let g:clang_format#auto_format_on_insert_leave=1
+    " vim-autoformat {
+        if isdirectory(expand("~/.vim/bundle/vim-autoformat"))
+            let g:autoformat_autoindent = 0
+            let g:autoformat_retab = 0
+            let g:autoformat_remove_trailing_spaces = 0
         endif
     " }
 " }

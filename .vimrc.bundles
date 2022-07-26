@@ -172,7 +172,8 @@ call plug#begin('~/.vim/bundle')
             Plug 'thinca/vim-quickrun'
             Plug 'tyru/open-browser.vim'
             Plug 'kannokanno/previm'
-            Plug 'rhysd/vim-clang-format'
+            "Plug 'rhysd/vim-clang-format'
+            Plug 'vim-autoformat/vim-autoformat'
         endif
     " }
 
