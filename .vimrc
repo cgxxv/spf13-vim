@@ -393,12 +393,12 @@ if !exists('g:vscode')
     " .vimrc.before.local file:
     " let g:spf13_no_fastBuffers = 1
     if !exists('g:spf13_no_fastBuffers')
-        exec "map \eH <M-H>"
-        exec "map \eL <M-L>"
-        exec "map! \eH <M-H>"
-        exec "map! \eL <M-L>"
-        nnoremap <M-H> :bprev<CR>
-        nnoremap <M-L> :bnext<CR>
+        exec "map \e{ <M-{>"
+        exec "map \e} <M-}>"
+        exec "map! \e} <M-}>"
+        exec "map! \e{ <M-}>"
+        nnoremap <M-{> :bprev<CR>
+        nnoremap <M-}> :bnext<CR>
     endif
 
     " Stupid shift key fixes
@@ -1028,7 +1028,8 @@ EOF
         if isdirectory(expand("~/.vim/bundle/vim-floaterm"))
             let g:floaterm_autoclose = 2
             let g:floaterm_opener = 'tabe'"open file in new tab
-            "nnoremap <Leader>2f :FloatermNew lf<CR>
+
+            nnoremap <Leader>2f :FloatermNew lf<CR>
             nnoremap <Leader>3n :FloatermNew nnn<CR>
             nnoremap <Leader>ft :FloatermToggle<CR>
         endif
