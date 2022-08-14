@@ -45,6 +45,7 @@ call plug#begin('~/.vim/bundle')
     if !exists('g:spf13_bundle_groups')
         let g:spf13_bundle_groups = [
             \ 'general',
+            \ 'easymotion',
             \ 'fzf.vim',
             \ 'gruvbox',
             \ 'vim-lsp',
@@ -74,7 +75,6 @@ call plug#begin('~/.vim/bundle')
             "Plug 'terryma/vim-multiple-cursors'
             "Plug 'vim-scripts/sessionman.vim'
             Plug 'zivyangll/git-blame.vim'
-            Plug 'easymotion/vim-easymotion'
             "Plug 'mbbill/undotree'
             Plug 'nathanaelkane/vim-indent-guides'
             "if !exists('g:spf13_no_views')
@@ -97,6 +97,15 @@ call plug#begin('~/.vim/bundle')
             Plug 'voldikss/vim-floaterm'
             Plug 't9md/vim-choosewin'
             Plug 'tpope/vim-eunuch'
+        endif
+    " }
+
+    " Easymotion {
+        if count(g:spf13_bundle_groups, 'easymotion')
+            Plug 'easymotion/vim-easymotion'
+            Plug 'haya14busa/incsearch.vim'
+            Plug 'haya14busa/incsearch-fuzzy.vim'
+            Plug 'haya14busa/incsearch-easymotion.vim'
         endif
     " }
 

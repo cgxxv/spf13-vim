@@ -133,6 +133,7 @@ if !exists('g:vscode')
     set nowritebackup
     "set cmdheight=2                     " Give more space for displaying messages.
     set shortmess+=c                    " Don't pass messages to |ins-completion-menu|.
+    set shortmess-=S
 
     " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
     " delays and poor user experience.
@@ -227,8 +228,8 @@ if !exists('g:vscode')
     set incsearch                   " Find as you type search
     set hlsearch                    " Highlight search terms
     set winminheight=0              " Windows can be 0 line high
-    set ignorecase                  " Case insensitive search
-    set smartcase                   " Case sensitive when uc present
+    " set ignorecase                  " Case insensitive search
+    " set smartcase                   " Case sensitive when uc present
     set wildmenu                    " Show list instead of just completing
     set wildmode=list:longest,full  " Command <Tab> completion, list matches, then longest common part, then all.
     set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
@@ -395,10 +396,17 @@ if !exists('g:vscode')
     if !exists('g:spf13_no_fastBuffers')
         exec "map \e{ <M-{>"
         exec "map \e} <M-}>"
-        exec "map! \e} <M-}>"
-        exec "map! \e{ <M-}>"
+        " exec "map! \e} <M-}>"
+        " exec "map! \e{ <M-}>"
         nnoremap <M-{> :bprev<CR>
         nnoremap <M-}> :bnext<CR>
+
+        exec "map \eH <M-H>"
+        exec "map \eL <M-L>"
+        " exec "map! \eH <M-H>"
+        " exec "map! \eL <M-L>"
+        nnoremap <M-H> :bprev<CR>
+        nnoremap <M-L> :bnext<CR>
     endif
 
     " Stupid shift key fixes
@@ -728,7 +736,7 @@ if !exists('g:vscode')
             nmap <buffer> <leader>rn <plug>(lsp-rename)
             nmap <buffer> [g <plug>(lsp-previous-diagnostic)
             nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-            nmap <buffer> K <plug>(lsp-hover)
+            nmap <buffer> <c-k> <plug>(lsp-hover)
             nnoremap <buffer> <expr><c-f> lsp#scroll(+4)
             nnoremap <buffer> <expr><c-d> lsp#scroll(-4)
 
@@ -755,46 +763,76 @@ if !exists('g:vscode')
     " }
 
     " easymotion {
-        if isdirectory(expand("~/.vim/bundle/vim-easymotion"))
+        if count(g:spf13_bundle_groups, 'easymotion')
              " type `l` and match `l`&`L`
-            let g:EasyMotion_smartcase = 1
+            let g:EasyMotion_smartcase = 0
             " Smartsign (type `3` and match `3`&`#`)
             let g:EasyMotion_use_smartsign_us = 1
             let g:EasyMotion_startofline = 0 " keep cursor column when JK motion
 
             " JK motions: Line motions
-            map <Leader>h <Plug>(easymotion-linebackward)
-            map <Leader>j <Plug>(easymotion-j)
-            map <Leader>k <Plug>(easymotion-k)
-            map <Leader>l <Plug>(easymotion-lineforward)
+            map H <Plug>(easymotion-linebackward)
+            map J <Plug>(easymotion-j)
+            map K <Plug>(easymotion-k)
+            map L <Plug>(easymotion-lineforward)
             " Move to line
-            map <Leader>L <Plug>(easymotion-bd-jk)
-            nmap <Leader>L <Plug>(easymotion-overwin-line)
+            map L <Plug>(easymotion-bd-jk)
+            nmap L2 <Plug>(easymotion-overwin-line)
             " Move to word
             map  <Leader>w <Plug>(easymotion-bd-w)
-            nmap <Leader>w <Plug>(easymotion-overwin-w)
+            nmap <Leader>W <Plug>(easymotion-overwin-w)
 
             " <Leader>f{char} to move to {char}
             map  <Leader>f <Plug>(easymotion-bd-f)
-            nmap <Leader>f <Plug>(easymotion-overwin-f)
+            nmap <Leader>fw <Plug>(easymotion-overwin-f)
 
             " Require tpope/vim-repeat to enable dot repeat support
             " Jump to anywhere with only `s{char}{target}`
             " `s<CR>` repeat last find motion.
-            nmap s <Plug>(easymotion-s)
-            nmap s2 <Plug>(easymotion-s2)
+            nmap S <Plug>(easymotion-s)
+            nmap <c-s> <Plug>(easymotion-s2)
             " Bidirectional & within line 't' motion
             nmap t <Plug>(easymotion-t)
-            nmap t <Plug>(easymotion-t2)
-            omap t <Plug>(easymotion-bd-tl)
-            map  / <Plug>(easymotion-sn)
-            omap / <Plug>(easymotion-tn)
+            nmap t2 <Plug>(easymotion-t2)
+            omap tl <Plug>(easymotion-bd-tl)
+            "map  / <Plug>(easymotion-sn)
+            "omap / <Plug>(easymotion-tn)
+
+            let s:pcount = {'name': 'PromptCount'}
+            function! s:pcount.on_char(cmdline) abort
+                call a:cmdline.set_prompt(len(a:cmdline.getline()) . '/')
+            endfunction
+            function! s:incsearch_config(...) abort
+                return incsearch#util#deepextend(deepcopy({
+                \   'modules': [incsearch#config#easymotion#module({'overwin': 1}), s:pcount],
+                \   'keymap': {
+                \     "\<CR>": '<Over>(easymotion)'
+                \   },
+                \   'is_expr': 0
+                \ }), get(a:, 1, {}))
+            endfunction
+            noremap <silent><expr> /  incsearch#go(<SID>incsearch_config())
+            noremap <silent><expr> ?  incsearch#go(<SID>incsearch_config({'command': '?'}))
+            noremap <silent><expr> g/ incsearch#go(<SID>incsearch_config({'is_stay': 1}))
+
+            function! s:config_easyfuzzymotion(...) abort
+                return extend(copy({
+                \   'converters': [incsearch#config#fuzzyword#converter()],
+                \   'modules': [incsearch#config#easymotion#module({'overwin': 1}), s:pcount],
+                \   'keymap': {"\<CR>": '<Over>(easymotion)'},
+                \   'is_expr': 0
+                \ }), get(a:, 1, {}))
+            endfunction
+
+            noremap <silent><expr> z/ incsearch#go(<SID>config_easyfuzzymotion())
+            noremap <silent><expr> z? incsearch#go(<SID>config_easyfuzzymotion({'command': '?'}))
+            noremap <silent><expr> zg/ incsearch#go(<SID>config_easyfuzzymotion({'is_stay': 1}))
 
             " These `n` & `N` mappings are options. You do not have to map `n` & `N` to EasyMotion.
             " Without these mappings, `n` & `N` works fine. (These mappings just provide
             " different highlight method and have some other features )
-            map  n <Plug>(easymotion-next)
-            map  N <Plug>(easymotion-prev)
+            "map  n <Plug>(easymotion-next)
+            "map  N <Plug>(easymotion-prev)
         endif
     " }
 
@@ -913,7 +951,8 @@ if !exists('g:vscode')
             let g:go_highlight_operators = 1
             let g:go_highlight_build_constraints = 1
             let g:go_fmt_command = "goimports"
-            let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+            let g:syntastic_go_checkers = ['golint', 'govet', 'golangci-lint']
+            let g:syntastic_go_gometalinter_args = ['--enable=errcheck']
             let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
             au FileType go nmap <Leader>odoc <Plug>(go-doc)
             "au FileType go nmap <Leader>odocs <Plug>(go-doc-split)
@@ -1214,6 +1253,7 @@ EOF
     " TagBar {
         if isdirectory(expand("~/.vim/bundle/tagbar/"))
             nnoremap <silent> <leader>tt :TagbarToggle<CR>
+            nnoremap <silent> <leader>tc :TagbarCurrentTag<CR>
         endif
     "}
 
@@ -1290,21 +1330,21 @@ EOF
                 \ 'active': {
                 \   'left': [
                 \       [ 'mode', 'paste' ],
-                \       [ 'cocstatus', 'currentfunction', 'readonly', 'absolutepath', 'modified' ],
+                \       [ 'gitbranch', 'modified'],
+                \       [ 'syntastic', 'readonly', 'absolutepath' ],
                 \       [ 'ctrlpmark', 'git', 'diagnostic', 'method' ],
                 \   ],
-                \   'right': [ [ 'lineinfo' ],
-                \              [ 'percent' ],
-                \              [ 'fileformat', 'fileencoding', 'filetype', 'charvaluehex' ] ]
+                \   'right': [
+                \       [ 'lineinfo' ],
+                \       [ 'percent' ],
+                \       [ 'spell', 'fileformat', 'fileencoding', 'filetype', 'charvaluehex', 'charvalue' ],
+                \   ]
                 \ },
                 \ 'tabline': {
                 \   'left': [ ['buffers'] ],
                 \   'right': [ ['close'] ]
                 \ },
                 \ 'component_function': {
-                \   'cocstatus': 'coc#status',
-                \   'currentfunction': 'CocCurrentFunction',
-                \   'blame': 'LightlineGitBlame',
                 \ },
                 \ 'component_expand': {
                 \   'buffers': 'lightline#bufferline#buffers',
