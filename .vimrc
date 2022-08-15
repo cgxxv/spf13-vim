@@ -194,6 +194,7 @@ if !exists('g:vscode')
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
 
+    " set cursorcolumn                " Show vertical line at the position of the cursor
     set cursorline                  " Highlight current line
 
     highlight clear SignColumn      " SignColumn should match background
@@ -237,7 +238,7 @@ if !exists('g:vscode')
     set scrolloff=3                 " Minimum lines to keep above and below cursor
     "set foldenable                  " Auto fold code
     set nofoldenable                " Disable fold code
-    set list
+    " set list
     set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
 " }
 
@@ -1324,11 +1325,18 @@ EOF
         endif
     " }
 
-    " indent_guides {
-        if isdirectory(expand("~/.vim/bundle/vim-indent-guides/"))
-            let g:indent_guides_start_level = 2
-            let g:indent_guides_guide_size = 1
-            let g:indent_guides_enable_on_vim_startup = 1
+    " " indent_guides {
+    "     if isdirectory(expand("~/.vim/bundle/vim-indent-guides/"))
+    "         let g:indent_guides_start_level = 2
+    "         let g:indent_guides_guide_size = 1
+    "         let g:indent_guides_enable_on_vim_startup = 0
+    "     endif
+    " " }
+
+    " indentLine {
+        if isdirectory(expand("~/.vim/bundle/indentLine/"))
+            let g:indentLine_enabled = 0
+            noremap <Leader>il :IndentLinesToggle<CR>
         endif
     " }
 
