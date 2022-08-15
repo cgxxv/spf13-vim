@@ -56,6 +56,7 @@ call plug#begin('~/.vim/bundle')
             \ 'go',
             \ 'plantuml',
             \ 'debugging',
+            \ 'minimap',
             \ ]
     endif
 
@@ -290,6 +291,11 @@ call plug#begin('~/.vim/bundle')
         endif
     " }
 
+    " minimap {
+        if count(g:spf13_bundle_groups, 'misc')
+            Plug 'wfxr/minimap.vim', {'do': ':!cargo install --locked code-minimap'}
+        endif
+    " }
     endif
 
 " }
