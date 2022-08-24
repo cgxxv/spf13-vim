@@ -194,7 +194,7 @@ if !exists('g:vscode')
     set tabpagemax=15               " Only show 15 tabs
     set showmode                    " Display the current mode
 
-    " set cursorcolumn                " Show vertical line at the position of the cursor
+    set cursorcolumn                " Show vertical line at the position of the cursor
     set cursorline                  " Highlight current line
 
     highlight clear SignColumn      " SignColumn should match background
@@ -752,6 +752,12 @@ if !exists('g:vscode')
             " call s:on_lsp_buffer_enabled only for languages that has the server registered.
             autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
         augroup END
+    endif
+" }
+"
+" tabnine & YouCompleteMe {
+    if count(g:spf13_bundle_groups, 'easymotion')
+        let g:ycm_auto_hover = '' " Remove auto CursorHold
     endif
 " }
 
@@ -1325,13 +1331,13 @@ EOF
         endif
     " }
 
-    " " indent_guides {
-    "     if isdirectory(expand("~/.vim/bundle/vim-indent-guides/"))
-    "         let g:indent_guides_start_level = 2
-    "         let g:indent_guides_guide_size = 1
-    "         let g:indent_guides_enable_on_vim_startup = 0
-    "     endif
-    " " }
+    " indent_guides {
+        if isdirectory(expand("~/.vim/bundle/vim-indent-guides/"))
+            let g:indent_guides_start_level = 2
+            let g:indent_guides_guide_size = 1
+            let g:indent_guides_enable_on_vim_startup = 0
+        endif
+    " }
 
     " indentLine {
         if isdirectory(expand("~/.vim/bundle/indentLine/"))

@@ -77,7 +77,7 @@ call plug#begin('~/.vim/bundle')
             "Plug 'vim-scripts/sessionman.vim'
             Plug 'zivyangll/git-blame.vim'
             "Plug 'mbbill/undotree'
-            "Plug 'nathanaelkane/vim-indent-guides'
+            Plug 'nathanaelkane/vim-indent-guides'
             Plug 'Yggdroot/indentLine'
             "if !exists('g:spf13_no_views')
             "    Plug 'vim-scripts/restore_view.vim'
